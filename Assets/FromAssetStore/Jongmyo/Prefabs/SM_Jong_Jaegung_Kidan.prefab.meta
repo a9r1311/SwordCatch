@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: be8f7c5b46065874d82c66d747e4f890
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jong_Jaegung_Kidan.prefab
+  uploadId: 651164

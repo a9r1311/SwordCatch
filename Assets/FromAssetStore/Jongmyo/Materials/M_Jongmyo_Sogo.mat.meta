@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5e75a599293d99c40a5c90d235273a14
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jongmyo_Sogo.mat
+  uploadId: 651164

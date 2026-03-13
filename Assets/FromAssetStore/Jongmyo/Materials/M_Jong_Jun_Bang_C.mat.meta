@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c868879bd922fb94ba2e7e2e83d8653f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Jun_Bang_C.mat
+  uploadId: 651164

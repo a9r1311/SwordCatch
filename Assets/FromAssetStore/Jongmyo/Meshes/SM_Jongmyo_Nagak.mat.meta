@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f145ed6e698e05d41a86d0f4d3cfa786
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Meshes/SM_Jongmyo_Nagak.mat
+  uploadId: 651164

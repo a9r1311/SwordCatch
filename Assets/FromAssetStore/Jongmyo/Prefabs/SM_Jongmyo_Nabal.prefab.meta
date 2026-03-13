@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e670a98ab99dc6843a6f220474439752
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jongmyo_Nabal.prefab
+  uploadId: 651164

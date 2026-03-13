@@ -1,0 +1,15 @@
+using Unity.VisualScripting;
+
+namespace Kamatte.Core
+{
+    public sealed class GameModeChanger    //  ゲームモード変更クラス
+    {
+        public void Chagne(GameMode prev, GameMode next)    //  ゲームモード変更
+        {
+            GameModeChagneExecutor executor = new GameModeChagneExecutor();
+
+            ServiceLocator.Resolve<IScreenFadeFacade>().FadeIn(1f);
+            ServiceLocator.Resolve<ICoroutineRunnerFacade>().StartCoroutine(executor.Execute(prev, next));
+        }
+    }
+}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 336ff20152eab9744a158e9002f4ac30
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jongmyo_Nodo.mat
+  uploadId: 651164

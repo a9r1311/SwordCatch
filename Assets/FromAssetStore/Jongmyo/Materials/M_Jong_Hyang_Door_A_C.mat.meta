@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 91a0d31140193264ba0c8b04459a210f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Hyang_Door_A_C.mat
+  uploadId: 651164

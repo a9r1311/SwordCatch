@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 25577d92704523b4a8302d28321dc510
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jongmyo_Teukjong.mat
+  uploadId: 651164

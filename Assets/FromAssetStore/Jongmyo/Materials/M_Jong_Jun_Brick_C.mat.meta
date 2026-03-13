@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1d3e9658c4ff1ba4485a58e4343835c9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Jun_Brick_C.mat
+  uploadId: 651164

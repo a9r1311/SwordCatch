@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 55e77837b2f64294fb682b8ee956a98c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Hyang_Roof.mat
+  uploadId: 651164

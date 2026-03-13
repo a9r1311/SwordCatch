@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 980f03c120cbf4949976f1019f5d4238
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jongmyo_Hun.mat
+  uploadId: 651164

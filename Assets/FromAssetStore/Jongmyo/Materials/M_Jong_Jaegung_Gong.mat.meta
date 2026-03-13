@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c2bbbb7c5b7303a4ab84f62eb6067cd0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Jaegung_Gong.mat
+  uploadId: 651164

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 91c2a7d1951a2da4da3d19141ae91893
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jongmyo_Dangpiri.prefab
+  uploadId: 651164

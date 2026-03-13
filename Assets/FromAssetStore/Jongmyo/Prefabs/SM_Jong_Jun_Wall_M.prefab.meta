@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: cc6e81a4dd4741d4ea278bd3c6bcc500
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jong_Jun_Wall_M.prefab
+  uploadId: 651164

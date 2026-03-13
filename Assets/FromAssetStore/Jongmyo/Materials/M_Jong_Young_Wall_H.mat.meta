@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 83a8be750a138d949b8d2c269201b1e2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Young_Wall_H.mat
+  uploadId: 651164

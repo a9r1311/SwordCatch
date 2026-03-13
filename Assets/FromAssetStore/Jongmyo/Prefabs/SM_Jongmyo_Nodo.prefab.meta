@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2199da6af47550f4580b4f038821dcd6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jongmyo_Nodo.prefab
+  uploadId: 651164

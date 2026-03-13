@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bb10ef86ad46ee14b938cbbbc559c6ad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Materials/M_Jong_Jaegung_Step.mat
+  uploadId: 651164

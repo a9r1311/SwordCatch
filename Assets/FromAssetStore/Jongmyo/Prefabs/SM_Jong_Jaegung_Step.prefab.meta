@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4fbadbffaaaf75f4d920adaf27eb06de
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jong_Jaegung_Step.prefab
+  uploadId: 651164

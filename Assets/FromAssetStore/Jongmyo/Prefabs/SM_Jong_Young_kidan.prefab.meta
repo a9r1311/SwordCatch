@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6d6ca64e45f03f64883c561996b1ddb8
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jong_Young_kidan.prefab
+  uploadId: 651164

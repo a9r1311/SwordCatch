@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 85b79f2ae19de2f4f94db7ef31fc903f
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 269194
+  packageName: NHA - Jongmyo Shrine
+  packageVersion: 1.0
+  assetPath: Assets/Jongmyo/Prefabs/SM_Jongmyo_Jeongakdaegeum.prefab
+  uploadId: 651164
