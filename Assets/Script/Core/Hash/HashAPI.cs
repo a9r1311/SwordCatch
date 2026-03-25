@@ -1,5 +1,3 @@
-using System;
-
 public static class HashAPI    //  ハッシュAPIクラス
 {
     public static int StableHash(string text)    //  不変ハッシュ値を生成

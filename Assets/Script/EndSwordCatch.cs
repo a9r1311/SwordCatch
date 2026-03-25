@@ -13,10 +13,5 @@ namespace Kamatte.Core
                 ServiceLocator.Resolve<GameModeAPIFacadeBase>().executeTask.Execute(GameMode.SwordCatch, GameMode.SwordCatch);
             }
         }
-
-        override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-        {
-
-        }
     }
 }

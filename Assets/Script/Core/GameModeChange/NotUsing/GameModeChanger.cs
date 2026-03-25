@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 namespace Kamatte.Core
 {
     public sealed class GameModeChanger    //  ゲームモード変更クラス

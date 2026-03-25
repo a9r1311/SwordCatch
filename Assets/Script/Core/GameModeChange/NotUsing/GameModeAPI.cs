@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Kamatte.Core
 {
     public static class GameModeAPI    //  ƒQ[ƒ€ƒ‚[ƒh‚ÉŠÖ‚·‚éAPI
