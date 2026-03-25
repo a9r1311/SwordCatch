@@ -16,17 +16,17 @@ namespace Kamatte.SwordCatch
 
             if(swingWay == 0)
             {
-                Debug.LogWarning("Normal");
+                Debug.Log("Normal");
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.NormalSwing.SetTrigger();
             }
             else if(swingWay == 1)
             {
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.FastSwing.SetTrigger();
-                Debug.LogWarning("Fast");
+                Debug.Log("Fast");
             }
             else if (swingWay == 2)
             {
-                Debug.LogWarning("Delay");
+                Debug.Log("Delay");
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.DelaySwing.SetTrigger();
             }
         }

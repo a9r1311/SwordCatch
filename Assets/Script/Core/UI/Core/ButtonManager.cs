@@ -35,7 +35,7 @@ namespace Kamatte.Core
         }
 
         [SerializeField] private ButtonMapping[] buttonMapping;
-        
+
         private Dictionary<ButtonID, Button> buttonMap = new();
 
 #if UNITY_EDITOR
@@ -48,7 +48,7 @@ namespace Kamatte.Core
 
             foreach (var mapping in buttonMapping)
             {
-                if(mapping == null)
+                if (mapping == null)
                 {
                     continue;
                 }
@@ -89,7 +89,7 @@ namespace Kamatte.Core
                 Debug.LogWarning($"ボタンが見つかりません: {ButtonID}");
             }
         }
-        
+
         public void UnregistReact(ButtonID ButtonID)    //  ボタン反応解除
         {
             if (buttonMap.TryGetValue(ButtonID, out Button button))

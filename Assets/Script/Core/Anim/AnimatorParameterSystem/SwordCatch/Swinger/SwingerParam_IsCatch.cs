@@ -9,7 +9,6 @@ namespace Kamatte.SwordCatch
 
         public void SetBool(bool isHited)
         {
-            Debug.Log("888");
             animator.SetBool(hash, isHited);
         }
     }
