@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-
 namespace Kamatte.Core
 {
     public class ExecuteModeChangeTask    //  Task‚ğÀs‚·‚é
