@@ -5,7 +5,7 @@ using Kamatte.Player;
 
 namespace Kamatte.SwordCatch
 {
-    public class AnimParamSystemBootstrap_SwordCatch : MonoBehaviour    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する。
+    public class AnimParamSystemBootstrap : MonoBehaviour    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する。
     {
         [System.Serializable]
         class AnimatorBinding    //  インスペクターに表示するためのKVP
