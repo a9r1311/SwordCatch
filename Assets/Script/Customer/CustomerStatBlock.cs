@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Kamatte.Customer
 {
     [System.Serializable]
-    public class CustomerStatusBlock    //  お客さんのステータス項目
+    public class CustomerStatBlock    //  お客さんのステータス項目
     {
         [Header("白刃取りの時の性格")]
         public SwingerPersonal swingerPersonal;    //  振り下ろしの性格
