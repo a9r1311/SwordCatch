@@ -5,6 +5,7 @@ using Kamatte.Player;
 
 namespace Kamatte.SwordCatch
 {
+    [DefaultExecutionOrder(-10)]
     public class AnimParamSystemBootstrap : MonoBehaviour    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する。
     {
         [System.Serializable]

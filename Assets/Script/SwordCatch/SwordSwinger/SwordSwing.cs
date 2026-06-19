@@ -20,12 +20,12 @@ namespace Kamatte.SwordCatch
             if(swingType == SwingType.Normal)
             {
                 Debug.Log("通常振り下ろし開始");
-                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.NormalSwing.SetTrigger();
+                _animParameter.SwingerParam.NormalSwing.SetTrigger();
             }
             else if(swingType == SwingType.Fast)
             {
                 Debug.Log("高速振り下ろし開始");
-                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.FastSwing.SetTrigger();
+                _animParameter.SwingerParam.FastSwing.SetTrigger();
             }
             //else if (swingWay == 2)    //  Delayは難しすぎたのでコメントアウト中
             //{

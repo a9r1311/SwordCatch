@@ -1,13 +1,13 @@
-using UnityEngine;
-using Kamatte.Customer;
 using Kamatte.Core;
+using Kamatte.Customer;
+using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
     public class SwingTimeController : MonoBehaviour    //  刀を振るタイミングを決定するスクリプト
     {
-        [SerializeField] CustomerStatus customerStatus;    //  お客さんのステータス
-        CustomerStatusBlock customerStatusBlock;           //  お客さんのステータスブロック
+        [SerializeField] CustomerIDStatPair _customerIDStat;    //  お客さんの能力値が入ってるSO
+        CustomerStatBlock _customerStat;           //  お客さんの能力値
         SwordSwing _swingAction;             //  刀振りのコントローラー
 
         [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
@@ -30,19 +30,19 @@ namespace Kamatte.SwordCatch
 
         private void Awake()
         {
-            customerStatusBlock = customerStatus.GetStats(CustomerID.Samurai);
-            swingerPersonal = customerStatusBlock.swingerPersonal;
+            _customerStat = _customerIDStat.GetStat(CustomerID.Samurai);
+            swingerPersonal = _customerStat.swingerPersonal;
 
-            swingTimer = customerStatusBlock.swingTimer;
+            swingTimer = _customerStat.swingTimer;
         }
         public void Initialize(SwordSwing swingAction)    //  クラス変数初期化
         {
-            customerStatusBlock = customerStatus.GetStats(CustomerID.Samurai);
+            _customerStat = _customerIDStat.GetStat(CustomerID.Samurai);
             _swingAction = swingAction;
 
-            swingerPersonal = customerStatusBlock.swingerPersonal;
+            swingerPersonal = _customerStat.swingerPersonal;
 
-            swingTimer = customerStatusBlock.swingTimer;
+            swingTimer = _customerStat.swingTimer;
             readJudge = new StateReadJudge_SwordCatch();
             stateReader = new StateReader_SwordCatch(stateHolder, readJudge);
             writeJudge = new StateWriteJudge_SwordCatch();
