@@ -8,7 +8,7 @@ namespace Kamatte.SwordCatch
     {
         [SerializeField] CustomerStatus customerStatus;    //  お客さんのステータス
         CustomerStatusBlock customerStatusBlock;           //  お客さんのステータスブロック
-        SwordSwingController _swordSwingController;             //  刀振りのコントローラー
+        SwordSwing _swingAction;             //  刀振りのコントローラー
 
         [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
         StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
@@ -26,6 +26,7 @@ namespace Kamatte.SwordCatch
         [SerializeField] private AudioClip RoundVoiceClip;
 
         int Swingway = 0;
+        SwingType _swingTyep = SwingType.Normal;
 
         private void Awake()
         {
@@ -34,10 +35,10 @@ namespace Kamatte.SwordCatch
 
             swingTimer = customerStatusBlock.swingTimer;
         }
-        public void Initialize(SwordSwingController swingController)    //  クラス変数初期化
+        public void Initialize(SwordSwing swingAction)    //  クラス変数初期化
         {
             customerStatusBlock = customerStatus.GetStats(CustomerID.Samurai);
-            _swordSwingController = swingController;
+            _swingAction = swingAction;
 
             swingerPersonal = customerStatusBlock.swingerPersonal;
 
@@ -65,7 +66,8 @@ namespace Kamatte.SwordCatch
                     SpeedStarUpdate();
                     break;
             }
-            if(Swingway == 1 && swingTimer < 0.74f && !IsSpraked)
+            //if(Swingway == 1 && swingTimer < 0.74f && !IsSpraked)
+            if(_swingTyep == SwingType.Fast && swingTimer < 0.74f && !IsSpraked)
             {
                 IsSpraked = true;
                 audioSource.PlayOneShot(RoundVoiceClip, 0.4f);
@@ -75,9 +77,9 @@ namespace Kamatte.SwordCatch
                 stateWriter.ChangeCatchState(false);
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(false);
                 stateWriter.ChangeHitSwingState(false);
-                _swordSwingController.SwingSword(Swingway);
+                _swingAction.SwingSword(_swingTyep);
                 swingTimer = Random.Range(1, 10);
-                Swingway = Random.Range(0, 2);
+                _swingTyep = (SwingType)Random.Range(0, 2);
                 IsSpraked = false;
             }
         }
