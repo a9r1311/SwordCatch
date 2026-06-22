@@ -1,10 +1,11 @@
 ﻿#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.AddressableAssets.Settings;
 using UnityEditor.AddressableAssets;
+using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-public static class AddressablesBuildUtility
+//  手動アセットビルドツール(※Editorファイル内に配置)
+public static class AddressablesBuild
 {
     [MenuItem("Tools/Addressables/Build Player Content")]
     public static void BuildAddressablesContent()
@@ -16,8 +17,9 @@ public static class AddressablesBuildUtility
             return;
         }
 
+        //  アセットをビルド
         AddressableAssetSettings.BuildPlayerContent();
-        Debug.Log("✅ Addressables Build Completed!");
+        Debug.Log("Addressables Build Completed.");
     }
 }
 #endif
