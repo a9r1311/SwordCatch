@@ -1,12 +1,14 @@
 using Kamatte.Core;
+using System.Threading.Tasks;
 
 namespace Kamatte.SwordCatch
 {
-    public class SceneStartStepExcute : SceneStartStepExcuteBase
+    public sealed class SceneStartStepExcute : SceneStartStepExcuteBase
     {
-        public override void StartSteps()
+        public override ValueTask StartSteps()    //  ”’næ‚èŠJn‚Ìˆ—
         {
             ServiceLocator.Resolve<IScreenFadeFacade>().FadeIn(1f);
+            return default;
         }
     }
 }
