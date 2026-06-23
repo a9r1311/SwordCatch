@@ -2,8 +2,10 @@ using System;
 
 namespace Kamatte.Core
 {
-    public interface IStateFactory<TStateID> where TStateID : Enum    //  ステートファクトリインターフェース
+    //  ステートファクトリインターフェース
+    public interface IStateFactory<TStateID> where TStateID : Enum
     {
-        IState<TStateID> CreateState(TStateID stateID);         //  ステートマシーン作成
+        //  ステート作成
+        IState<TStateID> CreateState(TStateID stateID);
     }
 }
