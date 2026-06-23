@@ -4,22 +4,26 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-//  手動アセットビルドツール(※Editorファイル内に配置)
-public static class AddressablesBuild
+namespace Kamatte.Editor
 {
-    [MenuItem("Tools/Addressables/Build Player Content")]
-    public static void BuildAddressablesContent()
+    //  手動アセットビルドツール(※Editorファイル内に配置)
+    public static class AddressablesBuild
     {
-        AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
-        if (settings == null)
+        //  API関数
+        [MenuItem("Tools/Addressables/Build Player Content")]
+        public static void BuildAddressablesContent()
         {
-            Debug.LogError("AddressableAssetSettings not found.");
-            return;
-        }
+            AddressableAssetSettings settings = AddressableAssetSettingsDefaultObject.Settings;
+            if (settings == null)
+            {
+                Debug.LogError("AddressableAssetSettings not found.");
+                return;
+            }
 
-        //  アセットをビルド
-        AddressableAssetSettings.BuildPlayerContent();
-        Debug.Log("Addressables Build Completed.");
+            //  アセットをビルド
+            AddressableAssetSettings.BuildPlayerContent();
+            Debug.Log("Addressables Build Completed.");
+        }
     }
 }
 #endif
