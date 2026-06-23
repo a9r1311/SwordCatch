@@ -1,6 +1,7 @@
 namespace Kamatte.SwordCatch
 {
-    public enum SwordCatchAnimID_Swinger    //  刀を振る侍のアニメーションID
+    //  刀を振る侍のアニメーションID
+    public enum SwordCatchAnimID_Swinger
     {
         Idle,          //  アイドル状態
         SwingSword,    //  刀振り下ろし
