@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.ID
+namespace Kamatte.Core
 {
     //   オブジェクトデータベース
     [CreateAssetMenu(fileName = "ObjectDatabase", menuName = "GameData/ID Object Database")]
-    public class ObjectDatabase : ScriptableObject
+    public sealed class ObjectDatabase : ScriptableObject
     {
         [Header("オブジェクトID(Toolから取得)")]
         [SerializeField] private List<string> ObjectIDs = new();    //  オブジェクトIDリスト
