@@ -5,13 +5,15 @@ using Kamatte.Core;
 
 namespace Kamatte.SwordCatch
 {
-    public class SceneBootstarp_SwordCatch : MonoBehaviour
+    //  機能群の初期化訳役
+    [DisallowMultipleComponent]
+    public sealed class SceneBootstrap_SwordCatch : MonoBehaviour
     {
-        SceneStartStepExcuteBase startStepExcute;    //  シーン開始時に必要な処理をするクラス
+        SceneStartStepExcuteBase startStepExcute;               //  シーン開始時に必要な処理をするクラス
 
         [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
-        StateReadJudge_SwordCatch readJudge;    //  アクセスが適正かを判断する関数をReader層から呼ばれる。
+        StateReader_SwordCatch stateReader;                     //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
+        StateReadJudge_SwordCatch readJudge;                    //  アクセスが適正かを判断する関数をReader層から呼ばれる。
 
         FadeOutStep fadeOutStep;
 
