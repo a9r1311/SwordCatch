@@ -1,4 +1,5 @@
 using UnityEngine;
+using Kamatte.Core;
 
 namespace Kamatte.ID
 {

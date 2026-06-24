@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Kamatte.Core;
 
 //  オブジェクトとIDを辞書登録
 namespace Kamatte.ID

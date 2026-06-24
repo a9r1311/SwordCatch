@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Kamatte.Core;
 
-namespace Kamatte.ID
+
+namespace Kamatte.Editor
 {
     //  IDデータベース構築
     public class IDDataBaseCreater
