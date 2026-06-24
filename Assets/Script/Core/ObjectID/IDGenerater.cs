@@ -1,6 +1,7 @@
 using UnityEngine;
+using Kamatte.ID;
 
-namespace Kamatte.ID
+namespace Kamatte.Core
 {
     [RequireComponent(typeof(ObjectRegistry))]
     //  オブジェクトID自動生成
