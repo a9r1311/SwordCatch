@@ -3,10 +3,10 @@ namespace Kamatte.Core
 {
     public class PlayerIdleState_SwordCatch : StateBase<PlayerSwordCatchStateID>    //  白刃取りIdle状態
     {
-        PlayerHitBoxMgr _playerHitBoxMgr;
+        PlayerHitBox _playerHitBoxMgr;
         IStateFactory<PlayerSwordCatchStateID> _stateFactory;
 
-        public PlayerIdleState_SwordCatch(PlayerHitBoxMgr hitBoxManager, IStateMachine<PlayerSwordCatchStateID> machine, IStateFactory<PlayerSwordCatchStateID> stateFactory)    //  コンストラクタ
+        public PlayerIdleState_SwordCatch(PlayerHitBox hitBoxManager, IStateMachine<PlayerSwordCatchStateID> machine, IStateFactory<PlayerSwordCatchStateID> stateFactory)    //  コンストラクタ
             : base(machine)
         {
             _playerHitBoxMgr = hitBoxManager;

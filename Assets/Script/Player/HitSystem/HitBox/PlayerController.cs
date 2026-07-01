@@ -4,22 +4,23 @@ using Kamatte.SwordCatch;
 
 namespace Kamatte.Player
 {
-    [RequireComponent(typeof(PlayerHitBoxControllerBootstrap))]
+    //  プレイヤーコントローラー
+    [RequireComponent(typeof(PlayerBootstrap))]
     [DisallowMultipleComponent]
-    public class PlayerHitBoxController : MonoBehaviour    //  プレイヤー制御クラス
+    public sealed class PlayerController : MonoBehaviour
     {
-        PlayerHitBoxMgr playerHitBoxMgr;              //  プレイヤーヒットボックス管理クラス
+        PlayerHitBox _playerHitBoxMgr;    //  プレイヤーヒットボックス管理クラス
 
         public StateReader_SwordCatch StateReader { get; private set; }
         public StateWriter_SwordCatch StateWriter { get; private set; }
 
-        private AudioSource audioSource;
-        private AudioClip catchClip;
+        AudioSource audioSource;
+        AudioClip catchClip;
         bool isSound = false;
 
         public void Initialize(PlayerContext ctx)    //  初期化
         {
-            playerHitBoxMgr = ctx.HitBoxMgr;
+            _playerHitBoxMgr = ctx.HitBoxMgr;
 
             StateReader = ctx.StateReader;
             StateWriter = ctx.StateWriter;
@@ -30,26 +31,29 @@ namespace Kamatte.Player
 
         void Update()
         {
-            playerHitBoxMgr.Update();
+            _playerHitBoxMgr.Update();
         }
 
+        //  当たり判定アクティブ
         public void ActiveHitBox()
         {
-            playerHitBoxMgr.EnableHitBox(HitBoxID.SwordCatch);
+            _playerHitBoxMgr.EnableHitBox(HitBoxID.CatchSword);
         }
 
+        //  当たり判定消去
         public void EraseHitBox()
         {
-            playerHitBoxMgr.DisableHitBox(HitBoxID.SwordCatch);
+            _playerHitBoxMgr.DisableHitBox(HitBoxID.CatchSword);
             isSound = false;
         }
 
-        public void PlayCatchSound()
+        //  白刃取り成功
+        public void OnCatch()
         {
             if (StateReader.AcceseState().CatchState.IsCatchSword && !isSound)
             {
                 isSound = true;
-                audioSource.PlayOneShot(catchClip, 0.6f);
+                AudioManager.Instance.PlaySE(catchClip, 0.8f, 1f, 0f);
             }
         }
 

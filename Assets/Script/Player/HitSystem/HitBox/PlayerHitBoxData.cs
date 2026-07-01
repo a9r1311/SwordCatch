@@ -4,10 +4,12 @@ using UnityEngine;
 namespace Kamatte.Core
 {
     [CreateAssetMenu(fileName = "PlayerHitBox", menuName = "Player/HitBox")]
-    [System.Serializable]
-    public class PlayerHitBoxData : ScriptableObject   //  ヒットボックスのデータ一覧
+    //  当たり判定リスト
+    public sealed class PlayerHitBoxData : ScriptableObject
     {
         [Header("ヒットボックスリスト")]
-        public List<HitBoxData> playerHitBoxes = new();
+        [SerializeField] List<HitBox> _playerHitBoxes = new();
+
+        public IReadOnlyList<HitBox> PlayerHitBoxes => _playerHitBoxes;
     }
 }
