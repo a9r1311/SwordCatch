@@ -14,7 +14,6 @@ namespace Kamatte.Player
         public StateReader_SwordCatch StateReader { get; private set; }
         public StateWriter_SwordCatch StateWriter { get; private set; }
 
-        AudioSource audioSource;
         AudioClip catchClip;
         bool isSound = false;
 
@@ -25,7 +24,6 @@ namespace Kamatte.Player
             StateReader = ctx.StateReader;
             StateWriter = ctx.StateWriter;
 
-            audioSource = ctx.AudioSource;
             catchClip = ctx.CatchSE;
         }
 

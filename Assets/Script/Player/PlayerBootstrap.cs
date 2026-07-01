@@ -56,7 +56,7 @@ namespace Kamatte.Player
 
             playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateReader, stateWriter);
 
-            context = new PlayerContext(playerHitBox, playerHeadTF, stateReader, stateWriter, audioSource, catchClip);
+            context = new PlayerContext(playerHitBox, playerHeadTF, stateReader, stateWriter, catchClip);
           
             playerController.Initialize(context);    //  Controller‚Ì«¿ãAwake‚Å‰Šú‰»
         }

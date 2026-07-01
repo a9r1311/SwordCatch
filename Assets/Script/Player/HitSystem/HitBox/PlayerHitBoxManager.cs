@@ -52,7 +52,7 @@ namespace Kamatte.Player
             {
                 _activeBox = box;
                 activeID = box.id;
-                LogUtility.Log(LogPrefix.playerHitBoxController, $"{id} ヒットボックス有効", LogLevel.Info);
+                Debug.Log("ヒットボックス有効化");
             }
         }
 
@@ -61,7 +61,7 @@ namespace Kamatte.Player
             if (activeID.Equals(id))
             {
                 _activeBox = null;
-                LogUtility.Log(LogPrefix.playerHitBoxController, $"{id} ヒットボックス無効", LogLevel.Info);
+                Debug.Log("ヒットボックス無効化");
             }
         }
 
@@ -79,7 +79,7 @@ namespace Kamatte.Player
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
                     controller.OnCatch();
-                    LogUtility.Log(LogPrefix.playerHitBoxController, "白刃取り成功", LogLevel.Info);
+                    Debug.Log("白刃取り成功");
                     SwordCatchEventBus.CatchSuccess();
                     ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(true);
                 }
