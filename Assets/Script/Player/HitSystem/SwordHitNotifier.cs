@@ -8,7 +8,7 @@ namespace Kamatte.SwordCatch
     [DisallowMultipleComponent]
     public sealed class SwordHitNotifier : MonoBehaviour    //  “‚ª“–‚½‚Á‚½‚Éˆ—‚ğ“®‚©‚·
     {
-        [SerializeField] PlayerHitBoxController playerController;
+        [SerializeField] PlayerController playerController;
         [SerializeField] StateHolder_SwordCatch stateHolder;
 
         private AnimParamFacadeBase animationFacade;

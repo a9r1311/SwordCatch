@@ -5,9 +5,9 @@ namespace Kamatte.Player
     public class PlayerUpperSMFactory : SMFactoryBase<PlayerStateMachineID>    //  プレイヤー上位ステートマシーン生成
     {
         PlayerUpperSM _upperStateMachine;    //  アッパーステートマシーン(//　ここから)
-        PlayerHitBoxMgr _hitBoxMamager;    //  ヒットボックスマネージャー
+        PlayerHitBox _hitBoxMamager;    //  ヒットボックスマネージャー
 
-        public PlayerUpperSMFactory(PlayerHitBoxMgr hitBoxMgr)    //  コンストラクタ
+        public PlayerUpperSMFactory(PlayerHitBox hitBoxMgr)    //  コンストラクタ
         {
             _hitBoxMamager = hitBoxMgr;
             Register(PlayerStateMachineID.SwordCatchSM, () => CreateSwordCatchSM());    //  ステートマシーン登録

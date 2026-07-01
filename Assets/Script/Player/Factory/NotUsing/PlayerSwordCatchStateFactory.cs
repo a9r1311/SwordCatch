@@ -5,9 +5,9 @@ namespace Kamatte.Player
     public class PlayerStateFacotry_SwordCatch : SMFactoryBase<PlayerSwordCatchStateID>    //  プレイヤーの白刃取り状態を生成するファクトリ
     {
         PlayerSwordCatchSM _playerSwordCatchStateMachine;    //  プレイヤーのステートマシーン
-        PlayerHitBoxMgr _playerHitBoxMgr;                    //  プレイヤーの当たり判定管理クラス
+        PlayerHitBox _playerHitBoxMgr;                    //  プレイヤーの当たり判定管理クラス
 
-        public PlayerStateFacotry_SwordCatch(PlayerHitBoxMgr playerHitBoxMgr, PlayerSwordCatchSM stateMachine)    //  コンストラクタ
+        public PlayerStateFacotry_SwordCatch(PlayerHitBox playerHitBoxMgr, PlayerSwordCatchSM stateMachine)    //  コンストラクタ
         {
             _playerSwordCatchStateMachine = stateMachine;
             _playerHitBoxMgr = playerHitBoxMgr;

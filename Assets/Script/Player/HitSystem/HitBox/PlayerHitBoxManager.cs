@@ -5,28 +5,31 @@ using Kamatte.SwordCatch;
 
 namespace Kamatte.Player
 {
-    public class PlayerHitBoxMgr    //  ヒットボックス管理者
+    //  ヒットボックス管理者
+    public sealed class PlayerHitBox
     {
-        Dictionary<HitBoxID, HitBoxData> _hitbBoxDictionary;    //  当たり判定一覧
-        HitBoxData _activeBox = null;    //  アクティブになってる当たり判定
-        PlayerHitBoxController controller;
-        public Transform _playerHeadTF;    //  プレイヤーの頭
-        HitBoxID activeID = HitBoxID.Unknown;                       //  アクティブにするボックスID
+        Dictionary<HitBoxID, HitBox> _hitbBoxDictionary;    //  当たり判定一覧
+        HitBox _activeBox = null;    //  有効になっている当たり判定
+
+        PlayerController controller;
+        public Transform _playerHeadTF;
+
+        HitBoxID activeID = HitBoxID.Unknown;    //  アクティブにするボックスID
 
         StateWriter_SwordCatch stateWriter;
         StateReader_SwordCatch stateRead;
 
-        public HitBoxData ActiveBox => _activeBox;
+        public HitBox ActiveBox => _activeBox;
 
         Vector3 StarEffectPos;
         Vector3 FireWorksPos = new Vector3(648,-507,269);
         Vector3 LightningCenterPos = new Vector3(616, -5.5f, 507);
 
-        public PlayerHitBoxMgr
-            (PlayerHitBoxData hitBoxData, PlayerHitBoxController playerController, Transform playerHead, Vector3 starEffectPos, StateReader_SwordCatch read, StateWriter_SwordCatch writer)    //  コンストラクタ
+        public PlayerHitBox
+            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader_SwordCatch read, StateWriter_SwordCatch writer)    //  コンストラクタ
         {
-            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBoxData>();
-            foreach (var box in hitBoxData.playerHitBoxes)
+            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
+            foreach (var box in hitBoxData.PlayerHitBoxes)
             {
                 _hitbBoxDictionary[box.id] = box;
             }
@@ -40,7 +43,7 @@ namespace Kamatte.Player
 
         void Initalize()    //  初期化
         {
-            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBoxData>();
+            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
         }
 
         public void EnableHitBox(HitBoxID id)    //  当たり判定有効化
@@ -75,7 +78,7 @@ namespace Kamatte.Player
                     stateWriter.AddCatchSuccessCnt();
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
-                    controller.PlayCatchSound();
+                    controller.OnCatch();
                     LogUtility.Log(LogPrefix.playerHitBoxController, "白刃取り成功", LogLevel.Info);
                     SwordCatchEventBus.CatchSuccess();
                     ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(true);
@@ -83,13 +86,10 @@ namespace Kamatte.Player
             }
         }
 
-        public Vector3 ResolveCenter(Transform owner) => _activeBox.anchorType switch    //  当たり判定の中心地を返す
+        Vector3 ResolveCenter(Transform owner)    //  当たり判定の中心座標を返す
         {
-            HitBoxAnchorType.Transform => owner.position + owner.rotation * _activeBox.offset,
-            HitBoxAnchorType.Bone => _activeBox.boneTransform.position + _activeBox.boneTransform.rotation * _activeBox.offset,
-            HitBoxAnchorType.World => _activeBox.worldCenter != null ? _activeBox.worldCenter : Vector3.zero,
-            _ => owner.position
-        };
+            return owner.position + owner.rotation * _activeBox.offset;
+        }
 
         void PlayrRandomEffect()
         {
@@ -108,3 +108,11 @@ namespace Kamatte.Player
         }
     }
 }
+
+//public Vector3 ResolveCenter(Transform owner) => _activeBox.anchorType switch    //  当たり判定の中心地を返す
+//{
+//    HitBoxAnchor.Transform => owner.position + owner.rotation * _activeBox.offset,
+//    HitBoxAnchor.Bone => _activeBox.bone.position + _activeBox.bone.rotation * _activeBox.offset,
+//    HitBoxAnchor.World => _activeBox.worldCenter != null ? _activeBox.worldCenter : Vector3.zero,
+//    _ => owner.position
+//};
