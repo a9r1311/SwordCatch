@@ -12,7 +12,7 @@ namespace Kamatte.Player
         PlayerHitBox _playerHitBoxMgr;    //  プレイヤーヒットボックス管理クラス
 
         public StateReader_SwordCatch StateReader { get; private set; }
-        public StateWriter_SwordCatch StateWriter { get; private set; }
+        public StateWriter StateWriter { get; private set; }
 
         AudioClip catchClip;
         bool isSound = false;

@@ -21,8 +21,7 @@ namespace Kamatte.Player
         [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
         StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
         StateReadJudge_SwordCatch readJudge;    //  アクセスが適正かを判断する関数をReader層から呼ばれる。
-        StateWriter_SwordCatch stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
-        StateWriteJudge_SwordCatch writeJudge;    //  下位クラスからの書き換えが適正かを判断する、Witerにインスタンスを渡してそこから判断関数を呼び出してもらう
+        StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
 
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip catchClip;
@@ -51,8 +50,7 @@ namespace Kamatte.Player
 
             readJudge = new StateReadJudge_SwordCatch();
             stateReader = new StateReader_SwordCatch(stateHolder, readJudge);
-            writeJudge = new StateWriteJudge_SwordCatch();
-            stateWriter = new StateWriter_SwordCatch(stateHolder, writeJudge);
+            stateWriter = new StateWriter(stateHolder);
 
             playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateReader, stateWriter);
 
