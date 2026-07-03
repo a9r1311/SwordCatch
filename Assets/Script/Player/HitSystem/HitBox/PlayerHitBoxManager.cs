@@ -11,12 +11,12 @@ namespace Kamatte.Player
         Dictionary<HitBoxID, HitBox> _hitbBoxDictionary;    //  当たり判定一覧
         HitBox _activeBox = null;    //  有効になっている当たり判定
 
-        PlayerController controller;
-        public Transform _playerHeadTF;
+        Transform _playerHeadTF;
+        PlayerController _controller;
 
         HitBoxID activeID = HitBoxID.Unknown;    //  アクティブにするボックスID
 
-        StateWriter_SwordCatch stateWriter;
+        StateWriter stateWriter;
         StateReader_SwordCatch stateRead;
 
         public HitBox ActiveBox => _activeBox;
@@ -26,14 +26,14 @@ namespace Kamatte.Player
         Vector3 LightningCenterPos = new Vector3(616, -5.5f, 507);
 
         public PlayerHitBox
-            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader_SwordCatch read, StateWriter_SwordCatch writer)    //  コンストラクタ
+            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader_SwordCatch read, StateWriter writer)    //  コンストラクタ
         {
             _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
             foreach (var box in hitBoxData.PlayerHitBoxes)
             {
                 _hitbBoxDictionary[box.id] = box;
             }
-            controller = playerController;
+            _controller = playerController;
             _playerHeadTF = playerHead;
             StarEffectPos = starEffectPos;
 
@@ -41,12 +41,8 @@ namespace Kamatte.Player
             stateWriter = writer;
         }
 
-        void Initalize()    //  初期化
-        {
-            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
-        }
-
-        public void EnableHitBox(HitBoxID id)    //  当たり判定有効化
+        //  当たり判定有効化
+        public void EnableHitBox(HitBoxID id)
         {
             if (_hitbBoxDictionary.TryGetValue(id, out var box))
             {
@@ -56,7 +52,8 @@ namespace Kamatte.Player
             }
         }
 
-        public void DisableHitBox(HitBoxID id)    //  当たり判定無効化
+        //  当たり判定無効化
+        public void DisableHitBox(HitBoxID id)
         {
             if (activeID.Equals(id))
             {
@@ -65,23 +62,36 @@ namespace Kamatte.Player
             }
         }
 
-        public void Update()    //  毎フレーム実行処理
+        public void Update()
         {
-            if (_activeBox == null) return;
-            var hits = Physics.OverlapBox(ResolveCenter(_playerHeadTF), _activeBox.size * 0.5f);    //  gpt とここから
+            if (_activeBox == null)
+            {
+                return;
+            }
+
+            //  activeboxの情報を読んで当たり判定を生成
+            var hits = Physics.OverlapBox(
+                ResolveCenter(_playerHeadTF),
+                _activeBox.size * 0.5f
+                );
+            
             foreach (var h in hits)
             {
-                if (h.CompareTag("Sword") && !stateRead.AcceseState().CatchState.IsCatchSword && !stateRead.AcceseState().HitSwingState.IsHitSwing)
+                if (
+                    h.CompareTag("Sword")
+                    && !stateRead.AcceseState().CatchState.IsCatchSword
+                    && !stateRead.AcceseState().HitSwingState.IsHitSwing
+                    )
                 {
+                    _controller.OnCatch();
                     PlayrRandomEffect();
                     stateWriter.ChangeCatchState(true);
                     stateWriter.AddCatchSuccessCnt();
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
-                    controller.OnCatch();
-                    Debug.Log("白刃取り成功");
                     SwordCatchEventBus.CatchSuccess();
                     ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(true);
+                    Debug.Log("白刃取り成功");
                 }
             }
         }
