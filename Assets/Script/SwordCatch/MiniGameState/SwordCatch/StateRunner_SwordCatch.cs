@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
-    [RequireComponent(typeof(StateSystemBootstrap_SwordCatch))]
+    [RequireComponent(typeof(StateSystemBootstrap))]
     [DisallowMultipleComponent]
-    public class StateHolder_SwordCatch : MonoBehaviour
+    public class StateHolder : MonoBehaviour
     {
         public SwordCatchStateBase SwordCatchState { get; private set; }
 
