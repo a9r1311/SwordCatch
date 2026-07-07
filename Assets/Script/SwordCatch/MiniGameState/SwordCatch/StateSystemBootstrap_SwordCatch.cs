@@ -11,7 +11,7 @@ namespace Kamatte.SwordCatch
         HitSwingState hitSwingState;    //    キャッチの状況を持つクラス。
 
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
+        StateReader stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
 
         void Awake()
         {
@@ -25,7 +25,7 @@ namespace Kamatte.SwordCatch
             hitSwingState = new HitSwingState();
             swordCatchState = new SwordCatchState(catchState, hitSwingState);
 
-            stateReader = new StateReader_SwordCatch(stateHolder);
+            stateReader = new StateReader(stateHolder);
         }
 
         void Start()

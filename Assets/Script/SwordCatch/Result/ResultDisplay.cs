@@ -10,11 +10,11 @@ namespace Kamatte.SwordCatch
         GameObject resultRoot;
         TextMeshProUGUI playerLevelTxt;
         TextMeshProUGUI countTxt;
-        StateReader_SwordCatch stateRead;
+        StateReader stateRead;
 
         public int Order => 50;    //  é¿çsèá(è¨Ç≥Ç¢ï˚Ç™êÊ)
         
-        public ResultDisplay(GameObject resultRoot, TextMeshProUGUI countText, TextMeshProUGUI levelText, StateReader_SwordCatch stateRead)
+        public ResultDisplay(GameObject resultRoot, TextMeshProUGUI countText, TextMeshProUGUI levelText, StateReader stateRead)
         {
             this.resultRoot = resultRoot;
             this.countTxt = countText;

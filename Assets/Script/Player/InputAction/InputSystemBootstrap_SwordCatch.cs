@@ -9,7 +9,7 @@ namespace Kamatte.Core
         InputSystem_Actions inputAction_System;
 
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
+        StateReader stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
 
         HandleInputAction_SwordCatch handleAction_Player;
         PlayerInputAction_SwordCatch playerAction_SwordCatch;    //  プレイヤーのアクション関数を持つクラス
@@ -18,7 +18,7 @@ namespace Kamatte.Core
         {
             inputAction_System = new InputSystem_Actions();
 
-            stateReader = new StateReader_SwordCatch(stateHolder);
+            stateReader = new StateReader(stateHolder);
 
             playerAction_SwordCatch = new PlayerInputAction_SwordCatch(stateReader);
             handleAction_Player = new HandleInputAction_SwordCatch(inputAction_System, playerAction_SwordCatch);

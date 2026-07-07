@@ -1,7 +1,7 @@
-namespace Kamatte.Customer
+namespace Kamatte.SwordCatch
 {
-    //  ‚¨‹q‚³‚ñ‚ÌID
-    public enum CustomerID
+    //  U‚è‰º‚ë‚·ƒLƒƒƒ‰‚ÌID
+    public enum SwingerID
     {
         Samurai,    //  ˜
     }
