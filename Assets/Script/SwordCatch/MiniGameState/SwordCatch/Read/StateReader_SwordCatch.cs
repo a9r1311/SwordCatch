@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-namespace Kamatte.SwordCatch
+﻿namespace Kamatte.SwordCatch
 {
-    public class StateReader_SwordCatch    //  判断層を通って、状態を持つクラスにアクセスする関数を持つ
+    public class StateReader    //  判断層を通って、状態を持つクラスにアクセスする関数を持つ
     {
         StateHolder stateHolder;    //  SwordCatchの状態データを集約してるクラス、このクラスから読む
 
-        public StateReader_SwordCatch(StateHolder holder)    //  StateHolderBootstrap_SwordCatchから呼ばれる
+        public StateReader(StateHolder holder)    //  StateHolderBootstrap_SwordCatchから呼ばれる
         {
             stateHolder = holder;
         }

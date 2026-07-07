@@ -18,7 +18,7 @@ namespace Kamatte.Player
         PlayerController _controller;
 
         StateWriter stateWriter;
-        StateReader_SwordCatch stateRead;
+        StateReader stateRead;
 
         public HitBox ActiveBox => _activeBox;
 
@@ -27,7 +27,7 @@ namespace Kamatte.Player
         Vector3 LightningCenterPos = new Vector3(616, -5.5f, 507);
 
         public PlayerHitBox
-            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader_SwordCatch read, StateWriter writer)    //  コンストラクタ
+            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader read, StateWriter writer)    //  コンストラクタ
         {
             _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
             foreach (var box in hitBoxData.PlayerHitBoxes)

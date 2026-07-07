@@ -1,47 +1,45 @@
 using Kamatte.Core;
-using Kamatte.Customer;
 using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
-    public class SwingTimeController : MonoBehaviour    //  刀を振るタイミングを決定するスクリプト
+    [DisallowMultipleComponent]
+    public sealed class SwingTimeController : MonoBehaviour    //  刀を振るタイミングを決定するスクリプト
     {
-        [SerializeField] CustomerIDStatPair _customerIDStat;    //  お客さんの能力値が入ってるSO
-        CustomerStatBlock _customerStat;           //  お客さんの能力値
+        [SerializeField] SwingerIDStatPair _swingerIDStat;    //  お客さんの能力値が入ってるSO
+        SwingerStatBlock _swingerStat;           //  お客さんの能力値
         SwordSwing _swingAction;             //  刀振りのコントローラー
 
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
+        StateReader stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
         StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
         
-        SwingerPersonal swingerPersonal;     //  刀振りの性格
+        SwingPersonal swingerPersonal;     //  刀振りの性格
 
         float swingTimer;     //  刀を振り下ろすまでのタイマー
-        bool isTimerStop = false;
         bool IsSpraked = false;
 
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip RoundVoiceClip;
 
-        int Swingway = 0;
         SwingType _swingTyep = SwingType.Normal;
 
         private void Awake()
         {
-            _customerStat = _customerIDStat.GetStat(CustomerID.Samurai);
-            swingerPersonal = _customerStat.swingerPersonal;
+            _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
+            swingerPersonal = _swingerStat.swingerPersonal;
 
-            swingTimer = _customerStat.swingTimer;
+            swingTimer = _swingerStat.swingTimer;
         }
         public void Initialize(SwordSwing swingAction)    //  クラス変数初期化
         {
-            _customerStat = _customerIDStat.GetStat(CustomerID.Samurai);
+            _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
             _swingAction = swingAction;
 
-            swingerPersonal = _customerStat.swingerPersonal;
+            swingerPersonal = _swingerStat.swingerPersonal;
 
-            swingTimer = _customerStat.swingTimer;
-            stateReader = new StateReader_SwordCatch(stateHolder);
+            swingTimer = _swingerStat.swingTimer;
+            stateReader = new StateReader(stateHolder);
             stateWriter = new StateWriter(stateHolder);
         }
         void Update()
@@ -52,13 +50,13 @@ namespace Kamatte.SwordCatch
             }
             switch (swingerPersonal)
             {
-                case SwingerPersonal.Chiken:
+                case SwingPersonal.Chiken:
                     ChikenUpdate();
                     break;
-                case SwingerPersonal.SwordMaster:
+                case SwingPersonal.SwordMaster:
                     SwordMasterUpdate();
                     break;
-                case SwingerPersonal.SpeedStar:
+                case SwingPersonal.SpeedStar:
                     SpeedStarUpdate();
                     break;
             }

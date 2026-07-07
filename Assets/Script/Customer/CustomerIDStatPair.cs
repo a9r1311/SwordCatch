@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Kamatte.Customer
+namespace Kamatte.SwordCatch
 {
-    [CreateAssetMenu(fileName = "CustomerStat", menuName = "SwordCatch/Customer/Stat")]
-
+    [CreateAssetMenu(fileName = "SwingerStatList", menuName = "Swinger/StatList")]
     //  お客さんの能力値
-    public sealed class CustomerIDStatPair : ScriptableObject, ISerializationCallbackReceiver
+    public sealed class SwingerIDStatPair : ScriptableObject, ISerializationCallbackReceiver
     {
 
         //  敵のIDと能力値のクラス
         [System.Serializable]
-        public class CustomerIDStat
+        public class SwingerIDStat
         {
-            public CustomerID customerName;    //  お客さんのID
-            public CustomerStatBlock stat;    //  能力値
+            public SwingerID ID;    //  お客さんのID
+            public SwingerStatBlock stat;    //  能力値
         }
 
         [Header("お客さんの能力値リスト")]
-        [SerializeField] List<CustomerIDStat> _customerIDStatList = new();    //  IDと能力値のリスト(インスペクター用)
-        Dictionary<CustomerID, CustomerStatBlock> _statMap = new();    //  IDと能力値の辞書(処理用)
+        [SerializeField] List<SwingerIDStat> _swingerIDStatList = new();    //  IDと能力値のリスト(インスペクター用)
+        Dictionary<SwingerID, SwingerStatBlock> _statMap = new();    //  IDと能力値の辞書(処理用)
 
         public void OnAfterDeserialize()
         {
@@ -32,19 +31,19 @@ namespace Kamatte.Customer
         void BuildStatMap()
         {
             _statMap.Clear();
-            foreach (var pair in _customerIDStatList)
+            foreach (var pair in _swingerIDStatList)
             {
-                if (!_statMap.ContainsKey(pair.customerName))
+                if (!_statMap.ContainsKey(pair.ID))
                 {
-                    _statMap.Add(pair.customerName, pair.stat);
+                    _statMap.Add(pair.ID, pair.stat);
                 }
             }
         }
 
         //  IDに応じた能力値の取得
-        public CustomerStatBlock GetStat(CustomerID customerName)
+        public SwingerStatBlock GetStat(SwingerID customerName)
         {
-            return _statMap.TryGetValue(customerName, out CustomerStatBlock stat) ? stat : null;
+            return _statMap.TryGetValue(customerName, out SwingerStatBlock stat) ? stat : null;
         }
     }
 }

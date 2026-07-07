@@ -6,9 +6,9 @@ namespace Kamatte.Player
 {
     public class PlayerInputAction_SwordCatch    //  ƒvƒŒƒCƒ„[‚Ì”’næ‚èó‘Ô‚Ì“ü—Í‚É”½‰‚µ‚½“®‚«
     {
-        StateReader_SwordCatch stateReader;
+        StateReader stateReader;
         
-        public PlayerInputAction_SwordCatch(StateReader_SwordCatch stateReader)
+        public PlayerInputAction_SwordCatch(StateReader stateReader)
         {
             this.stateReader = stateReader;
         }
