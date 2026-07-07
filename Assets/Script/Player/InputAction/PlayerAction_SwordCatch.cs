@@ -15,7 +15,7 @@ namespace Kamatte.Player
 
         public void Catch(InputAction.CallbackContext context)    //  キャッチ挙動を開始する
         {
-            if (!stateReader.AcceseState().HitSwingState.IsHitSwing)
+            if (!stateReader.StateHolder.IsHitSwing)
             {
                 ServiceLocator.Resolve<AnimParamFacadeBase>().PlayerParam.PlayerParam_Catch.SetTrigger();
             }

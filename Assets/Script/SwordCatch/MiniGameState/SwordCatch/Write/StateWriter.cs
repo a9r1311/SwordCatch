@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Kamatte.SwordCatch
 {
     public class StateWriter    //  判断層を通って、状態を持つクラスにアクセスする関数を持つ
@@ -11,18 +9,22 @@ namespace Kamatte.SwordCatch
             stateHolder = holder;
         }
 
-        public void AddCatchSuccessCnt()    //  CatchClassの白刃取り成功回数をインクリメントする
+        //  CatchClassの白刃取り成功回数をインクリメントする
+        public void AddCatchSuccessCnt()
         {
-            stateHolder.SwordCatchState.CatchState.AddSuccessCount();
+            //  白刃取り成功
+            stateHolder.CatchSuccess();
         }
 
-        public void ChangeCatchState(bool isCatchSwing)    //  ソードキャッチゲームの状態に書き込む
+        //  ソードキャッチゲームの状態に書き込む
+        public void ChangeCatchState(bool isCatchSwing)
         {
-                stateHolder.SwordCatchState.CatchState.ChagneCatchSwordState(isCatchSwing);
+                stateHolder.IsCatchSword = isCatchSwing;
         }
-        public void ChangeHitSwingState(bool isHitSwing)    //  ソードキャッチゲームの状態に書き込む
+        //  ソードキャッチゲームの状態に書き込む
+        public void ChangeHitSwingState(bool isHitSwing)
         {
-                stateHolder.SwordCatchState.HitSwingState.ChagneHitSwordState(isHitSwing);
+                stateHolder.IsHitSwing = isHitSwing;
         }
     }
 }
