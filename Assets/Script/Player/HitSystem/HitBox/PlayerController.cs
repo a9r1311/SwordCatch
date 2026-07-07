@@ -48,7 +48,7 @@ namespace Kamatte.Player
         //  ”’næ‚è¬Œ÷
         public void OnCatch()
         {
-            if (StateReader.AcceseState().CatchState.IsCatchSword && !isSound)
+            if (StateReader.StateHolder.IsCatchSword && !isSound)
             {
                 isSound = true;
                 AudioManager.Instance.PlaySE(catchClip, 0.8f, 1f, 0f);

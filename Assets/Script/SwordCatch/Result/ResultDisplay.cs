@@ -26,7 +26,7 @@ namespace Kamatte.SwordCatch
         {
             if (prev == GameMode.SwordCatch && next == GameMode.SwordCatch)
             {
-                countTxt.text = stateRead.AcceseState().CatchState.CatchSuccessTime.ToString();
+                countTxt.text = stateRead.StateHolder.CatchSuccessCnt.ToString();
                 playerLevelTxt.text = GetPlayerLevel();
                 resultRoot.SetActive(true);
                 yield break;
@@ -34,47 +34,47 @@ namespace Kamatte.SwordCatch
         }
         string GetPlayerLevel()
         {
-            if (stateRead.AcceseState().CatchState.CatchSuccessTime > 30)
+            if (stateRead.StateHolder.CatchSuccessCnt > 30)
             {
                 return "宮本武蔵";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 24)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 24)
             {
                 return PlayerPower.GOAT.ToString();
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 19)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 19)
             {
                 return PlayerPower.Chanmpion.ToString();
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 17)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 17)
             {
                 return "モンスター";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 14)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 14)
             {
                 return "F1レーサー";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 12)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 12)
             {
                 return "侍";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 9)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 9)
             {
                 return "中堅";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 7)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 7)
             {
                 return "育ち盛り";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 4)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 4)
             {
                 return "足軽";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 2)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 2)
             {
                 return "寝起き";
             }
-            else if (stateRead.AcceseState().CatchState.CatchSuccessTime > 0)
+            else if (stateRead.StateHolder.CatchSuccessCnt > 0)
             {
                 return "赤ちゃん";
             }

@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
+    //  刀を振るタイミングを決定するスクリプト
     [DisallowMultipleComponent]
-    public sealed class SwingTimeController : MonoBehaviour    //  刀を振るタイミングを決定するスクリプト
+    public sealed class SwingTimeController : MonoBehaviour
     {
-        [SerializeField] SwingerIDStatPair _swingerIDStat;    //  お客さんの能力値が入ってるSO
-        SwingerStatBlock _swingerStat;           //  お客さんの能力値
-        SwordSwing _swingAction;             //  刀振りのコントローラー
-
-        [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
-        StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
-        
+        [SerializeField] SwingerIDStatPair _swingerIDStat;  // 刀役の能力値が入ってるSO
+        SwingerStatBlock _swingerStat;  // 刀役の能力値(キャッシュ)
+        SwordSwing _swordSwing;  // 刀振りのコントローラー
         SwingPersonal swingerPersonal;     //  刀振りの性格
 
-        float swingTimer;     //  刀を振り下ろすまでのタイマー
+        [SerializeField] StateHolder stateHolder;  // ゲーム状態クラス
+        StateReader stateReader;  // ゲーム状態を読み取るクラス
+        StateWriter stateWriter;  // ゲーム状態を書き換える
+
+        float swingTimer;  // 刀を振り下ろすまでのタイマー
         bool IsSpraked = false;
 
         [SerializeField] private AudioSource audioSource;
@@ -34,7 +34,7 @@ namespace Kamatte.SwordCatch
         public void Initialize(SwordSwing swingAction)    //  クラス変数初期化
         {
             _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
-            _swingAction = swingAction;
+            _swordSwing = swingAction;
 
             swingerPersonal = _swingerStat.swingerPersonal;
 
@@ -44,7 +44,7 @@ namespace Kamatte.SwordCatch
         }
         void Update()
         {
-            if (!stateReader.AcceseState().HitSwingState.IsHitSwing)
+            if (!stateReader.StateHolder.IsHitSwing)
             {
                 swingTimer -= Time.deltaTime;
             }
@@ -71,7 +71,7 @@ namespace Kamatte.SwordCatch
                 stateWriter.ChangeCatchState(false);
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(false);
                 stateWriter.ChangeHitSwingState(false);
-                _swingAction.SwingSword(_swingTyep);
+                _swordSwing.SwingSword(_swingTyep);
                 swingTimer = Random.Range(1, 10);
                 _swingTyep = (SwingType)Random.Range(0, 2);
                 IsSpraked = false;
