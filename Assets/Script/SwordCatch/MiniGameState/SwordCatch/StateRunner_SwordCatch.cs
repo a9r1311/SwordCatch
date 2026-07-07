@@ -21,16 +21,9 @@ namespace Kamatte.SwordCatch
         public bool IsHitSwing
         { get { return _isHitSwing; } set { _isHitSwing = value; } }
 
-        public void CatchSuccess()    //  リザルトで表示する成功回数をインクリメントする
+        public void CatchSuccess()  // リザルトで表示する成功回数をインクリメントする
         {
             _catchSuccessCnt++;
-        }
-
-        public SwordCatchStateBase SwordCatchState { get; private set; }
-
-        public void Initialize(SwordCatchStateBase swordCatchState)    //  BootStrapから呼ばれる初期化
-        {
-            SwordCatchState = swordCatchState;
         }
     }
 }

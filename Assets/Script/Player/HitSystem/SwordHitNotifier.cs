@@ -8,33 +8,33 @@ namespace Kamatte.SwordCatch
     [DisallowMultipleComponent]
     public sealed class SwordHitNotifier : MonoBehaviour    //  “‚ª“–‚½‚Á‚½‚Éˆ—‚ğ“®‚©‚·
     {
-        [SerializeField] PlayerController playerController;
-        [SerializeField] StateHolder stateHolder;
+        [SerializeField] PlayerController _playerController;
+        [SerializeField] StateHolder _stateHolder;
 
-        private AnimParamFacadeBase animationFacade;
+        AnimParamFacadeBase _animationFacade;
 
         void Awake()
         {
-            UAssert.IsNotNull(playerController, "[SwordHitNotifier] playerContoroller‚ª–¢İ’è‚Å‚·");
-            UAssert.IsNotNull(stateHolder, "[SwordHitNotifier] stateHolder‚ª–¢İ’è‚Å‚·");
+            UAssert.IsNotNull(_playerController, "[SwordHitNotifier] playerContoroller‚ª–¢İ’è‚Å‚·");
+            UAssert.IsNotNull(_stateHolder, "[SwordHitNotifier] stateHolder‚ª–¢İ’è‚Å‚·");
         }
 
         void Start()
         {
-            animationFacade = ServiceLocator.Resolve<AnimParamFacadeBase>();
-            UAssert.IsNotNull(animationFacade, "[SwordHitNotifier] ServiceLocator‚ÉanimationFacadeBase‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            _animationFacade = ServiceLocator.Resolve<AnimParamFacadeBase>();
+            UAssert.IsNotNull(_animationFacade, "[SwordHitNotifier] ServiceLocator‚ÉanimationFacadeBase‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
         }
 
         public void OnSwordHit(Collider other)    //  “ª‚ÉƒAƒ^ƒbƒ`‚µ‚½Class‚©‚çŒÄ‚Ño‚³‚ê‚é
         {
             if (!other.CompareTag("Sword")) return;
 
-            if (!stateHolder.SwordCatchState.CatchState.IsCatchSword)
+            if (!_stateHolder.IsCatchSword)
             {
-                playerController.EraseHitBox();
-                stateHolder.SwordCatchState.HitSwingState.ChagneHitSwordState(true);
+                _playerController.EraseHitBox();
+                _stateHolder.IsHitSwing = true;
                 EffectActAPI.Action(new EffectActKey(EffectActor.Player, EffectActTrigger.Hit, EffectActType.Blow));
-                animationFacade.SwingerParam.IsHited.SetBool(true);
+                _animationFacade.SwingerParam.IsHited.SetBool(true);
             }
         }
     }

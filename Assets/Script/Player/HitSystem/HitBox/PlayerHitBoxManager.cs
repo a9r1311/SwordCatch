@@ -17,8 +17,7 @@ namespace Kamatte.Player
         Transform _playerHeadTF;
         PlayerController _controller;
 
-        StateWriter stateWriter;
-        StateReader stateRead;
+        StateHolder _stateHolder;
 
         public HitBox ActiveBox => _activeBox;
 
@@ -27,7 +26,7 @@ namespace Kamatte.Player
         Vector3 LightningCenterPos = new Vector3(616, -5.5f, 507);
 
         public PlayerHitBox
-            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateReader read, StateWriter writer)    //  コンストラクタ
+            (PlayerHitBoxData hitBoxData, PlayerController playerController, Transform playerHead, Vector3 starEffectPos, StateHolder stateHolder)    //  コンストラクタ
         {
             _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
             foreach (var box in hitBoxData.PlayerHitBoxes)
@@ -37,9 +36,7 @@ namespace Kamatte.Player
             _controller = playerController;
             _playerHeadTF = playerHead;
             StarEffectPos = starEffectPos;
-
-            stateRead = read;
-            stateWriter = writer;
+            _stateHolder = stateHolder; 
         }
 
         //  当たり判定有効化
@@ -80,14 +77,14 @@ namespace Kamatte.Player
             {
                 if (
                     h.CompareTag("Sword")
-                    && !stateRead.StateHolder.IsCatchSword
-                    && !stateRead.StateHolder.IsHitSwing
+                    && !_stateHolder.IsCatchSword
+                    && !_stateHolder.IsHitSwing
                     )
                 {
                     _controller.OnCatch();
                     PlayrRandomEffect();
-                    stateWriter.ChangeCatchState(true);
-                    stateWriter.AddCatchSuccessCnt();
+                    _stateHolder.IsCatchSword = true;
+                    _stateHolder.CatchSuccess();
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
                     SwordCatchEventBus.CatchSuccess();
@@ -104,11 +101,11 @@ namespace Kamatte.Player
 
         void PlayrRandomEffect()
         {
-            if(stateRead.StateHolder.CatchSuccessCnt == 5)
+            if(_stateHolder.CatchSuccessCnt == 5)
             {
                 EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.FireWorks), FireWorksPos);
             }
-            if(stateRead.StateHolder.CatchSuccessCnt > 20)
+            if(_stateHolder.CatchSuccessCnt > 20)
             {
                 float radius = 7f;
                 Vector3 LightningAddPos = Random.insideUnitSphere * radius;
