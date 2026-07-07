@@ -4,9 +4,9 @@ namespace Kamatte.SwordCatch
 {
     public class StateWriter    //  判断層を通って、状態を持つクラスにアクセスする関数を持つ
     {
-        StateHolder_SwordCatch stateHolder;    //  SwordCatchの状態データを集約してるクラス、このクラスに書く
+        StateHolder stateHolder;    //  SwordCatchの状態データを集約してるクラス、このクラスに書く
 
-        public StateWriter(StateHolder_SwordCatch holder)    //  StateHolderBootstrap_SwordCatchから呼ばれる
+        public StateWriter(StateHolder holder)    //  StateHolderBootstrap_SwordCatchから呼ばれる
         {
             stateHolder = holder;
         }

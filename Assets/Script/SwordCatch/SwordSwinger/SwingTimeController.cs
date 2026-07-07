@@ -10,9 +10,8 @@ namespace Kamatte.SwordCatch
         CustomerStatBlock _customerStat;           //  お客さんの能力値
         SwordSwing _swingAction;             //  刀振りのコントローラー
 
-        [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
+        [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
         StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
-        StateReadJudge_SwordCatch readJudge;    //  アクセスが適正かを判断する関数をReader層から呼ばれる。
         StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
         
         SwingerPersonal swingerPersonal;     //  刀振りの性格
@@ -42,8 +41,7 @@ namespace Kamatte.SwordCatch
             swingerPersonal = _customerStat.swingerPersonal;
 
             swingTimer = _customerStat.swingTimer;
-            readJudge = new StateReadJudge_SwordCatch();
-            stateReader = new StateReader_SwordCatch(stateHolder, readJudge);
+            stateReader = new StateReader_SwordCatch(stateHolder);
             stateWriter = new StateWriter(stateHolder);
         }
         void Update()

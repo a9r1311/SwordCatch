@@ -4,8 +4,8 @@ using Kamatte.SwordCatch;
 
 namespace Kamatte.Player
 {
-    [RequireComponent(typeof(PlayerController))]
     [DisallowMultipleComponent]
+    [RequireComponent(typeof(PlayerController))]
     //  プレイヤー初期化クラス
     public sealed class PlayerBootstrap : MonoBehaviour
     {
@@ -18,9 +18,8 @@ namespace Kamatte.Player
 
         [SerializeField] Vector3 catchEffectPos;
 
-        [SerializeField] StateHolder_SwordCatch stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
+        [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
         StateReader_SwordCatch stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
-        StateReadJudge_SwordCatch readJudge;    //  アクセスが適正かを判断する関数をReader層から呼ばれる。
         StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
 
         [SerializeField] private AudioSource audioSource;
@@ -48,8 +47,7 @@ namespace Kamatte.Player
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
 
-            readJudge = new StateReadJudge_SwordCatch();
-            stateReader = new StateReader_SwordCatch(stateHolder, readJudge);
+            stateReader = new StateReader_SwordCatch(stateHolder);
             stateWriter = new StateWriter(stateHolder);
 
             playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateReader, stateWriter);
