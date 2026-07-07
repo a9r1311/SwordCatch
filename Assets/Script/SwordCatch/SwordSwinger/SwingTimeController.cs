@@ -12,9 +12,7 @@ namespace Kamatte.SwordCatch
         SwordSwing _swordSwing;  // 刀振りのコントローラー
         SwingPersonal swingerPersonal;     //  刀振りの性格
 
-        [SerializeField] StateHolder stateHolder;  // ゲーム状態クラス
-        StateReader stateReader;  // ゲーム状態を読み取るクラス
-        StateWriter stateWriter;  // ゲーム状態を書き換える
+        [SerializeField] StateHolder _stateHolder;  // ゲーム状態クラス
 
         float swingTimer;  // 刀を振り下ろすまでのタイマー
         bool IsSpraked = false;
@@ -39,12 +37,10 @@ namespace Kamatte.SwordCatch
             swingerPersonal = _swingerStat.swingerPersonal;
 
             swingTimer = _swingerStat.swingTimer;
-            stateReader = new StateReader(stateHolder);
-            stateWriter = new StateWriter(stateHolder);
         }
         void Update()
         {
-            if (!stateReader.StateHolder.IsHitSwing)
+            if (!_stateHolder.IsHitSwing)
             {
                 swingTimer -= Time.deltaTime;
             }
@@ -68,9 +64,9 @@ namespace Kamatte.SwordCatch
             }
             if (swingTimer < 0)
             {
-                stateWriter.ChangeCatchState(false);
+                _stateHolder.IsCatchSword = false;
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(false);
-                stateWriter.ChangeHitSwingState(false);
+                _stateHolder.IsHitSwing = false;
                 _swordSwing.SwingSword(_swingTyep);
                 swingTimer = Random.Range(1, 10);
                 _swingTyep = (SwingType)Random.Range(0, 2);

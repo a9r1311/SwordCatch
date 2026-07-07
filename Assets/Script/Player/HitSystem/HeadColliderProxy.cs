@@ -10,7 +10,7 @@ namespace Kamatte.SwordCatch
         {
             if (hitNotifier == null)
             {
-                Debug.LogError("hitNotifierの参照がありません。");
+                Debug.LogError("hitNotifierの参照がありません。", this.gameObject);
             }
         }
 

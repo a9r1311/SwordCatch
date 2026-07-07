@@ -19,8 +19,6 @@ namespace Kamatte.Player
         [SerializeField] Vector3 catchEffectPos;
 
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader stateReader;    //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
-        StateWriter stateWriter;    //  下位クラスからStateを書き換えるためのFacade、judgeを通ったらState集約クラスの関数を使って書き換える
 
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip catchClip;
@@ -47,12 +45,10 @@ namespace Kamatte.Player
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
 
-            stateReader = new StateReader(stateHolder);
-            stateWriter = new StateWriter(stateHolder);
 
-            playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateReader, stateWriter);
+            playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateHolder);
 
-            context = new PlayerContext(playerHitBox, playerHeadTF, stateReader, stateWriter, catchClip);
+            context = new PlayerContext(playerHitBox, playerHeadTF, stateHolder, catchClip);
           
             playerController.Initialize(context);    //  Controllerの性質上Awakeで初期化
         }

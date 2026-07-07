@@ -9,10 +9,8 @@ namespace Kamatte.Player
     [DisallowMultipleComponent]
     public sealed class PlayerController : MonoBehaviour
     {
-        PlayerHitBox _playerHitBoxMgr;    //  プレイヤーヒットボックス管理クラス
-
-        public StateReader StateReader { get; private set; }
-        public StateWriter StateWriter { get; private set; }
+        PlayerHitBox _playerHitBoxMgr;  // プレイヤーヒットボックス管理クラス
+        StateHolder _stateHolder;  // ゲーム状態を保持するクラス
 
         AudioClip catchClip;
         bool isSound = false;
@@ -20,9 +18,7 @@ namespace Kamatte.Player
         public void Initialize(PlayerContext ctx)    //  初期化
         {
             _playerHitBoxMgr = ctx.HitBoxMgr;
-
-            StateReader = ctx.StateReader;
-            StateWriter = ctx.StateWriter;
+            _stateHolder = ctx.StateHolder;
 
             catchClip = ctx.CatchSE;
         }
@@ -48,7 +44,7 @@ namespace Kamatte.Player
         //  白刃取り成功
         public void OnCatch()
         {
-            if (StateReader.StateHolder.IsCatchSword && !isSound)
+            if (_stateHolder.IsCatchSword && !isSound)
             {
                 isSound = true;
                 AudioManager.Instance.PlaySE(catchClip, 0.8f, 1f, 0f);

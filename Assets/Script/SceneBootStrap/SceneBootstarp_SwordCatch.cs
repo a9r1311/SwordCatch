@@ -12,7 +12,6 @@ namespace Kamatte.SwordCatch
         SceneStartStepExcuteBase startStepExcute;               //  シーン開始時に必要な処理をするクラス
 
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-        StateReader stateReader;                     //  下位クラスからStateClassへのFacade、Judgeインスタンスからアクセス可否を判断する。
 
         FadeOutStep fadeOutStep;
 
@@ -38,10 +37,8 @@ namespace Kamatte.SwordCatch
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
 
-            stateReader = new StateReader(stateHolder);
-
             fadeOutStep = new FadeOutStep();
-            resultDisplay = new ResultDisplay(resultRoot, CatchCountTxt, playerPowerTxt, stateReader);
+            resultDisplay = new ResultDisplay(resultRoot, CatchCountTxt, playerPowerTxt, stateHolder);
             stopAudio = new StopAudio(BgmSource);
             swordSwing = new SwordSwing();
         }

@@ -10,71 +10,73 @@ namespace Kamatte.SwordCatch
         GameObject resultRoot;
         TextMeshProUGUI playerLevelTxt;
         TextMeshProUGUI countTxt;
-        StateReader stateRead;
+        StateHolder _stateHolder;
 
         public int Order => 50;    //  実行順(小さい方が先)
         
-        public ResultDisplay(GameObject resultRoot, TextMeshProUGUI countText, TextMeshProUGUI levelText, StateReader stateRead)
+        public ResultDisplay(GameObject resultRoot, TextMeshProUGUI countText, TextMeshProUGUI levelText, StateHolder stateHolder)
         {
             this.resultRoot = resultRoot;
             this.countTxt = countText;
             playerLevelTxt = levelText;
-            this.stateRead = stateRead;
+            _stateHolder= stateHolder;
         }
 
         public IEnumerator Execute(GameMode prev, GameMode next)    //  Stepの処理関数のラップ関数
         {
             if (prev == GameMode.SwordCatch && next == GameMode.SwordCatch)
             {
-                countTxt.text = stateRead.StateHolder.CatchSuccessCnt.ToString();
+                countTxt.text = _stateHolder.CatchSuccessCnt.ToString();
                 playerLevelTxt.text = GetPlayerLevel();
                 resultRoot.SetActive(true);
                 yield break;
             }
         }
+
+        // プレイヤーの実力を取得
         string GetPlayerLevel()
         {
-            if (stateRead.StateHolder.CatchSuccessCnt > 30)
+            if (_stateHolder.CatchSuccessCnt > 30)
             {
                 return "宮本武蔵";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 24)
+            else if (_stateHolder.CatchSuccessCnt > 24)
             {
                 return PlayerPower.GOAT.ToString();
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 19)
+            else if (_stateHolder.CatchSuccessCnt > 19)
             {
                 return PlayerPower.Chanmpion.ToString();
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 17)
+            else if (_stateHolder.CatchSuccessCnt > 17)
             {
                 return "モンスター";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 14)
+            else if (_stateHolder.CatchSuccessCnt > 14)
             {
                 return "F1レーサー";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 12)
+            else if (_stateHolder.CatchSuccessCnt > 12)
             {
                 return "侍";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 9)
+            else if (_stateHolder.CatchSuccessCnt > 9)
             {
                 return "中堅";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 7)
+            else if (_stateHolder.CatchSuccessCnt > 7)
             {
                 return "育ち盛り";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 4)
+            else if (_stateHolder.CatchSuccessCnt > 4)
             {
                 return "足軽";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 2)
+            else if (_stateHolder.CatchSuccessCnt > 2)
             {
                 return "寝起き";
             }
-            else if (stateRead.StateHolder.CatchSuccessCnt > 0)
+            else if (_stateHolder.CatchSuccessCnt > 0)
             {
                 return "赤ちゃん";
             }
