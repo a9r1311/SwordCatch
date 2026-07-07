@@ -2,24 +2,26 @@ using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
-    public sealed class HeadColliderProxy : MonoBehaviour    //  頭オブジェクトにアタッチして代わりに衝突を検知してもらう
+    //  頭にアタッチして衝突を検知してもらう
+    [DisallowMultipleComponent]
+    public sealed class HeadColliderProxy : MonoBehaviour
     {
-        [SerializeField] private SwordHitNotifier hitNotifier;
+        [SerializeField] SwordHitNotifier hitNotifier;
 
-        private void Awake()
+        void Awake()
         {
             if (hitNotifier == null)
             {
-                Debug.LogError("hitNotifierの参照がありません。", this.gameObject);
+                Debug.LogError("hitNotifierの参照がありません。");
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
-            if (hitNotifier != null)
-            {
-                hitNotifier.OnSwordHit(other);
-            }
+            if (hitNotifier == null) return;
+            if (!other.CompareTag("Sword")) return;
+         
+            hitNotifier.OnSwordHit(other);
         }
     }
 }
