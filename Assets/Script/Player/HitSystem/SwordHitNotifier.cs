@@ -5,8 +5,9 @@ using Kamatte.Player;
 
 namespace Kamatte.SwordCatch
 {
+    //  刀が当たった時の処理をするクラス
     [DisallowMultipleComponent]
-    public sealed class SwordHitNotifier : MonoBehaviour    //  刀が当たった時に処理を動かす
+    public sealed class SwordHitNotifier : MonoBehaviour
     {
         [SerializeField] PlayerController _playerController;
         [SerializeField] StateHolder _stateHolder;
@@ -25,7 +26,8 @@ namespace Kamatte.SwordCatch
             UAssert.IsNotNull(_animationFacade, "[SwordHitNotifier] ServiceLocatorにanimationFacadeBaseが登録されていません");
         }
 
-        public void OnSwordHit(Collider other)    //  頭にアタッチしたClassから呼び出される
+        //  刀が当たった時の処理
+        public void OnSwordHit(Collider other)
         {
             if (!other.CompareTag("Sword")) return;
 
@@ -34,7 +36,7 @@ namespace Kamatte.SwordCatch
                 _playerController.EraseHitBox();
                 _stateHolder.IsHitSwing = true;
                 EffectActAPI.Action(new EffectActKey(EffectActor.Player, EffectActTrigger.Hit, EffectActType.Blow));
-                _animationFacade.SwingerParam.IsHited.SetBool(true);
+                _animationFacade.SwingerParam.IsHit(true);
             }
         }
     }

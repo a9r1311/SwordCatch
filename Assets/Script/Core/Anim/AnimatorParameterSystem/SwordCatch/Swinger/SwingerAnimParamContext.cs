@@ -1,20 +1,26 @@
+
 namespace Kamatte.SwordCatch
 {
-    public class SwingerAnimParamContext
+    public sealed class SwingerAnimParameters
     {
-        public SwingerParam_NormalSwing NormalSwing { get; }
-        public SwingerParam_FastSwing FastSwing{ get; }
-        public SwingerParam_DelaySwing DelaySwing { get; }
-        public SwingerParam_IsHited IsHited { get; }
-        public SwingerParam_IsCatch IsCatch { get; }
-
-        public SwingerAnimParamContext(SwingerParam_NormalSwing normalSwing, SwingerParam_FastSwing fastSwing, SwingerParam_DelaySwing delaySwing, SwingerParam_IsHited isHited, SwingerParam_IsCatch isCatch)
+        public string NormalSwing { get; private set; }
+        public string FastSwing { get; private set; }
+        //public string DelaySwing { get; private set; }  // Delay‚Í‚Þ‚¸‚¢‚©‚çˆê’U‚È‚µ
+        public string IsHit { get; private set; }
+        public string IsCought { get; private set; }
+        
+        public SwingerAnimParameters(
+            string normalSwing,
+            string fastSwing,
+            //string delaySwing,  // Delay‚Í‚Þ‚¸‚¢‚©‚çˆê’U‚È‚µ
+            string isHit,
+            string isCought)
         {
             NormalSwing = normalSwing;
             FastSwing = fastSwing;
-            DelaySwing = delaySwing;
-            IsHited = isHited;
-            IsCatch = isCatch;
+            //DelaySwing = delaySwing;  // Delay‚Í‚Þ‚¸‚¢‚©‚çˆê’U‚È‚µ
+            IsHit = isHit;
+            IsCought = isCought;
         }
     }
 }
