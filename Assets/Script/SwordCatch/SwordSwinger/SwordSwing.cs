@@ -10,9 +10,8 @@ namespace Kamatte.SwordCatch
         public SwordSwing()
         {
             _animParameter = ServiceLocator.Resolve<AnimParamFacadeBase>();
-            UAssert.IsNotNull( _animParameter,"[SwordSwing] animParameterの参照が取得できませんでした。");
+            UAssert.IsNotNull( _animParameter,"animParameterの参照が取得できませんでした。");
         }
-
 
         public void SwingSword(SwingType swingType)    //  刀振り下ろし
         {
@@ -20,12 +19,12 @@ namespace Kamatte.SwordCatch
             if(swingType == SwingType.Normal)
             {
                 Debug.Log("通常振り下ろし開始");
-                _animParameter.SwingerParam.NormalSwing.SetTrigger();
+                _animParameter.SwingerParam.NormmalSwing();
             }
             else if(swingType == SwingType.Fast)
             {
                 Debug.Log("高速振り下ろし開始");
-                _animParameter.SwingerParam.FastSwing.SetTrigger();
+                _animParameter.SwingerParam.FastSwing();
             }
             //else if (swingWay == 2)    //  Delayは難しすぎたのでコメントアウト中
             //{

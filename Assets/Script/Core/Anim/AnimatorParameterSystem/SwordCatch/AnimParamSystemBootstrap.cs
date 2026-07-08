@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Kamatte.Core;
-using Kamatte.Player;
+using Kamatte.Swinger;
 
 namespace Kamatte.SwordCatch
 {
+    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する
     [DefaultExecutionOrder(-10)]
-    public class AnimParamSystemBootstrap : MonoBehaviour    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する。
+    public sealed class AnimParamSystemBootstrap : MonoBehaviour
     {
         [System.Serializable]
         class AnimatorBinding    //  インスペクターに表示するためのKVP
@@ -18,29 +19,29 @@ namespace Kamatte.SwordCatch
         [SerializeField] List<AnimatorBinding> animatorBindings;    //  インスペクターにバインディングを表示するためのリスト
         Dictionary<AnimatorRole, Animator> animatorMap;    //  インスペクター用から処理用の辞書に変える
 
-        AnimParamRead paramRead;    //  未使用(消したらエラー出る)
-        AnimParamSet paramSet;    //  未使用(消したらエラー出る)
 
-        AnimParamFacade_SwordCatch paramFacade;    //  SLに登録するFacade
+        AnimParamFacade paramFacade;    //  SLに登録するFacade
         AnimParam_Player playerParam;    //  プレイヤーのパラメータを集約してるクラス
         AnimParam_Swinger swingerParam;    //  刀振りのパラメータを集約してるクラス
 
         void Awake()
         {
-            BuildDictionary();    //  インスペクター表示用Listから処理用辞書を構築
-            
-            paramRead = new AnimParamRead();
-            paramSet = new AnimParamSet();
+            //  インスペクター表示用Listから処理用の辞書を構築
+            BuildDictionary();
 
-            GeneratePlayerSystem();    //  プレイヤーのパラーメーターシステム初期化
-            GenerateSwingerSystem();    //  刀振りのパラメーターシステム初期化
+            //  プレイヤーのアニメーターパラメータークラス生成
+            GeneratePlayerSystem();
+            //  スウィンガーのアニメーターパラメータークラス生成
+            GenerateSwingerSystem();
 
-            paramFacade = new AnimParamFacade_SwordCatch(playerParam, swingerParam);
+            paramFacade = new AnimParamFacade(playerParam, swingerParam);
 
-            ServiceLocator.Register<AnimParamFacadeBase>(paramFacade);    //  SLに登録
+            //  SLに登録
+            ServiceLocator.Register<AnimParamFacadeBase>(paramFacade);
         }
 
-        void BuildDictionary()    //  インスペクター表示用Listから処理速度向上のためDictionaryを構築する
+        //  インスペクター表示用Listから処理速度向上のためDictionaryを構築する
+        void BuildDictionary()
         {
             animatorMap = new Dictionary<AnimatorRole, Animator>();
 
@@ -57,26 +58,23 @@ namespace Kamatte.SwordCatch
             }
         }
 
-        void GeneratePlayerSystem()    //  各パラメータークラスを初期化して集約クラスに渡す
+        //  プレイヤーのアニメーションパラメータークラスを生成
+        void GeneratePlayerSystem()
         {
-            PlayerParam_Catch catchParam = new(animatorMap[AnimatorRole.Player], "Catch");
-            
-            PlayerAnimParamContext ctx = new PlayerAnimParamContext(catchParam);
-
-            playerParam = new AnimParam_Player(animatorMap[AnimatorRole.Player], paramRead, paramSet,ctx);
+            playerParam = new AnimParam_Player(animatorMap[AnimatorRole.Player], "Catch");
         }
 
-        void GenerateSwingerSystem()  //  各パラメータークラスを初期化して集約クラスに渡す
+        //  刀振りのアニメーションパラメータークラスを生成
+        void GenerateSwingerSystem()
         {
-            SwingerParam_NormalSwing normalSwingParam = new(animatorMap[AnimatorRole.SwordSwinger], "NormalSwing");
-            SwingerParam_FastSwing fastSwingParam = new(animatorMap[AnimatorRole.SwordSwinger], "FastSwing");
-            SwingerParam_DelaySwing delaySwingParam = new(animatorMap[AnimatorRole.SwordSwinger], "DelaySwing");
-            SwingerParam_IsHited isHitedParam = new(animatorMap[AnimatorRole.SwordSwinger], "IsHited");
-            SwingerParam_IsCatch isCatchParam = new(animatorMap[AnimatorRole.SwordSwinger], "IsCatched");
-
-            SwingerAnimParamContext ctx = new(normalSwingParam, fastSwingParam, delaySwingParam, isHitedParam, isCatchParam);
-
-            swingerParam = new AnimParam_Swinger(animatorMap[AnimatorRole.SwordSwinger], paramRead, paramSet, ctx);
+            SwingerAnimParameters ctx = new(
+                SwingerAnimatorParameter.NormalSwing.ToString(),
+                SwingerAnimatorParameter.FastSwing.ToString(),
+                //SwingerAnimatorParameter.DelaySwing.ToString(), Delayは難しすぎたので一旦なし
+                SwingerAnimatorParameter.IsHit.ToString(),
+                SwingerAnimatorParameter.IsCought.ToString()
+                );
+            swingerParam = new AnimParam_Swinger(animatorMap[AnimatorRole.SwordSwinger], ctx);
         }
     }
 }

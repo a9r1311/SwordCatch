@@ -88,7 +88,7 @@ namespace Kamatte.Player
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
                     SwordCatchEventBus.CatchSuccess();
-                    ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(true);
+                    ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
                     Debug.Log("白刃取り成功");
                 }
             }

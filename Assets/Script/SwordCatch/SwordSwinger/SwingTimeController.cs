@@ -65,7 +65,7 @@ namespace Kamatte.SwordCatch
             if (swingTimer < 0)
             {
                 _stateHolder.IsCatchSword = false;
-                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCatch.SetBool(false);
+                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(false);
                 _stateHolder.IsHitSwing = false;
                 _swordSwing.SwingSword(_swingTyep);
                 swingTimer = Random.Range(1, 10);
@@ -73,18 +73,24 @@ namespace Kamatte.SwordCatch
                 IsSpraked = false;
             }
         }
-        void ChikenUpdate()    //  ê´äiChikenÇÃUpdate
+
+        //  ê´äiChikenÇÃUpdate
+        void ChikenUpdate()
         {
 
         }
-        void SwordMasterUpdate()    //  ê´äiSwordMasterUpdate
+
+        //  ê´äiSwordMasterUpdate
+        void SwordMasterUpdate()
         {
             if (swingTimer < 0)
             {
                 //  Swing
             }
         }
-        void SpeedStarUpdate()    //  ê´äiSpeedStarÇÃUpdate
+
+        //  ê´äiSpeedStarÇÃUpdate
+        void SpeedStarUpdate()
         {
             if (swingTimer < 0)
             {

@@ -1,17 +1,23 @@
 using UnityEngine;
 using Kamatte.Core;
-using Kamatte.Player;
 
 namespace Kamatte.SwordCatch
 {
-    public sealed class AnimParam_Player : AnimParamCollectionBase    //  各パラメーターを集約しているクラス
+    //  Playerのアニメーションパラーメータを保持しているクラス
+    public sealed class AnimParam_Player : AnimParamCollectionBase
     {
-        public PlayerParam_Catch PlayerParam_Catch { get; }
-        public AnimParam_Player
-            (Animator animator, AnimParamRead animParamRead, AnimParamSet animParamSet, PlayerAnimParamContext ctx) :
-            base(animator, animParamRead, animParamSet)
+        int _hash;
+        
+        public AnimParam_Player(Animator animator,string paramName)
+            : base(animator) 
         {
-            PlayerParam_Catch = ctx.PlayerParam_Catch;
+            _hash = Animator.StringToHash(paramName);
+        }
+
+        //  キャッチアニメーション発火
+        public void Catch()
+        {
+            animator.SetTrigger(_hash);
         }
     }
 }
