@@ -9,7 +9,7 @@ namespace Kamatte.SwordCatch
     [DisallowMultipleComponent]
     public sealed class SceneBootstrap_SwordCatch : MonoBehaviour
     {
-        [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
+        [SerializeField] StateHolder stateHolder;  // 白刃取りの状況を保持しているクラス
 
         FadeOutStep fadeOutStep;
 
@@ -25,6 +25,7 @@ namespace Kamatte.SwordCatch
         StopAudio stopAudio;
         [SerializeField] AudioSource BgmSource;
 
+        GameModeAPIFacadeBase _gameModeAPIFacade;
 
         void Awake()
         {
@@ -46,9 +47,11 @@ namespace Kamatte.SwordCatch
             swingTimeController.Initialize(_swing);
             
             RetryButton.onClick.AddListener(Retry);
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().pushTask.PushStep(resultDisplay);
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().pushTask.PushStep(stopAudio);
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().pushTask.PushStep(fadeOutStep);
+
+            _gameModeAPIFacade = ServiceLocator.Resolve<GameModeAPIFacadeBase>();
+            _gameModeAPIFacade.pushTask.PushStep(resultDisplay);
+            _gameModeAPIFacade.pushTask.PushStep(stopAudio);
+            _gameModeAPIFacade.pushTask.PushStep(fadeOutStep);
         }
 
         void Retry()
@@ -58,9 +61,10 @@ namespace Kamatte.SwordCatch
         void OnDestroy()
         {
             RetryButton.onClick.RemoveAllListeners();
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().removeTask.RemoveStep(resultDisplay);
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().removeTask.RemoveStep(stopAudio);
-            ServiceLocator.Resolve<GameModeAPIFacadeBase>().removeTask.RemoveStep(fadeOutStep);
+
+            _gameModeAPIFacade.removeTask.RemoveStep(resultDisplay);
+            _gameModeAPIFacade.removeTask.RemoveStep(stopAudio);
+            _gameModeAPIFacade.removeTask.RemoveStep(fadeOutStep);
         }
     }
 }
