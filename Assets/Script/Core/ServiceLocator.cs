@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Kamatte.Core
 {
@@ -13,10 +14,14 @@ namespace Kamatte.Core
         //  機能登録
         public static void Register<T>(T service)
         {
-            if (services.ContainsKey(typeof(T)))
-            {
-            }
+            var type = typeof(T);
 
+#if UNITY_EDITOR
+            if (services.ContainsKey(type))
+            {
+                Debug.LogWarning($"{type.Name} は既に登録されています。上書きします。");
+            }
+#endif
             services[typeof(T)] = service;
         }
 
@@ -37,7 +42,13 @@ namespace Kamatte.Core
             services.Remove(typeof(T));
         }
 
-        //  メモリ解法(重い処理)
+        //  全機能クリア
+        public static void Clear()
+        {
+            services.Clear();
+        }
+
+        //  メモリ解法(重処理)
         public static void TrimServiceDict()
         {
             services.TrimExcess();

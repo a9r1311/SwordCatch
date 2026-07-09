@@ -7,7 +7,7 @@ namespace Kamatte.SwordCatch
     public sealed class SwingerStatBlock
     {
         [Header("”’næ‚è‚Ì‚Ì«Ši")]
-        public SwingPersonal SwingerPersonal;
+        public SwingerPersonal SwingerPersonal;
 
         [Header("Å‰‚ÌU‚è‰º‚ë‚µ•û–@")]
         public SwingType FirstSwingType = SwingType.Normal;
