@@ -10,7 +10,7 @@ namespace Kamatte.SwordCatch
         public Swing()
         {
             _animParameter = ServiceLocator.Resolve<AnimParamFacadeBase>();
-            UAssert.IsNotNull( _animParameter,"animParameterの参照が取得できませんでした。");
+            UAssert.IsNotNull( _animParameter,"animParameterの参照が取得出来ていません。");
         }
 
         //  刀振り下ろし
