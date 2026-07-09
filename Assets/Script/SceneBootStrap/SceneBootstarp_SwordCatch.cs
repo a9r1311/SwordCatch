@@ -9,8 +9,6 @@ namespace Kamatte.SwordCatch
     [DisallowMultipleComponent]
     public sealed class SceneBootstrap_SwordCatch : MonoBehaviour
     {
-        SceneStartStepExcuteBase startStepExcute;               //  シーン開始時に必要な処理をするクラス
-
         [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
 
         FadeOutStep fadeOutStep;
@@ -30,8 +28,6 @@ namespace Kamatte.SwordCatch
 
         void Awake()
         {
-            startStepExcute = new SceneStartStepExcute();
-            
             if (stateHolder == null)
             {
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
@@ -45,7 +41,7 @@ namespace Kamatte.SwordCatch
 
         void Start()
         {
-            startStepExcute.StartSteps();
+            ServiceLocator.Resolve<IScreenFadeFacade>().FadeIn(1f);
 
             swingTimeController.Initialize(_swing);
             
