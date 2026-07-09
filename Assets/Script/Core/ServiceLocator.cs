@@ -3,13 +3,15 @@ using System.Collections.Generic;
 
 namespace Kamatte.Core
 {
-    public static class ServiceLocator    //  InterfaceやBaseClassをKey、インスタンスをValueのStatic辞書を持って、APIFacadeになる
+    //  システム系を使うためのServiceLocator
+    public static class ServiceLocator
     {
-        static readonly Dictionary<Type, object> services = new();    //  サービス辞書
+        static readonly Dictionary<Type, object> services = new();  // 機能辞書
 
         //  --  Public API
 
-        public static void Register<T>(T service)    //  APIを登録
+        //  機能登録
+        public static void Register<T>(T service)
         {
             if (services.ContainsKey(typeof(T)))
             {
@@ -17,18 +19,26 @@ namespace Kamatte.Core
 
             services[typeof(T)] = service;
         }
-      
-        public static T Resolve<T>()    //  API取り出し(Interfaceにキャスト)
+
+        //  機能取り出し
+        public static T Resolve<T>()
         {
+            if (!services.TryGetValue(typeof(T), out var service))
+            {
+                throw new InvalidOperationException($"[ServiceLocator] {typeof(T).Name} が登録されていません。");
+            }
+
             return (T)services[typeof(T)];
         }
-        
-        public static void Unregister<T>(T service)    //  登録解除
+
+        //  登録解除
+        public static void Unregister<T>(T service)
         {
             services.Remove(typeof(T));
         }
-        
-        public static void TrimServiceDict()    //  UnRegisterを呼び終わった後にメモリを解放するために辞書をTrim
+
+        //  メモリ解法(重い処理)
+        public static void TrimServiceDict()
         {
             services.TrimExcess();
         }
