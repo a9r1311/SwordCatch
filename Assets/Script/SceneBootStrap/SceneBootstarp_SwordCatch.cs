@@ -21,7 +21,7 @@ namespace Kamatte.SwordCatch
         [SerializeField] TextMeshProUGUI CatchCountTxt;
         [SerializeField] Button RetryButton;
 
-        [SerializeField] SwingTimeController swingTimeController;
+        [SerializeField] SwingerController swingTimeController;
         Swing _swing;
 
         StopAudio stopAudio;

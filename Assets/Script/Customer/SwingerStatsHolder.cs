@@ -4,19 +4,18 @@ using System.Collections.Generic;
 namespace Kamatte.SwordCatch
 {
     [CreateAssetMenu(fileName = "SwingerStatList", menuName = "Swinger/StatList")]
-    //  お客さんの能力値
+    //  スウィンガーの能力値
     public sealed class SwingerStatsHolder : ScriptableObject, ISerializationCallbackReceiver
     {
-
         //  敵のIDと能力値のクラス
         [System.Serializable]
         public class SwingerIDStat
         {
-            public SwingerID ID;    //  お客さんのID
-            public SwingerStatBlock Stat;    //  能力値
+            public SwingerID ID;  // ID
+            public SwingerStatBlock Stat;  // 能力値
         }
 
-        [Header("お客さんの能力値リスト")]
+        [Header("刀振りの能力値リスト")]
         [SerializeField] List<SwingerIDStat> _swingerIDStatList = new();    //  IDと能力値のリスト(インスペクター用)
         Dictionary<SwingerID, SwingerStatBlock> _statMap = new();    //  IDと能力値の辞書(処理用)
 

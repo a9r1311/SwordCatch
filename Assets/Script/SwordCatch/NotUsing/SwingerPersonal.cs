@@ -1,9 +1,9 @@
 namespace Kamatte.SwordCatch
 {
-    public enum SwingPersonal    //  “‚ğU‚él‚Ì«Ši
+    public enum SwingerPersonal    //  “‚ğU‚él‚Ì«Ši
     {
-        Chiken,         //  Td‚ÉU‚è‰º‚ë‚·
-        SwordMaster,    //  “‚ÉŠµ‚ê‚Ä‚é
-        SpeedStar,      //  ‘¬UU‚è‰º‚ë‚·
+        Normal,     // •’Ê‚ÌU‚è•û
+        Chiken,     // Td‚ÉU‚è‰º‚ë‚·
+        SpeedStar,  // ‘‚­U‚è‰º‚ë‚·
     }
 }
