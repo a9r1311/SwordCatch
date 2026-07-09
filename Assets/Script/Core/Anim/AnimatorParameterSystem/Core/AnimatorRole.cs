@@ -1,8 +1,9 @@
 namespace Kamatte.Core
 {
-    enum AnimatorRole    //  アニメーターが担当してるキャラ
+    //  アニメーターが制御する対象
+    enum AnimatorTarget
     {
-        Player,
-        SwordSwinger
+        Player,       //  プレイヤー
+        SwordSwinger  //  スウィンガー
     }
 }

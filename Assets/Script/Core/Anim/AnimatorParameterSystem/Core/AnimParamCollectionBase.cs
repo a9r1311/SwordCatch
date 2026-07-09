@@ -11,6 +11,5 @@ namespace Kamatte.Core
         {
             this.animator = animator;
         }
-       
     }
 }

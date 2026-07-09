@@ -5,24 +5,24 @@ using Kamatte.Swinger;
 
 namespace Kamatte.SwordCatch
 {
-    //  アニメーターのパラメーターをいじるシステムをServiceLocatorに登録する
+    //  アニメーターのパラメーターシステムをSLに登録するクラス
+    [DisallowMultipleComponent]
     [DefaultExecutionOrder(-10)]
     public sealed class AnimParamSystemBootstrap : MonoBehaviour
     {
         [System.Serializable]
-        class AnimatorBinding    //  インスペクターに表示するためのKVP
+        class AnimatorBinding
         {
-            public AnimatorRole role;
+            public AnimatorTarget target;
             public Animator animator;
         }
         
-        [SerializeField] List<AnimatorBinding> animatorBindings;    //  インスペクターにバインディングを表示するためのリスト
-        Dictionary<AnimatorRole, Animator> animatorMap;    //  インスペクター用から処理用の辞書に変える
+        [SerializeField] List<AnimatorBinding> animatorBindings;  // インスペクターにバインディングを表示するためのリスト
+        Dictionary<AnimatorTarget, Animator> animatorMap;  // リストから処理用の辞書に切り替える
 
-
-        AnimParamFacade paramFacade;    //  SLに登録するFacade
-        AnimParam_Player playerParam;    //  プレイヤーのパラメータを集約してるクラス
-        AnimParam_Swinger swingerParam;    //  刀振りのパラメータを集約してるクラス
+        AnimParamFacade paramFacade;  // パラーメーター集約クラス
+        AnimParam_Player playerParam;  // プレイヤーのパラメータを保持してるクラス
+        AnimParam_Swinger swingerParam;  // スウィンガーのパラメータを保持してるクラス
 
         void Awake()
         {
@@ -35,7 +35,6 @@ namespace Kamatte.SwordCatch
             GenerateSwingerSystem();
 
             paramFacade = new AnimParamFacade(playerParam, swingerParam);
-
             //  SLに登録
             ServiceLocator.Register<AnimParamFacadeBase>(paramFacade);
         }
@@ -43,17 +42,17 @@ namespace Kamatte.SwordCatch
         //  インスペクター表示用Listから処理速度向上のためDictionaryを構築する
         void BuildDictionary()
         {
-            animatorMap = new Dictionary<AnimatorRole, Animator>();
+            animatorMap = new Dictionary<AnimatorTarget, Animator>(animatorBindings.Count);
 
             foreach (var bind in animatorBindings)
             {
-                if (!animatorMap.ContainsKey(bind.role))
+                if (!animatorMap.ContainsKey(bind.target))
                 {
-                    animatorMap.Add(bind.role, bind.animator);
+                    animatorMap.Add(bind.target, bind.animator);
                 }
                 else
                 {
-                    Debug.LogWarning($"Duplicate AnimatorRole: {bind.role}");
+                    Debug.LogWarning($"Duplicate AnimatorRole: {bind.target}");
                 }
             }
         }
@@ -61,7 +60,7 @@ namespace Kamatte.SwordCatch
         //  プレイヤーのアニメーションパラメータークラスを生成
         void GeneratePlayerSystem()
         {
-            playerParam = new AnimParam_Player(animatorMap[AnimatorRole.Player], "Catch");
+            playerParam = new AnimParam_Player(animatorMap[AnimatorTarget.Player], "Catch");
         }
 
         //  刀振りのアニメーションパラメータークラスを生成
@@ -74,7 +73,7 @@ namespace Kamatte.SwordCatch
                 SwingerAnimatorParameter.IsHit.ToString(),
                 SwingerAnimatorParameter.IsCought.ToString()
                 );
-            swingerParam = new AnimParam_Swinger(animatorMap[AnimatorRole.SwordSwinger], ctx);
+            swingerParam = new AnimParam_Swinger(animatorMap[AnimatorTarget.SwordSwinger], ctx);
         }
     }
 }
