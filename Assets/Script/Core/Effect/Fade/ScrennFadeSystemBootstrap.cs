@@ -6,7 +6,6 @@ namespace Kamatte.Core
     public class ScrennFadeSystemBootstrap : MonoBehaviour    //  画面をフェードさせるシステムの初期化役
     {
         ScreenFadeFacade screenFadeFacade;    //  システム窓口Class
-        ScreenFadeJudgeBase fadeJudge;    //  フェードしていい状態か判断するクラス
         ScreenFade screenFader;    //  フェード関数持ちクラス
 
         [SerializeField] CanvasGroup canvasGroup;
@@ -16,8 +15,7 @@ namespace Kamatte.Core
         private void Awake()
         {
             screenFader = new ScreenFade(canvasGroup, canvas, fadeImage);
-            fadeJudge = new ScrennFadeJudge();
-            screenFadeFacade = new ScreenFadeFacade(screenFader, fadeJudge);
+            screenFadeFacade = new ScreenFadeFacade(screenFader);
             
             DontDestroyOnLoad(canvas);
         }
