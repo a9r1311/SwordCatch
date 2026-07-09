@@ -1,6 +1,6 @@
-
 namespace Kamatte.SwordCatch
 {
+    //  “U‚è‚ÌAnimatorParametorStringƒNƒ‰ƒX(ˆø”È—ª—p)
     public sealed class SwingerAnimParameters
     {
         public string NormalSwing { get; private set; }

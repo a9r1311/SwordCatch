@@ -7,14 +7,15 @@ namespace Kamatte.SwordCatch
     [DisallowMultipleComponent]
     public sealed class SwingTimeController : MonoBehaviour
     {
-        [SerializeField] SwingerIDStatPair _swingerIDStat;  // 刀役の能力値が入ってるSO
-        SwingerStatBlock _swingerStat;  // 刀役の能力値(キャッシュ)
-        SwordSwing _swordSwing;  // 刀振りのコントローラー
-        SwingPersonal swingerPersonal;     //  刀振りの性格
-
         [SerializeField] StateHolder _stateHolder;  // ゲーム状態クラス
 
-        float swingTimer;  // 刀を振り下ろすまでのタイマー
+        [SerializeField] SwingerIDStatPair _swingerIDStat;  // スウィンガーの能力値SO
+        SwingerStatBlock _swingerStat;  // 刀役の能力値(キャッシュ用)
+        Swing _swing;  // 刀振りのコントローラー
+        SwingPersonal swingerPersonal;     //  刀振りの性格
+
+        float _swingTimer;  // 刀を振り下ろすまでのタイマー
+        float _screemToFastSwing;  // 叫んでから高速振り下ろしするまでの時間
         bool IsSpraked = false;
 
         [SerializeField] private AudioSource audioSource;
@@ -22,27 +23,26 @@ namespace Kamatte.SwordCatch
 
         SwingType _swingTyep = SwingType.Normal;
 
-        private void Awake()
+        void Awake()
         {
             _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
-            swingerPersonal = _swingerStat.swingerPersonal;
+            swingerPersonal = _swingerStat.SwingerPersonal;
 
-            swingTimer = _swingerStat.swingTimer;
+            _swingTimer = _swingerStat.SwingTimer;
+            _screemToFastSwing = _swingerStat.ScreemToSwing;
         }
-        public void Initialize(SwordSwing swingAction)    //  クラス変数初期化
+
+        //  SwingClass受け取り
+        public void Initialize(Swing swing)
         {
-            _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
-            _swordSwing = swingAction;
-
-            swingerPersonal = _swingerStat.swingerPersonal;
-
-            swingTimer = _swingerStat.swingTimer;
+            _swing = swing;
         }
+
         void Update()
         {
             if (!_stateHolder.IsHitSwing)
             {
-                swingTimer -= Time.deltaTime;
+                _swingTimer -= Time.deltaTime;
             }
             switch (swingerPersonal)
             {
@@ -57,18 +57,18 @@ namespace Kamatte.SwordCatch
                     break;
             }
             //if(Swingway == 1 && swingTimer < 0.74f && !IsSpraked)
-            if(_swingTyep == SwingType.Fast && swingTimer < 0.74f && !IsSpraked)
+            if(_swingTyep == SwingType.Fast && _swingTimer < _screemToFastSwing && !IsSpraked)
             {
                 IsSpraked = true;
                 audioSource.PlayOneShot(RoundVoiceClip, 0.4f);
             }
-            if (swingTimer < 0)
+            if (_swingTimer < 0)
             {
                 _stateHolder.IsCatchSword = false;
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(false);
                 _stateHolder.IsHitSwing = false;
-                _swordSwing.SwingSword(_swingTyep);
-                swingTimer = Random.Range(1, 10);
+                _swing.SwingSword(_swingTyep);
+                _swingTimer = Random.Range(1, 10);
                 _swingTyep = (SwingType)Random.Range(0, 2);
                 IsSpraked = false;
             }
@@ -83,7 +83,7 @@ namespace Kamatte.SwordCatch
         //  性格SwordMasterUpdate
         void SwordMasterUpdate()
         {
-            if (swingTimer < 0)
+            if (_swingTimer < 0)
             {
                 //  Swing
             }
@@ -92,7 +92,7 @@ namespace Kamatte.SwordCatch
         //  性格SpeedStarのUpdate
         void SpeedStarUpdate()
         {
-            if (swingTimer < 0)
+            if (_swingTimer < 0)
             {
                 //  Swing
             }

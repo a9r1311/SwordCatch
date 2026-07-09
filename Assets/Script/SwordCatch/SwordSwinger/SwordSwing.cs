@@ -4,18 +4,18 @@ using UAssert = UnityEngine.Assertions.Assert;
 
 namespace Kamatte.SwordCatch
 {
-    public sealed class SwordSwing
+    public sealed class Swing
     {
         AnimParamFacadeBase _animParameter;
-        public SwordSwing()
+        public Swing()
         {
             _animParameter = ServiceLocator.Resolve<AnimParamFacadeBase>();
             UAssert.IsNotNull( _animParameter,"animParameterの参照が取得できませんでした。");
         }
 
-        public void SwingSword(SwingType swingType)    //  刀振り下ろし
+        //  刀振り下ろし
+        public void SwingSword(SwingType swingType)
         {
-
             if(swingType == SwingType.Normal)
             {
                 Debug.Log("通常振り下ろし開始");
