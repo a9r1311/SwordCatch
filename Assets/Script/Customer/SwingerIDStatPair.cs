@@ -5,7 +5,7 @@ namespace Kamatte.SwordCatch
 {
     [CreateAssetMenu(fileName = "SwingerStatList", menuName = "Swinger/StatList")]
     //  お客さんの能力値
-    public sealed class SwingerIDStatPair : ScriptableObject, ISerializationCallbackReceiver
+    public sealed class SwingerStatsHolder : ScriptableObject, ISerializationCallbackReceiver
     {
 
         //  敵のIDと能力値のクラス
@@ -13,7 +13,7 @@ namespace Kamatte.SwordCatch
         public class SwingerIDStat
         {
             public SwingerID ID;    //  お客さんのID
-            public SwingerStatBlock stat;    //  能力値
+            public SwingerStatBlock Stat;    //  能力値
         }
 
         [Header("お客さんの能力値リスト")]
@@ -27,6 +27,12 @@ namespace Kamatte.SwordCatch
         }
         public void OnBeforeSerialize() { }
 
+        //  IDに応じた能力値の取得
+        public SwingerStatBlock GetStat(SwingerID customerName)
+        {
+            return _statMap.TryGetValue(customerName, out SwingerStatBlock stat) ? stat : null;
+        }
+
         //  能力値辞書の構築
         void BuildStatMap()
         {
@@ -35,15 +41,9 @@ namespace Kamatte.SwordCatch
             {
                 if (!_statMap.ContainsKey(pair.ID))
                 {
-                    _statMap.Add(pair.ID, pair.stat);
+                    _statMap.Add(pair.ID, pair.Stat);
                 }
             }
-        }
-
-        //  IDに応じた能力値の取得
-        public SwingerStatBlock GetStat(SwingerID customerName)
-        {
-            return _statMap.TryGetValue(customerName, out SwingerStatBlock stat) ? stat : null;
         }
     }
 }

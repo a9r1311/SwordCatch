@@ -9,27 +9,37 @@ namespace Kamatte.SwordCatch
     {
         [SerializeField] StateHolder _stateHolder;  // ゲーム状態クラス
 
-        [SerializeField] SwingerIDStatPair _swingerIDStat;  // スウィンガーの能力値SO
-        SwingerStatBlock _swingerStat;  // 刀役の能力値(キャッシュ用)
+        [SerializeField] SwingerStatsHolder _statsHolder;  // スウィンガーの能力値SO
+        SwingerStatBlock _stat;  // 刀役の能力値(キャッシュ用)
         Swing _swing;  // 刀振りのコントローラー
-        SwingPersonal swingerPersonal;     //  刀振りの性格
+        //SwingPersonal swingerPersonal;     //  刀振りの性格
 
+        SwingType _swingTyep;  // 刀を降る方法
         float _swingTimer;  // 刀を振り下ろすまでのタイマー
         float _screemToFastSwing;  // 叫んでから高速振り下ろしするまでの時間
-        bool IsSpraked = false;
+        
+        bool _isShout = false;  // 高速振り下ろし前に叫んだかどうか
 
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip RoundVoiceClip;
+        AnimParamFacadeBase _animatorParametor;  // アニメーターのパラメーターを保持してるクラス
+        
+        [SerializeField] AudioSource _audioSource;
+        [SerializeField] AudioClip _roundVoiceClip;
 
-        SwingType _swingTyep = SwingType.Normal;
+
 
         void Awake()
         {
-            _swingerStat = _swingerIDStat.GetStat(SwingerID.Samurai);
-            swingerPersonal = _swingerStat.SwingerPersonal;
+            _stat = _statsHolder.GetStat(SwingerID.Samurai);
+            //swingerPersonal = _swingerStat.SwingerPersonal;
 
-            _swingTimer = _swingerStat.SwingTimer;
-            _screemToFastSwing = _swingerStat.ScreemToSwing;
+            _swingTimer = _stat.FirstSwingTime;  // 最初の振り下ろしまでの時間を取得
+            _swingTyep = _stat.FirstSwingType;  // 最初の振り下ろし方法を取得
+            _screemToFastSwing = _stat.ScreemToSwing;
+        }
+
+        void Start()
+        {
+            _animatorParametor = ServiceLocator.Resolve<AnimParamFacadeBase>();
         }
 
         //  SwingClass受け取り
@@ -44,58 +54,80 @@ namespace Kamatte.SwordCatch
             {
                 _swingTimer -= Time.deltaTime;
             }
-            switch (swingerPersonal)
+
+            //switch (swingerPersonal)
+            //{
+            //    case SwingPersonal.Chiken:
+            //        ChikenUpdate();
+            //        break;
+            //    case SwingPersonal.SwordMaster:
+            //        SwordMasterUpdate();
+            //        break;
+            //    case SwingPersonal.SpeedStar:
+            //        SpeedStarUpdate();
+            //        break;
+            //}
+
+            if(
+                _swingTyep == SwingType.Fast &&
+                _swingTimer < _screemToFastSwing&&
+                !_isShout
+                )
             {
-                case SwingPersonal.Chiken:
-                    ChikenUpdate();
-                    break;
-                case SwingPersonal.SwordMaster:
-                    SwordMasterUpdate();
-                    break;
-                case SwingPersonal.SpeedStar:
-                    SpeedStarUpdate();
-                    break;
+                //  叫ぶ
+                Shout();
             }
-            //if(Swingway == 1 && swingTimer < 0.74f && !IsSpraked)
-            if(_swingTyep == SwingType.Fast && _swingTimer < _screemToFastSwing && !IsSpraked)
-            {
-                IsSpraked = true;
-                audioSource.PlayOneShot(RoundVoiceClip, 0.4f);
-            }
+
             if (_swingTimer < 0)
             {
-                _stateHolder.IsCatchSword = false;
-                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(false);
-                _stateHolder.IsHitSwing = false;
-                _swing.SwingSword(_swingTyep);
-                _swingTimer = Random.Range(1, 10);
-                _swingTyep = (SwingType)Random.Range(0, 2);
-                IsSpraked = false;
+                //  降り下ろす
+                Swing();
             }
         }
 
-        //  性格ChikenのUpdate
-        void ChikenUpdate()
+        //  叫ぶ
+        void Shout()
         {
-
+            _isShout = true;
+            _audioSource.PlayOneShot(_roundVoiceClip, 0.4f);
         }
 
-        //  性格SwordMasterUpdate
-        void SwordMasterUpdate()
+        //  降り下ろす
+        void Swing()
         {
-            if (_swingTimer < 0)
-            {
-                //  Swing
-            }
+            _stateHolder.IsCatchSword = false;
+            _stateHolder.IsHitSwing = false;
+            _animatorParametor.SwingerParam.IsCought(false);
+            
+            _swing.SwingSword(_swingTyep);
+            _swingTimer = Random.Range(1, 10);
+            _swingTyep = (SwingType)Random.Range(0, 2);
+
+            _isShout = false;
         }
 
-        //  性格SpeedStarのUpdate
-        void SpeedStarUpdate()
-        {
-            if (_swingTimer < 0)
-            {
-                //  Swing
-            }
-        }
+        ////  性格ChikenのUpdate
+        //void ChikenUpdate()
+        //{
+
+        //}
+
+        ////  性格SwordMasterUpdate
+        //void SwordMasterUpdate()
+        //{
+        //    if (_swingTimer < 0)
+        //    {
+        //        //  Swing
+        //    }
+        //}
+
+        ////  性格SpeedStarのUpdate
+        //void SpeedStarUpdate()
+        //{
+        //    if (_swingTimer < 0)
+        //    {
+        //        //  Swing
+        //    }
+        //}
     }
 }
