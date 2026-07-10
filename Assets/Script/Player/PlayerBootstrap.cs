@@ -4,56 +4,52 @@ using Kamatte.SwordCatch;
 
 namespace Kamatte.Player
 {
+    //  プレイヤー初期化クラス
     [DisallowMultipleComponent]
     [RequireComponent(typeof(PlayerController))]
-    //  プレイヤー初期化クラス
     public sealed class PlayerBootstrap : MonoBehaviour
     {
-        [SerializeField] PlayerController playerController; 
-        PlayerContext context;    //  初期化のためのコンテキスト
+        [SerializeField] PlayerController _playerController;  // プレイヤーコントローラー 
+        PlayerContext _context;  // コンストラクタ引数短縮用クラス
 
-        [SerializeField] PlayerHitBoxData playerHitBoxData;
-        [SerializeField] Transform playerHeadTF;
-        PlayerHitBox  playerHitBox;
+        PlayerHitBox _playerHitBox;  // プレイヤー当たり判定クラス
+        [SerializeField] PlayerHitBoxData _playerHitBoxData;  // 当たり判定データSO
+        [SerializeField] Transform _playerHeadTF;  // 当たり判定用の頭Transform
 
-        [SerializeField] Vector3 catchEffectPos;
-
-        [SerializeField] StateHolder stateHolder;    //  ミニゲームのStateを集約してる、Reader層から呼ばれる。
-
-        [SerializeField] private AudioSource audioSource;
-        [SerializeField] private AudioClip catchClip;
-
-        //  --  Unity life cycle
+        [SerializeField] StateHolder _stateHolder;  // ゲーム状況保持クラス
+        
+        [SerializeField] Vector3 _catchEffectPos;  // キャッチ時のエフェクト生成場所
+        [SerializeField] AudioClip _catchClip;  // キャッチSE
 
         void Awake()
         {
-            if (playerController == null)
+            if (_playerController == null)
             {
-                playerController = GetComponent<PlayerController>();
+                _playerController = GetComponent<PlayerController>();
                 Debug.LogWarning("playerController isn't assigned in the Inspector");
             }
-            if(playerHitBoxData == null)
+            if(_playerHitBoxData == null)
             {
                 Debug.LogError("playerHitBoxData isn't assigned in the Inspector");
             }
-            if (playerHeadTF == null)
+            if (_playerHeadTF == null)
             {
                 Debug.LogError("playerHeadTF isn't assigned in the Inspector");
             }
-            if(stateHolder == null)
+            if(_stateHolder == null)
             {
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
-            if (catchClip == null)
+            if (_catchClip == null)
             {
                 Debug.LogError("catchClip isn't assigned in the Inspector");
             }
 
-            playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateHolder);
+            _playerHitBox = new PlayerHitBox(_playerHitBoxData, _playerController, _playerHeadTF, _catchEffectPos, _stateHolder);
 
-            context = new PlayerContext(playerHitBox, playerHeadTF, stateHolder, catchClip);
+            _context = new PlayerContext(_playerHitBox, _playerHeadTF, _stateHolder, _catchClip);
           
-            playerController.Initialize(context);    //  Controllerの性質上Awakeで初期化
+            _playerController.Initialize(_context);    //  Controllerの性質上Awakeで初期化
         }
     }
 }
