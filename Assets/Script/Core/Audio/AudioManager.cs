@@ -69,11 +69,8 @@ namespace Kamatte.Core
         //  API
         public void PlaySE(AudioClip clip, float volume = 1f, float pitch = 1f, float spatialBlend = 0f)
         {
-            if (clip == null)
-            {
-                Debug.Log("nari");
-                return;
-            }
+            if (clip == null) return;
+
             var source = _pool.Count > 0 ? _pool.Dequeue() : CreateNewAudioSourceInstance();
 
             source.clip = clip;
