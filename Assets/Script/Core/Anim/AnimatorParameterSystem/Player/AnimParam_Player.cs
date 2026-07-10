@@ -6,7 +6,7 @@ namespace Kamatte.SwordCatch
     //  Playerのアニメーションパラーメータを保持しているクラス
     public sealed class AnimParam_Player : AnimParamCollectionBase
     {
-        int _hash;
+        int _hash;  // アニメーションハッシュ
         
         public AnimParam_Player(Animator animator,string paramName)
             : base(animator) 

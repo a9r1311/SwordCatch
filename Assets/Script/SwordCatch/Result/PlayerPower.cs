@@ -1,5 +1,6 @@
 namespace Kamatte.SwordCatch
 {
+    //  プレイヤーの実力(リザルト用)
     public enum PlayerPower
     {
         FirstTime,

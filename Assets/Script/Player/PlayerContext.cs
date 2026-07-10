@@ -3,7 +3,8 @@ using Kamatte.SwordCatch;
 
 namespace Kamatte.Player
 {
-    public class PlayerContext    //  初期化用コンテキスト
+    //  コンストラクタ引数短縮用クラス
+    public class PlayerContext
     {
         public PlayerHitBox HitBoxMgr { get; private set; }
         public Transform HeadTF { get; private set; }
@@ -11,7 +12,12 @@ namespace Kamatte.Player
 
         public AudioClip CatchSE{ get; private set; }
 
-        public PlayerContext(PlayerHitBox hitBoxMgr, Transform headTF, StateHolder stateHolder, AudioClip catchSE)
+        public PlayerContext(
+            PlayerHitBox hitBoxMgr,
+            Transform headTF,
+            StateHolder stateHolder,
+            AudioClip catchSE
+            )
         {
             HitBoxMgr = hitBoxMgr;
             HeadTF = headTF;
