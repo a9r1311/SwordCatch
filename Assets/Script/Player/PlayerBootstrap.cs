@@ -44,7 +44,10 @@ namespace Kamatte.Player
             {
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
-
+            if (catchClip == null)
+            {
+                Debug.LogError("catchClip isn't assigned in the Inspector");
+            }
 
             playerHitBox = new PlayerHitBox(playerHitBoxData, playerController, playerHeadTF, catchEffectPos, stateHolder);
 
