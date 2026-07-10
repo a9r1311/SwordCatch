@@ -81,9 +81,9 @@ namespace Kamatte.Player
                     && !_stateHolder.IsHitSwing
                     )
                 {
+                    _stateHolder.IsCatchSword = true;  // 一番上に書くべし
                     _controller.OnCatch();
                     PlayrRandomEffect();
-                    _stateHolder.IsCatchSword = true;
                     _stateHolder.CatchSuccess();
                     EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
 
