@@ -87,29 +87,5 @@ namespace Kamatte.SwordCatch
 
             IsShout = false;
         }
-
-        ////  «ŠiChiken‚ÌUpdate
-        //void ChikenUpdate()
-        //{
-
-        //}
-
-        ////  «ŠiSwordMasterUpdate
-        //void SwordMasterUpdate()
-        //{
-        //    if (_swingTimer < 0)
-        //    {
-        //        //  Swing
-        //    }
-        //}
-
-        ////  «ŠiSpeedStar‚ÌUpdate
-        //void SpeedStarUpdate()
-        //{
-        //    if (_swingTimer < 0)
-        //    {
-        //        //  Swing
-        //    }
-        //}
     }
 }
