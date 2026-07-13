@@ -20,7 +20,7 @@ namespace Kamatte.SwordCatch
         {
             if (hitNotifier == null) return;
             if (!other.CompareTag("Sword")) return;
-         
+
             hitNotifier.OnSwordHit(other);
         }
     }

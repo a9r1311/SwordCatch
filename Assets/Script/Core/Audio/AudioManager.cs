@@ -3,30 +3,11 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
-
-    //  Audio管理クラス
+    //  オーディオ管理クラス
+    [DefaultExecutionOrder(-5)]
     [DisallowMultipleComponent]
     public sealed class AudioManager : MonoBehaviour
     {
-        static AudioManager _instance;
-        public static AudioManager Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindFirstObjectByType<AudioManager>();
-                    if (_instance == null)
-                    {
-                        var go = new GameObject("AudioManager");
-                        _instance = go.AddComponent<AudioManager>();
-                        DontDestroyOnLoad(go);
-                    }
-                }
-                return _instance;
-            }
-        }
-
         [Header("プール設定")]
         [SerializeField] int _initialPoolSize = 16;
 
@@ -35,14 +16,9 @@ namespace Kamatte.Core
 
         void Awake()
         {
-            if (_instance != null && _instance != this)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            _instance = this;
             DontDestroyOnLoad(gameObject);
-
+            ServiceLocator.Register(this);
+            
             //  Pool初期化
             InitializePool();
         }

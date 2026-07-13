@@ -14,7 +14,7 @@ namespace Kamatte.Player
         HitBox _activeBox = null;  // 有効になっている当たり判定
         HitBoxID activeID = HitBoxID.Unknown;  // アクティブにするボックスID
 
-        Transform _playerHeadTF;
+        public Transform _playerHeadTF;
         PlayerController _controller;
 
         StateHolder _stateHolder;
@@ -39,6 +39,46 @@ namespace Kamatte.Player
             _stateHolder = stateHolder; 
         }
 
+        public void Update()
+        {
+            if (_activeBox == null)
+            {
+                return;
+            }
+
+            //  activeboxの情報を読んで当たり判定を生成
+            var hits = Physics.OverlapBox(
+                ResolveCenter(_playerHeadTF),
+                _activeBox.size * 0.5f
+                );
+
+            foreach (var h in hits)
+            {
+                if (
+                    h.CompareTag("Sword")
+                    && !_stateHolder.IsCatchSword
+                    && !_stateHolder.IsHitSwing
+                    )
+                {
+                    _stateHolder.IsCatchSword = true;  // 一番上に書くべし
+                    _controller.OnCatch();
+                    PlayrRandomEffect();
+                    _stateHolder.CatchSuccess();
+                    EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
+
+                    SwordCatchEventBus.CatchSuccess();
+                    ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
+                    Debug.Log("白刃取り成功");
+                }
+                else
+                {
+                    Debug.Log(h.tag);
+                }
+            }
+            Debug.Log(_stateHolder.IsCatchSword);
+            Debug.Log(_stateHolder.IsHitSwing);
+        }
+
         //  当たり判定有効化
         public void EnableHitBox(HitBoxID id)
         {
@@ -60,42 +100,10 @@ namespace Kamatte.Player
             }
         }
 
-        public void Update()
+
+        public Vector3 ResolveCenter(Transform owner)    //  当たり判定の中心座標を返す
         {
-            if (_activeBox == null)
-            {
-                return;
-            }
-
-            //  activeboxの情報を読んで当たり判定を生成
-            var hits = Physics.OverlapBox(
-                ResolveCenter(_playerHeadTF),
-                _activeBox.size * 0.5f
-                );
-            
-            foreach (var h in hits)
-            {
-                if (
-                    h.CompareTag("Sword")
-                    && !_stateHolder.IsCatchSword
-                    && !_stateHolder.IsHitSwing
-                    )
-                {
-                    _stateHolder.IsCatchSword = true;  // 一番上に書くべし
-                    _controller.OnCatch();
-                    PlayrRandomEffect();
-                    _stateHolder.CatchSuccess();
-                    EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), StarEffectPos);
-
-                    SwordCatchEventBus.CatchSuccess();
-                    ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
-                    Debug.Log("白刃取り成功");
-                }
-            }
-        }
-
-        Vector3 ResolveCenter(Transform owner)    //  当たり判定の中心座標を返す
-        {
+            Debug.Log(owner.position + _activeBox.offset);
             return owner.position + owner.rotation * _activeBox.offset;
         }
 
@@ -112,15 +120,25 @@ namespace Kamatte.Player
                 Vector3 LightningPos = new Vector3(LightningCenterPos.x + LightningAddPos.x, LightningCenterPos.y, LightningCenterPos.z + LightningAddPos.z);
                 EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning), LightningPos);
             }
+        }
+        public void DrawGizmos()
+        {
+            if (_activeBox == null || _playerHeadTF == null)
+            {
+                return;
+            }
 
+            // Gizmosの色を設定（赤色）
+            Gizmos.color = Color.red;
+
+            // 現在の判定位置と回転を取得
+            Vector3 center = ResolveCenter(_playerHeadTF);
+            Quaternion rotation = _playerHeadTF.rotation;
+            Vector3 size = _activeBox.size;
+
+            // 箱を描画
+            Gizmos.matrix = Matrix4x4.TRS(center, rotation, Vector3.one);
+            Gizmos.DrawWireCube(Vector3.zero, size);
         }
     }
 }
-
-//public Vector3 ResolveCenter(Transform owner) => _activeBox.anchorType switch    //  当たり判定の中心地を返す
-//{
-//    HitBoxAnchor.Transform => owner.position + owner.rotation * _activeBox.offset,
-//    HitBoxAnchor.Bone => _activeBox.bone.position + _activeBox.bone.rotation * _activeBox.offset,
-//    HitBoxAnchor.World => _activeBox.worldCenter != null ? _activeBox.worldCenter : Vector3.zero,
-//    _ => owner.position
-//};
