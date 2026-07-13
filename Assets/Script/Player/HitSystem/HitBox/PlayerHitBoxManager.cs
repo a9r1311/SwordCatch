@@ -68,15 +68,9 @@ namespace Kamatte.Player
 
                     SwordCatchEventBus.CatchSuccess();
                     ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
-                    Debug.Log("白刃取り成功");
-                }
-                else
-                {
-                    Debug.Log(h.tag);
+                    MyLogger.Log("白刃取り成功");
                 }
             }
-            Debug.Log(_stateHolder.IsCatchSword);
-            Debug.Log(_stateHolder.IsHitSwing);
         }
 
         //  当たり判定有効化
@@ -103,7 +97,6 @@ namespace Kamatte.Player
 
         public Vector3 ResolveCenter(Transform owner)    //  当たり判定の中心座標を返す
         {
-            Debug.Log(owner.position + _activeBox.offset);
             return owner.position + owner.rotation * _activeBox.offset;
         }
 

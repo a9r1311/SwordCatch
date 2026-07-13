@@ -10,13 +10,13 @@ namespace Kamatte.Core
         {
             if (string.IsNullOrEmpty(sceneName))
             {
-                LogUtility.Log(LogPrefix.SceneUtility, "シーン名が空です", LogLevel.Error);
+                MyLogger.Log($"指定シーン名がEmptyです。 シーン名 : {sceneName}");
                 return;
             }
 
             SceneManager.LoadSceneAsync(sceneName).completed += _ =>
             {
-                LogUtility.Log(LogPrefix.SceneUtility, $"シーン読み込み完了: {sceneName}", LogLevel.Info);
+                MyLogger.Log($"シーン読み込み完了。 シーン名 : {sceneName}");
                 onCompleted?.Invoke();
             };
         }
@@ -25,14 +25,13 @@ namespace Kamatte.Core
         {
             if (string.IsNullOrEmpty(sceneName))
             {
-                Debug.LogError("");
-                LogUtility.Log(LogPrefix.SceneUtility, $"シーン読み込み完了: {sceneName}", LogLevel.Info);
+                MyLogger.Log($"シーン読み込み完了。 シーン名 : {sceneName}");
                 return;
             }
 
             SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive).completed += _ =>
             {
-                LogUtility.Log(LogPrefix.SceneUtility, $"Additive読み込み完了: {sceneName}", LogLevel.Info);
+                MyLogger.Log($"シーン読み込み完了。 シーン名 : {sceneName}");
                 onCompleted?.Invoke();
             };
         }
@@ -65,13 +64,13 @@ namespace Kamatte.Core
         {
             if (!IsSceneLoaded(sceneName))
             {
-                Debug.LogWarning($"[SceneUtility] アンロード対象シーンがロードされていません: {sceneName}");
+                MyLogger.WarningLog($"アンロード対象がロードされていません : {sceneName}");
                 return;
             }
 
             SceneManager.UnloadSceneAsync(sceneName).completed += _ =>
             {
-                Debug.Log($"[SceneUtility] シーンアンロード完了: {sceneName}");
+                MyLogger.Log($"シーンアンロード完了 : {sceneName}");
                 onCompleted?.Invoke();
             };
         }
