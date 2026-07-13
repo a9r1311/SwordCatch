@@ -32,7 +32,7 @@ namespace Kamatte.Core
                     //}
                     //  設定適応
                     ApplySettings(fadeImage);
-                    LogUtility.Log(LogPrefix.FadeImageSetter, "フェード用Imageの設定完了", LogLevel.Info);
+                    MyLogger.Log("フェード用Imageの設定完了");
                     setCnt++;
                 }
             }
@@ -41,7 +41,7 @@ namespace Kamatte.Core
                 //  プログレスバー消去
                 //ProgressBarUtility.Clear();
             }
-            LogUtility.Log(LogPrefix.FadeImageSetter, $"フェード用Image設定適用完了。処理対象{setCnt}個のImage",LogLevel.Info);
+            MyLogger.Log($"フェード用Image設定適用完了。処理対象{setCnt}個のImage");
         }
 
         static GameObject[] FindSceneFadeImage()    //  シーン内のFadePlaneを検索して取得
@@ -65,7 +65,7 @@ namespace Kamatte.Core
 
             ApplyRectTransform(rectTransform);    //  レクトトランスフォームを設定
 
-            LogUtility.Log(LogPrefix.FadeImageSetter, "PositionとScale設定完了", LogLevel.Info);
+            MyLogger.Log("Positionとscale設定完了");
         }
 
         static void ApplyRectTransform(RectTransform rectTransform)    //  レクトトランスフォームの設定を適用する

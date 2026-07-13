@@ -15,7 +15,7 @@ namespace Kamatte.Core
         {
             if (canvas == null || fadeImage == null || canvasGroup == null)
             {
-                LogUtility.Log(LogPrefix.ScreenFader, "画面のフェードに必要な参照が不足しています。", LogLevel.Warning);
+                MyLogger.WarningLog("画面のフェードに必要な参照が不足しています。");
             }
             else
             {
