@@ -14,7 +14,11 @@ namespace Kamatte.Player
 
         AudioManager _audioManager;  // audioŠÇ—ƒNƒ‰ƒX
         AudioClip catchClip;  // ”’næ‚è¬Œ÷‚Ì‰¹
-        bool isSound = false;  // SE‚ª‰½‰ñ‚à‚È‚é‚Ì‚ğ–h‚®‚½‚ß‚Ìƒtƒ‰ƒO
+        bool _isActivateOnCatch = false;  // SE‚ª‰½‰ñ‚à‚È‚é‚Ì‚ğ–h‚®‚½‚ß‚Ìƒtƒ‰ƒO
+
+        readonly Vector3 _starEffectPos = new Vector3(616.593f, -3.01f, 513.24f);
+        readonly Vector3 _fireWorksPos = new Vector3(648, -507, 269);
+        readonly Vector3 _lightningCenterPos = new Vector3(616, -5.5f, 507);
 
         //  ‰Šú‰»
         public void Initialize(PlayerContext ctx)
@@ -41,18 +45,41 @@ namespace Kamatte.Player
         public void EraseHitBox()
         {
             _playerHitBoxMgr.DisableHitBox(HitBoxID.CatchSword);
-            isSound = false;
+            _isActivateOnCatch = false;
         }
 
         //  ”’næ‚è¬Œ÷
         public void OnCatch()
         {
-            if (_stateHolder.IsCatchSword && !isSound)
+            _stateHolder.CatchSuccess();
+            if (_stateHolder.IsCatchSword && !_isActivateOnCatch)
             {
-                isSound = true;
+                MyLogger.Log("”’næ‚è¬Œ÷");
+
+                _isActivateOnCatch = true;
+
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
+                PlayrRandomEffect();
+                EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), _starEffectPos);
+                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
             }
         }
+
+        void PlayrRandomEffect()
+        {
+            if (_stateHolder.CatchSuccessCnt == 5)
+            {
+                EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.FireWorks), _fireWorksPos);
+            }
+            if (_stateHolder.CatchSuccessCnt > 20)
+            {
+                float radius = 7f;
+                Vector3 LightningAddPos = Random.insideUnitSphere * radius;
+                Vector3 LightningPos = new Vector3(_lightningCenterPos.x + LightningAddPos.x, _lightningCenterPos.y, _lightningCenterPos.z + LightningAddPos.z);
+                EffectAPIWindow.Play(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning), LightningPos);
+            }
+        }
+
         void OnDrawGizmos()
         {
             if (_playerHitBoxMgr != null)

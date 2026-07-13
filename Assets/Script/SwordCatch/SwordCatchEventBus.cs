@@ -11,9 +11,5 @@ namespace Kamatte.Core
         {
             OnCatchPressed?.Invoke();
         }
-        public static void CatchSuccess()    //  ƒLƒƒƒbƒ`¬Œ÷‚Ìˆ—
-        {
-            OnCatchSuccess?.Invoke();
-        }
     }
 }

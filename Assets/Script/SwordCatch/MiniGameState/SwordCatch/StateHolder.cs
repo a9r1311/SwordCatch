@@ -21,9 +21,10 @@ namespace Kamatte.SwordCatch
         public bool IsHitSwing
         { get { return _isHitSwing; } set { _isHitSwing = value; } }
 
-        // リザルトで表示する成功回数をインクリメントする
+        // キャッチ成功処理
         public void CatchSuccess()
         {
+            IsCatchSword = true;
             _catchSuccessCnt++;
         }
     }

@@ -45,7 +45,7 @@ namespace Kamatte.Player
                 Debug.LogError("catchClip isn't assigned in the Inspector");
             }
 
-            _playerHitBox = new PlayerHitBox(_playerHitBoxData, _playerController, _playerHeadTF, _catchEffectPos, _stateHolder);
+            _playerHitBox = new PlayerHitBox(_playerHitBoxData, _playerController, _playerHeadTF, _stateHolder);
 
             _context = new PlayerContext(_playerHitBox, _playerHeadTF, _stateHolder, _catchClip);
           
