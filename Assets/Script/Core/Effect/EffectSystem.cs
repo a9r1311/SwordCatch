@@ -3,7 +3,9 @@ using System.Collections.Generic;
 
 namespace Kamatte.Core
 {
-    public class EffectSystem : MonoBehaviour, IEffectSystem    //  エフェクト処理システム
+    //  エフェクト処理システム
+    [DefaultExecutionOrder(-10)]
+    public class EffectSystem : MonoBehaviour, IEffectSystem
     {
         [Header("エフェクトカタログ")]
         [SerializeField] private EffectCatalog catalog;
@@ -20,7 +22,6 @@ namespace Kamatte.Core
             ServiceLocator.Unregister<IEffectSystem>(this);    // シーン破棄時に解除（任意だが安全）
         }
 
-        //  --  Public API
 
         public void Play(EffectKey key, Vector3 position)    //  エフェクト再生
         {

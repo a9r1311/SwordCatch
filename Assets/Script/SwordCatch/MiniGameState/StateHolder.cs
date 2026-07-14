@@ -2,14 +2,12 @@ using UnityEngine;
 
 namespace Kamatte.SwordCatch
 {
-    //  ƒQ[ƒ€‚Ìó‘Ô‚ğ‚ÂƒNƒ‰ƒX
+    //  ƒQ[ƒ€ó‘Ô‚ğ•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒX
     [DisallowMultipleComponent]
-    [RequireComponent(typeof(StateSystemBootstrap))]
     public sealed class StateHolder : MonoBehaviour
     {
-        int _catchSuccessCnt = 0;    //  ”’næ‚è¬Œ÷‰ñ”
-        bool _isCatchSword = false;  //  ”’næ‚è‚ğ‚µ‚½‚©‚Ç‚¤‚©
-        
+        int _catchSuccessCnt = 0;  // ”’næ‚è¬Œ÷‰ñ”
+        bool _isCatchSword = false;  // ”’næ‚è¬Œ÷‚µ‚½‚©‚Ç‚¤‚©
         bool _isHitSwing = false;  // U‚è‰º‚ë‚µ‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©
         
         public int CatchSuccessCnt

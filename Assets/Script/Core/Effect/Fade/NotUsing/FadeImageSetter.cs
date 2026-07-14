@@ -7,30 +7,26 @@ using Kamatte.ID;
 
 namespace Kamatte.Core
 {
-    public class FadeImageSetter    //  Fadeの設定をする
+    //  Fadeの設定をする
+    public sealed class FadeImageSetter
     {
-        public static void SettingSceneFadeImage()    //  シーン内のフェード用Imageの設定をする
+        //  シーン内のフェード用Imageの設定をする
+        public static void SettingSceneFadeImage()
         {
-            GameObject[] fadeImages = FindSceneFadeImage();    //  シーン内のフェード用Imageを取得する
+            //  シーン内のフェード用Imageを取得する
+            GameObject[] fadeImages = FindSceneFadeImage();
 
             int setCnt = 0;
             int totalTask = fadeImages.Length;
             const string ProgressTitle = "FadePlaneの設定適用中";
             const string ProgressMsg_Scene = "シーン:";
-            //const string SetedImgMsg_Scene = "シーンのFadePlaneに設定適応:";
 
             try
             {
                 foreach (GameObject fadeImage in fadeImages)
                 {
                     float progress = (float)setCnt / totalTask;    //  進行度
-                    //bool IsCanceled = ProgressBarUtility.ShowCancelable(ProgressTitle, ProgressMsg_Scene + fadeImage.name, progress);    //  キャンセルボタンが押されるかどうかのフラグ
-                                                                                                                                         //  イメージ設定変更のプログレスバーを表示
-                    //if (IsCanceled)
-                    //{
-                    //    break;
-                    //}
-                    //  設定適応
+
                     ApplySettings(fadeImage);
                     MyLogger.Log("フェード用Imageの設定完了");
                     setCnt++;
@@ -44,7 +40,8 @@ namespace Kamatte.Core
             MyLogger.Log($"フェード用Image設定適用完了。処理対象{setCnt}個のImage");
         }
 
-        static GameObject[] FindSceneFadeImage()    //  シーン内のFadePlaneを検索して取得
+        //  シーン内のFadePlaneを検索して取得
+        static GameObject[] FindSceneFadeImage()
         {
             return Object.FindObjectsByType<IDGenerater>(FindObjectsSortMode.None)
                          .Where(obj =>
@@ -55,7 +52,8 @@ namespace Kamatte.Core
                          .ToArray();
         }
 
-        static void ApplySettings(GameObject fadeImageObject)    //  Canvasに設定を適応する
+        //  Canvasに設定を適応する
+        static void ApplySettings(GameObject fadeImageObject)
         {
             if (!TryGetRequiredComponents(fadeImageObject, out RectTransform rectTransform, out Image image)) return;
 
@@ -63,12 +61,14 @@ namespace Kamatte.Core
 
             Undo.RecordObject(fadeImageObject, UndoLog);
 
-            ApplyRectTransform(rectTransform);    //  レクトトランスフォームを設定
+            //  レクトトランスフォームを設定
+            ApplyRectTransform(rectTransform);
 
             MyLogger.Log("Positionとscale設定完了");
         }
 
-        static void ApplyRectTransform(RectTransform rectTransform)    //  レクトトランスフォームの設定を適用する
+        //  レクトトランスフォームの設定を適用する
+        static void ApplyRectTransform(RectTransform rectTransform)
         {
             rectTransform.anchorMin = Vector2.zero;               //  左下設定
             rectTransform.anchorMax = Vector2.one;                //  右上設定
@@ -78,7 +78,9 @@ namespace Kamatte.Core
             rectTransform.anchoredPosition3D = Vector3.zero;      //  アンカーポジション設定
             rectTransform.localScale = Vector3.one;               //  ローカルスケール設定  
         }
-        private static bool TryGetRequiredComponents(GameObject obj, out RectTransform rect, out Image img)    // 内部で必要なコンポーネントをチェック＆取得
+        
+        // 内部で必要なコンポーネントをチェック＆取得
+        static bool TryGetRequiredComponents(GameObject obj, out RectTransform rect, out Image img)
 
         {
             rect = obj.GetComponent<RectTransform>();
