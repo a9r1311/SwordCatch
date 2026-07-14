@@ -2,12 +2,22 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
+    //  Effect定義
     [CreateAssetMenu(fileName = "EffectDefinition", menuName = "Effect/Definition")]
-    public class EffectDefinition : ScriptableObject    //  Effect定義SO
+    public sealed class EffectDefinition : ScriptableObject
     {
-        [Header("Key")]
-        public EffectKey effectKey;    //  エフェクトの鍵
-        [Header("再生対象")]
-        public GameObject prefab;    //  再生するエフェクト
+        [Header("エフェクト設定")]
+
+        [Tooltip("エフェクト特定の為のオリジナルKey")]
+        public EffectKey Key;
+        
+        [Tooltip("再生するエフェクトのプレハブ")]
+        public GameObject EffectPrefab;
+        
+        [Tooltip("エフェクトの座標が固定か、ブレるか")]
+        public EffectPositionType PotitionType;
+
+        [Tooltip("エフェクト再生位置")]
+        public Vector3 Position;
     }
 }

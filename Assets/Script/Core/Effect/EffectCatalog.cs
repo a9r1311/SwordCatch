@@ -15,7 +15,7 @@ namespace Kamatte.Core
 
         public EffectDefinition Get(EffectKey key)    //  エフェクトデーター取得
         {
-            _cache ??= _effects.ToDictionary(e => e.effectKey);
+            _cache ??= _effects.ToDictionary(e => e.Key);
             return _cache[key];
         }
     }

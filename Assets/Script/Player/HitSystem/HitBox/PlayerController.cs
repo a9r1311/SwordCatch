@@ -16,11 +16,7 @@ namespace Kamatte.Player
         AudioClip catchClip;  // îíênéÊÇËê¨å˜éûÇÃâπ
         bool _isActivateOnCatch = false;  // SEÇ™âΩâÒÇ‡Ç»ÇÈÇÃÇñhÇÆÇΩÇﬂÇÃÉtÉâÉO
 
-        readonly Vector3 _starEffectPos = new Vector3(616.593f, -3.01f, 513.24f);
-        readonly Vector3 _fireWorksPos = new Vector3(648, -507, 269);
-        readonly Vector3 _lightningCenterPos = new Vector3(616, -5.5f, 507);
-
-        IEffectSystem _effectSystem;
+        EffectSystem _effectSystem;
 
         //  èâä˙âª
         public void Initialize(PlayerContext ctx)
@@ -31,7 +27,7 @@ namespace Kamatte.Player
             catchClip = ctx.CatchSE;
             _audioManager = ServiceLocator.Resolve<AudioManager>();
 
-            _effectSystem = ServiceLocator.Resolve<IEffectSystem>();
+            _effectSystem = ServiceLocator.Resolve<EffectSystem>();
         }
 
         void Update()
@@ -65,7 +61,7 @@ namespace Kamatte.Player
 
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
                 PlayrRandomEffect();
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword), _starEffectPos);
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword));
                 ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
             }
         }
@@ -74,14 +70,11 @@ namespace Kamatte.Player
         {
             if (_stateHolder.CatchSuccessCnt == 5)
             {
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.FireWorks), _fireWorksPos);
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.FireWorks));
             }
             if (_stateHolder.CatchSuccessCnt > 20)
             {
-                float radius = 7f;
-                Vector3 LightningAddPos = Random.insideUnitSphere * radius;
-                Vector3 LightningPos = new Vector3(_lightningCenterPos.x + LightningAddPos.x, _lightningCenterPos.y, _lightningCenterPos.z + LightningAddPos.z);
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning), LightningPos);
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning));
             }
         }
 
