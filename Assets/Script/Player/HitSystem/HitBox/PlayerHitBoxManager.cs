@@ -3,7 +3,6 @@ using System.Diagnostics;
 using UnityEngine;
 using Kamatte.Core;
 using Kamatte.SwordCatch;
-using CartoonFX;
 
 namespace Kamatte.Player
 {
@@ -95,11 +94,6 @@ namespace Kamatte.Player
             }
         }
 
-        public Vector3 ResolveCenter(Transform owner)
-        {
-            return owner.position + owner.rotation * _activeBox.offset;
-        }
-
         [Conditional("UNITY_EDITOR")]
         public void DrawGizmos()
         {
@@ -109,12 +103,10 @@ namespace Kamatte.Player
             }
 
             Gizmos.color = Color.red;
-
-            Vector3 hitBoxCenter = ResolveCenter(_playerHeadTF);
-            Quaternion hitBoxRotation = _playerHeadTF.rotation;
+            
             Vector3 size = _activeBox.size;
-
-            Gizmos.matrix = Matrix4x4.TRS(hitBoxCenter, hitBoxRotation, Vector3.one);
+            
+            Gizmos.matrix = Matrix4x4.TRS(_currentCenter, _currentRotation, Vector3.one);
             Gizmos.DrawWireCube(Vector3.zero, size);
         }
     }

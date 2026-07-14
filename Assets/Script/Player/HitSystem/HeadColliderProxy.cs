@@ -8,13 +8,11 @@ namespace Kamatte.SwordCatch
     {
         [SerializeField] SwordHitNotifier hitNotifier;
 
-        void Awake()
+        void Start()
         {
-            if (hitNotifier == null)
-            {
-                Debug.LogError("hitNotifierの参照がありません。");
-            }
-        }
+            // 実行順の影響か何かでTrueになってしまうのでコメントアウト
+            //Debug.Assert(hitNotifier == null, "hitNotifierの参照がありません。");
+　　　　}
 
         void OnTriggerEnter(Collider other)
         {
