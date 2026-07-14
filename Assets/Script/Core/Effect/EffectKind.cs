@@ -1,6 +1,7 @@
 namespace Kamatte.Core
 {
-    public enum EffectKind    //  エフェクトの種類
+    //  エフェクトの種類
+    public enum EffectKind
     {
         CatchSword,
         FireWorks,

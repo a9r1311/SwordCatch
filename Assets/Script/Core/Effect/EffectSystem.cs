@@ -5,48 +5,79 @@ namespace Kamatte.Core
 {
     //  エフェクト処理システム
     [DefaultExecutionOrder(-10)]
-    public class EffectSystem : MonoBehaviour, IEffectSystem
+    public sealed class EffectSystem : MonoBehaviour
     {
         [Header("エフェクトカタログ")]
-        [SerializeField] private EffectCatalog catalog;
+        [SerializeField] EffectCatalog _catalog;
 
-        private readonly Dictionary<EffectKey, GameObject> playingEffects = new();
+        readonly Dictionary<EffectKey, GameObject> _playingEffects = new();
 
-        private void Awake()
+        void Awake()
         {
-            ServiceLocator.Register<IEffectSystem>(this);    // ServiceLocator に自分を登録
+            // ServiceLocator に自分を登録
+            ServiceLocator.Register<EffectSystem>(this);
         }
 
-        private void OnDestroy()
+        void OnDestroy()
         {
-            ServiceLocator.Unregister<IEffectSystem>(this);    // シーン破棄時に解除（任意だが安全）
+            // シーン破棄時に解除（任意だが安全）
+            ServiceLocator.Unregister<EffectSystem>(this);
         }
 
-
-        public void Play(EffectKey key, Vector3 position)    //  エフェクト再生
+        //  エフェクト再生
+        public void Play(EffectKey key)
         {
-            // 定義解決
-            var definition = catalog.Get(key);
+            EffectDefinition definition = _catalog.Get(key);
+
             if (definition == null)
             {
                 Debug.LogWarning($"EffectDefinition not found : {key}");
                 return;
             }
 
-            Stop(key);    //  エフェクトを一回再生終了する
+            //  エフェクトを一回再生終了する
+            Stop(key);
 
-            var instance = Instantiate(definition.prefab, position, definition.prefab.transform.rotation);
+            GameObject effect;
 
-            playingEffects[key] = instance;
+            if (definition.PotitionType == EffectPositionType.NonFixedPositon)
+            {
+                effect = Instantiate(definition.EffectPrefab, GetLightningPos(definition) , definition.EffectPrefab.transform.rotation);
+            }
+            else
+            {
+                effect = Instantiate(definition.EffectPrefab, definition.Position, definition.EffectPrefab.transform.rotation);
+            }
+
+            _playingEffects[key] = effect;
         }
 
-        public void Stop(EffectKey key)    //  エフェクト停止
+        //  エフェクト停止
+        public void Stop(EffectKey key)
         {
-            if (!playingEffects.TryGetValue(key, out var instance))
+            if (!_playingEffects.TryGetValue(key, out var instance))
                 return;
 
             Destroy(instance);
-            playingEffects.Remove(key);
+            _playingEffects.Remove(key);
+        }
+
+        //  雷の座標(ランダム)を取得する
+        Vector3 GetLightningPos(EffectDefinition definition)
+        {
+            if (definition.Key.Equals(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning)))
+            {
+                float radius = 7f;
+
+                Vector3 LightningAddPos = Random.insideUnitSphere * radius;
+                Vector3 LightningPos = new Vector3(definition.Position.x + LightningAddPos.x, definition.Position.y, definition.Position.z + LightningAddPos.z);
+
+                return LightningPos;
+            }
+            else
+            {
+                return definition.Position;
+            }
         }
     }
 }
