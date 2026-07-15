@@ -12,12 +12,12 @@ namespace Kamatte.Core
 
             if (prev == GameMode.Title && next == GameMode.SwordCatch)
             {
-                task = ServiceLocator.Resolve<IScreenFadeFacade>().FadeOut(1f);
+                task = ServiceLocator.Resolve<ScreenFade>().FadeOut(1f);
                 yield return new WaitUntil(() => task.IsCompleted);
             }
             else if(prev == GameMode.SwordCatch && next == GameMode.SwordCatch)
             {
-                task = ServiceLocator.Resolve<IScreenFadeFacade>().FadeOut(1f);
+                task = ServiceLocator.Resolve<ScreenFade>().FadeOut(1f);
                 yield return new WaitUntil(() => task.IsCompleted);
             }
 

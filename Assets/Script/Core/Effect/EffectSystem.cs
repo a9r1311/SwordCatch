@@ -14,14 +14,14 @@ namespace Kamatte.Core
 
         void Awake()
         {
-            // ServiceLocator ‚É©•ª‚ğ“o˜^
+            //  “o˜^
             ServiceLocator.Register<EffectSystem>(this);
         }
 
         void OnDestroy()
         {
-            // ƒV[ƒ“”jŠü‚É‰ğœi”CˆÓ‚¾‚ªˆÀ‘Sj
-            ServiceLocator.Unregister<EffectSystem>(this);
+            //  “o˜^‰ğœ
+            ServiceLocator.Unregister<EffectSystem>();
         }
 
         //  ƒGƒtƒFƒNƒgÄ¶
@@ -67,9 +67,7 @@ namespace Kamatte.Core
         {
             if (definition.Key.Equals(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning)))
             {
-                float radius = 7f;
-
-                Vector3 LightningAddPos = Random.insideUnitSphere * radius;
+                Vector3 LightningAddPos = Random.insideUnitSphere * definition.RandomEffectPosRadius;
                 Vector3 LightningPos = new Vector3(definition.Position.x + LightningAddPos.x, definition.Position.y, definition.Position.z + LightningAddPos.z);
 
                 return LightningPos;

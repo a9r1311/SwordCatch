@@ -32,7 +32,7 @@ namespace Kamatte.Core
         async void OnGoPlayPressed()
         {
             buttonManager.SetInteractable(ButtonID.GoPlayButton, false);
-            await ServiceLocator.Resolve<IScreenFadeFacade>().FadeOut(1f);
+            await ServiceLocator.Resolve<ScreenFade>().FadeOut(1f);
             SceneUtility.LoadScene(SceneNameMap.GetName(SceneID.Shop));
         }
 

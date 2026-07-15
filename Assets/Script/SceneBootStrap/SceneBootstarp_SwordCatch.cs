@@ -42,7 +42,7 @@ namespace Kamatte.SwordCatch
 
         void Start()
         {
-            ServiceLocator.Resolve<IScreenFadeFacade>().FadeIn(1f);
+            ServiceLocator.Resolve<ScreenFade>().FadeIn(1f);
 
             swingTimeController.Initialize(_swing);
             

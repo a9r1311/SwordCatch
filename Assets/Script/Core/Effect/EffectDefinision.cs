@@ -14,10 +14,13 @@ namespace Kamatte.Core
         [Tooltip("再生するエフェクトのプレハブ")]
         public GameObject EffectPrefab;
         
-        [Tooltip("エフェクトの座標が固定か、ブレるか")]
+        [Header("エフェクトの座標が固定か、ブレるか")]
         public EffectPositionType PotitionType;
 
         [Tooltip("エフェクト再生位置")]
         public Vector3 Position;
+
+        [Header("エフェクト座標がぶれる際のブレ範囲")]
+        public float RandomEffectPosRadius = 0;
     }
 }
