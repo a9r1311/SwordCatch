@@ -10,20 +10,19 @@ namespace Kamatte.SwordCatch
     public sealed class SwordHitNotifier : MonoBehaviour
     {
         [SerializeField] PlayerController _playerController;
-        [SerializeField] StateHolder _stateHolder;
+        [SerializeField] StateHolder _stateHolder;  // ƒQ[ƒ€ó‘Ô‚ğ•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒX
 
-        AnimParamFacadeBase _animationFacade;
+        AnimParamFacade _animationFacade;
 
         void Awake()
         {
-            UAssert.IsNotNull(_playerController, "[SwordHitNotifier] playerContoroller‚ª–¢İ’è‚Å‚·");
-            UAssert.IsNotNull(_stateHolder, "[SwordHitNotifier] stateHolder‚ª–¢İ’è‚Å‚·");
+            UAssert.IsNotNull(_playerController, " playerContoroller‚ª–¢İ’è‚Å‚·");
+            UAssert.IsNotNull(_stateHolder, "stateHolder‚ª–¢İ’è‚Å‚·");
         }
 
         void Start()
         {
-            _animationFacade = ServiceLocator.Resolve<AnimParamFacadeBase>();
-            UAssert.IsNotNull(_animationFacade, "[SwordHitNotifier] ServiceLocator‚ÉanimationFacadeBase‚ª“o˜^‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+            _animationFacade = ServiceLocator.Resolve<AnimParamFacade>();
         }
 
         //  “‚ª“–‚½‚Á‚½‚Ìˆ—

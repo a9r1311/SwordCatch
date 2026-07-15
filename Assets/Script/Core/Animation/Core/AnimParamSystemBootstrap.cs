@@ -36,7 +36,7 @@ namespace Kamatte.SwordCatch
 
             paramFacade = new AnimParamFacade(playerParam, swingerParam);
             //  SLに登録
-            ServiceLocator.Register<AnimParamFacadeBase>(paramFacade);
+            ServiceLocator.Register<AnimParamFacade>(paramFacade);
         }
 
         //  インスペクター表示用Listから処理速度向上のためDictionaryを構築する

@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
-    [CreateAssetMenu(fileName = "EffectSOCatalog", menuName = "Effect/Catalog")]
-    public class EffectCatalog : ScriptableObject    //  エフェクトSOを集約してるSO
+    //  エフェクト定義データを集約しているクラス
+    [CreateAssetMenu(fileName = "EffectDefinitionCatalog", menuName = "Effect/Catalog")]
+    public sealed class EffectCatalog : ScriptableObject
     {
-        [SerializeField] List<EffectDefinition> _effects;    //  エフェクトデータリスト
+        [SerializeField] List<EffectDefinition> _effects;  // エフェクト定義データリスト(インスペクター用)
 
-        Dictionary<EffectKey, EffectDefinition> _cache;     //  エフェクトデータ辞書(内部処理用)
+        Dictionary<EffectKey, EffectDefinition> _cache;  // エフェクトデータ辞書(内部処理用)
 
-        //  --  Public API
-
-        public EffectDefinition Get(EffectKey key)    //  エフェクトデーター取得
+        //  エフェクトデータ取得
+        public EffectDefinition Get(EffectKey key)
         {
             _cache ??= _effects.ToDictionary(e => e.Key);
             return _cache[key];

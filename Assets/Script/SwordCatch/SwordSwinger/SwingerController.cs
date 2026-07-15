@@ -17,7 +17,7 @@ namespace Kamatte.SwordCatch
         SwingerPersonal _personal;  // 刀振りの性格
         ISwingStrategy _strategy;  // 性格ごとの振り方
 
-        AnimParamFacadeBase _animatorParametor;  // アニメーターのパラメーターを保持してるクラス
+        AnimParamFacade _animatorParametor;  // アニメーターのパラメーターを保持してるクラス
         
         [SerializeField] AudioSource _audioSource;
         [SerializeField] AudioClip _roundVoiceClip;
@@ -40,7 +40,7 @@ namespace Kamatte.SwordCatch
 
         void Start()
         {
-            _animatorParametor = ServiceLocator.Resolve<AnimParamFacadeBase>();
+            _animatorParametor = ServiceLocator.Resolve<AnimParamFacade>();
 
             switch (_personal)
             {
