@@ -15,7 +15,7 @@ namespace Kamatte.Core
         {
             if (judgeAcceptableExecute.Judge())
             {
-                ServiceLocator.Resolve<ICoroutineRunnerFacade>().StartCoroutine(modeChangeList.Execute(prev, next));
+                ServiceLocator.Resolve<CoroutineRunner>().StartCoroutine(modeChangeList.Execute(prev, next));
             }
         }
         public void startScene()
