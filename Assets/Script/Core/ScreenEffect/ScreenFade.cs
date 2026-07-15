@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Kamatte.Core
 {
-    public class ScreenFade    //  画面をフェードする
+    public sealed class ScreenFade    //  画面をフェードする
     {
         CanvasGroup canvasGroup;
         Canvas canvas;

@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +11,25 @@ namespace Kamatte.Core
 
         Dictionary<EffectKey, EffectDefinition> _cache;  // エフェクトデータ辞書(内部処理用)
 
+        void OnEnable()
+        {
+            _cache = null;
+        }
+
         //  エフェクトデータ取得
         public EffectDefinition Get(EffectKey key)
         {
-            _cache ??= _effects.ToDictionary(e => e.Key);
-            return _cache[key];
+            if (_cache == null)
+            {
+                _cache = new Dictionary<EffectKey, EffectDefinition>(_effects.Count);
+                
+                foreach (var effect in _effects)
+                {
+                    _cache[effect.Key] = effect;
+                }
+            }
+
+            return _cache.TryGetValue(key, out var definition) ? definition : null;
         }
     }
 }

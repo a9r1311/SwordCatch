@@ -6,7 +6,7 @@ namespace Kamatte.Core
         {
             GameModeChagneExecutor executor = new GameModeChagneExecutor();
 
-            ServiceLocator.Resolve<IScreenFadeFacade>().FadeIn(1f);
+            ServiceLocator.Resolve<ScreenFade>().FadeIn(1f);
             ServiceLocator.Resolve<CoroutineRunner>().StartCoroutine(executor.Execute(prev, next));
         }
     }
