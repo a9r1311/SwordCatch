@@ -62,7 +62,7 @@ namespace Kamatte.Player
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
                 PlayrRandomEffect();
                 _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword));
-                ServiceLocator.Resolve<AnimParamFacadeBase>().SwingerParam.IsCought(true);
+                ServiceLocator.Resolve<AnimParamFacade>().SwingerParam.IsCought(true);
             }
         }
 

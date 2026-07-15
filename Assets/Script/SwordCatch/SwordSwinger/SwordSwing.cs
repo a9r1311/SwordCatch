@@ -1,16 +1,14 @@
 using UnityEngine;
 using Kamatte.Core;
-using UAssert = UnityEngine.Assertions.Assert;
 
 namespace Kamatte.SwordCatch
 {
     public sealed class Swing
     {
-        AnimParamFacadeBase _animParameter;
+        AnimParamFacade _animParameter;
         public Swing()
         {
-            _animParameter = ServiceLocator.Resolve<AnimParamFacadeBase>();
-            UAssert.IsNotNull( _animParameter,"animParameter‚ÌQÆ‚ªæ“¾o—ˆ‚Ä‚¢‚Ü‚¹‚ñB");
+            _animParameter = ServiceLocator.Resolve<AnimParamFacade>();
         }
 
         //  “U‚è‰º‚ë‚µ
