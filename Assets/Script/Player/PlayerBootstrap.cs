@@ -18,7 +18,6 @@ namespace Kamatte.Player
 
         [SerializeField] StateHolder _stateHolder;  // ゲーム状況保持クラス
         
-        [SerializeField] Vector3 _catchEffectPos;  // キャッチ時のエフェクト生成場所
         [SerializeField] AudioClip _catchClip;  // キャッチSE
 
         void Awake()

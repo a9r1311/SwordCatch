@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
-    public abstract class EffectActDef : ScriptableObject    //  エフェクト定義クラス継承元
+    //  エフェクト定義クラス継承元
+    public abstract class CharacterPerformanceDefBase : ScriptableObject
     {
         [Header("演出用動きを定義してるSOのKey")]
-        
 
         //  --  Abstract
        
-        public abstract EffectActKey EffectActKey { get; }
+        public abstract PerformaceKey Key { get; }
         
         public abstract void Execute(GameObject target);    //  演出用の動き実行
        
