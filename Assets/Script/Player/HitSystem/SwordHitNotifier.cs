@@ -12,6 +12,8 @@ namespace Kamatte.SwordCatch
         [SerializeField] PlayerController _playerController;
         [SerializeField] StateHolder _stateHolder;  // ƒQ[ƒ€ó‘Ô‚ğ•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒX
 
+        CharacterPerformanceSystem _characterPerformanceSystem;
+
         AnimParamFacade _animationFacade;
 
         void Awake()
@@ -23,6 +25,7 @@ namespace Kamatte.SwordCatch
         void Start()
         {
             _animationFacade = ServiceLocator.Resolve<AnimParamFacade>();
+            _characterPerformanceSystem = ServiceLocator.Resolve<CharacterPerformanceSystem>();
         }
 
         //  “‚ª“–‚½‚Á‚½‚Ìˆ—
@@ -34,7 +37,9 @@ namespace Kamatte.SwordCatch
             {
                 _playerController.EraseHitBox();
                 _stateHolder.IsHitSwing = true;
-                EffectActAPI.Action(new EffectActKey(EffectActor.Player, EffectActTrigger.Hit, EffectActType.Blow));
+                _characterPerformanceSystem.Play(
+                    new PerformaceKey(Performer.Player, EffectActTrigger.HitSword, PerformaceType.Blow)
+                    );
                 _animationFacade.SwingerParam.IsHit(true);
             }
         }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+
 namespace Kamatte.Core
 {
     public sealed class EndSwordCatch : StateMachineBehaviour
