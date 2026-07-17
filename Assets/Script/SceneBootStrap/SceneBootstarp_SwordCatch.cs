@@ -27,14 +27,14 @@ namespace Kamatte.SwordCatch
         LowerAudio _lowerAudio;
         [SerializeField] AudioSource BgmSource;
 
-        GameModeAPIFacade _gameModeAPIFacade;
-
         [SerializeField] PlayerLevelCatalog _levelCatalog;
        
         readonly int _fadeOutOrder = 20;
         readonly int _stopAuidoOrder = 25;
         readonly float _loweredVolume = 0.02f;
         readonly int _resultDisplayOrder = 50;
+
+        GameModeChangeTask _gameModeTask;
 
         void Awake()
         {
@@ -57,10 +57,10 @@ namespace Kamatte.SwordCatch
             
             RetryButton.onClick.AddListener(Retry);
 
-            _gameModeAPIFacade = ServiceLocator.Get<GameModeAPIFacade>();
-            _gameModeAPIFacade.pushTask.PushStep(resultDisplay);
-            _gameModeAPIFacade.pushTask.PushStep(_lowerAudio);
-            _gameModeAPIFacade.pushTask.PushStep(fadeOutStep);
+            _gameModeTask = ServiceLocator.Get<GameModeChangeTask>();
+            _gameModeTask.PushStep(resultDisplay);
+            _gameModeTask.PushStep(_lowerAudio);
+            _gameModeTask.PushStep(fadeOutStep);
         }
 
         void Retry()
@@ -71,9 +71,9 @@ namespace Kamatte.SwordCatch
         {
             RetryButton.onClick.RemoveAllListeners();
 
-            _gameModeAPIFacade.removeTask.RemoveStep(resultDisplay);
-            _gameModeAPIFacade.removeTask.RemoveStep(_lowerAudio);
-            _gameModeAPIFacade.removeTask.RemoveStep(fadeOutStep);
+            _gameModeTask.RemoveStep(resultDisplay);
+            _gameModeTask.RemoveStep(_lowerAudio);
+            _gameModeTask.RemoveStep(fadeOutStep);
         }
     }
 }
