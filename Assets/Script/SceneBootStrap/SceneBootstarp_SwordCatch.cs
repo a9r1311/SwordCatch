@@ -25,7 +25,7 @@ namespace Kamatte.SwordCatch
         StopAudio stopAudio;
         [SerializeField] AudioSource BgmSource;
 
-        GameModeAPIFacadeBase _gameModeAPIFacade;
+        GameModeAPIFacade _gameModeAPIFacade;
 
         void Awake()
         {
@@ -48,7 +48,7 @@ namespace Kamatte.SwordCatch
             
             RetryButton.onClick.AddListener(Retry);
 
-            _gameModeAPIFacade = ServiceLocator.Resolve<GameModeAPIFacadeBase>();
+            _gameModeAPIFacade = ServiceLocator.Resolve<GameModeAPIFacade>();
             _gameModeAPIFacade.pushTask.PushStep(resultDisplay);
             _gameModeAPIFacade.pushTask.PushStep(stopAudio);
             _gameModeAPIFacade.pushTask.PushStep(fadeOutStep);
