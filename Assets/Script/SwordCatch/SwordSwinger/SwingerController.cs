@@ -40,7 +40,7 @@ namespace Kamatte.SwordCatch
 
         void Start()
         {
-            _animatorParametor = ServiceLocator.Resolve<AnimParamFacade>();
+            _animatorParametor = ServiceLocator.Get<AnimParamFacade>();
 
             switch (_personal)
             {

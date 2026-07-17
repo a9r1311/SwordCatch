@@ -16,7 +16,7 @@ namespace Kamatte.Player
         {
             if (!_stateHolder.IsHitSwing)
             {
-                ServiceLocator.Resolve<AnimParamFacade>().PlayerParam.Catch();
+                ServiceLocator.Get<AnimParamFacade>().PlayerParam.Catch();
             }
         }
 

@@ -11,7 +11,7 @@ namespace Kamatte.Core
 
         public void Execute(GameMode prev, GameMode next)    //  é¿çs
         {
-            ServiceLocator.Resolve<CoroutineRunner>().StartCoroutine(modeChangeList.Execute(prev, next));
+            ServiceLocator.Get<CoroutineRunner>().StartCoroutine(modeChangeList.Execute(prev, next));
         }
         public void startScene()
         {

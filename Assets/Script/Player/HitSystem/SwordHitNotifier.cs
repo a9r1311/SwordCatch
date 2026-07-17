@@ -24,8 +24,8 @@ namespace Kamatte.SwordCatch
 
         void Start()
         {
-            _animationFacade = ServiceLocator.Resolve<AnimParamFacade>();
-            _characterPerformanceSystem = ServiceLocator.Resolve<CharacterPerformanceSystem>();
+            _animationFacade = ServiceLocator.Get<AnimParamFacade>();
+            _characterPerformanceSystem = ServiceLocator.Get<CharacterPerformanceSystem>();
         }
 
         //  “‚ª“–‚½‚Á‚½‚Ìˆ—

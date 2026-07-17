@@ -25,9 +25,9 @@ namespace Kamatte.Player
             _stateHolder = ctx.StateHolder;
 
             catchClip = ctx.CatchSE;
-            _audioManager = ServiceLocator.Resolve<AudioManager>();
+            _audioManager = ServiceLocator.Get<AudioManager>();
 
-            _effectSystem = ServiceLocator.Resolve<EffectSystem>();
+            _effectSystem = ServiceLocator.Get<EffectSystem>();
         }
 
         void Update()
@@ -62,7 +62,7 @@ namespace Kamatte.Player
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
                 PlayrRandomEffect();
                 _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.CatchSword));
-                ServiceLocator.Resolve<AnimParamFacade>().SwingerParam.IsCought(true);
+                ServiceLocator.Get<AnimParamFacade>().SwingerParam.IsCought(true);
             }
         }
 

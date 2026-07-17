@@ -1,7 +1,9 @@
+using Kamatte.Core;
+using SwordCatch.Audio;
+using SwordCatch.Result;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using Kamatte.Core;
 
 namespace Kamatte.SwordCatch
 {
@@ -13,7 +15,7 @@ namespace Kamatte.SwordCatch
 
         FadeOutStep fadeOutStep;
 
-        ResultDisplay resultDisplay;
+        ResultDisplayStep resultDisplay;
         [SerializeField] GameObject resultRoot;
         [SerializeField] TextMeshProUGUI playerPowerTxt;
         [SerializeField] TextMeshProUGUI CatchCountTxt;
@@ -22,10 +24,17 @@ namespace Kamatte.SwordCatch
         [SerializeField] SwingerController swingTimeController;
         Swing _swing;
 
-        StopAudio stopAudio;
+        LowerAudio _lowerAudio;
         [SerializeField] AudioSource BgmSource;
 
         GameModeAPIFacade _gameModeAPIFacade;
+
+        [SerializeField] PlayerLevelCatalog _levelCatalog;
+       
+        readonly int _fadeOutOrder = 20;
+        readonly int _stopAuidoOrder = 25;
+        readonly float _loweredVolume = 0.02f;
+        readonly int _resultDisplayOrder = 50;
 
         void Awake()
         {
@@ -34,23 +43,23 @@ namespace Kamatte.SwordCatch
                 Debug.LogError("stateHolder isn't assigned in the Inspector");
             }
 
-            fadeOutStep = new FadeOutStep();
-            resultDisplay = new ResultDisplay(resultRoot, CatchCountTxt, playerPowerTxt, stateHolder);
-            stopAudio = new StopAudio(BgmSource);
+            fadeOutStep = new FadeOutStep(_fadeOutOrder);
+            _lowerAudio = new LowerAudio(_stopAuidoOrder, BgmSource, _loweredVolume);
+            resultDisplay = new ResultDisplayStep(_resultDisplayOrder, resultRoot, CatchCountTxt, playerPowerTxt, stateHolder, _levelCatalog);
             _swing = new Swing();
         }
 
         void Start()
         {
-            ServiceLocator.Resolve<ScreenFade>().FadeIn(1f);
+            ServiceLocator.Get<ScreenFade>().FadeIn(1f);
 
             swingTimeController.Initialize(_swing);
             
             RetryButton.onClick.AddListener(Retry);
 
-            _gameModeAPIFacade = ServiceLocator.Resolve<GameModeAPIFacade>();
+            _gameModeAPIFacade = ServiceLocator.Get<GameModeAPIFacade>();
             _gameModeAPIFacade.pushTask.PushStep(resultDisplay);
-            _gameModeAPIFacade.pushTask.PushStep(stopAudio);
+            _gameModeAPIFacade.pushTask.PushStep(_lowerAudio);
             _gameModeAPIFacade.pushTask.PushStep(fadeOutStep);
         }
 
@@ -63,7 +72,7 @@ namespace Kamatte.SwordCatch
             RetryButton.onClick.RemoveAllListeners();
 
             _gameModeAPIFacade.removeTask.RemoveStep(resultDisplay);
-            _gameModeAPIFacade.removeTask.RemoveStep(stopAudio);
+            _gameModeAPIFacade.removeTask.RemoveStep(_lowerAudio);
             _gameModeAPIFacade.removeTask.RemoveStep(fadeOutStep);
         }
     }

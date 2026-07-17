@@ -20,7 +20,7 @@ namespace Kamatte.Core
             if (stateInfo.normalizedTime >= 1f && ! _isEndSwordCatch)
             {
                 _isEndSwordCatch = true;
-                ServiceLocator.Resolve<GameModeAPIFacade>().executeTask.Execute(GameMode.SwordCatch, GameMode.SwordCatch);
+                ServiceLocator.Get<GameModeAPIFacade>().executeTask.Execute(GameMode.SwordCatch, GameMode.SwordCatch);
             }
         }
     }
