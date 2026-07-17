@@ -28,10 +28,6 @@ namespace Kamatte.Core
             {
                 rb = target.AddComponent<Rigidbody>();
             }
-            else
-            {
-                MyLogger.ErrorLog("PlayerにRigidBodyがアタッチされています、外して下さい");
-            }
             rb.AddForce(BlowForce, ForceMode.Impulse);
         }
     }
