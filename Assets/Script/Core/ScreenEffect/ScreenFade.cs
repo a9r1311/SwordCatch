@@ -36,14 +36,14 @@ namespace Kamatte.Core
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             SetFadeColor(fadeColor ?? Color.black);
-            ServiceLocator.Resolve<CoroutineRunner>().StartCoroutine(FadeCoroutine(0f, 1f, duration, tcs));
+            ServiceLocator.Get<CoroutineRunner>().StartCoroutine(FadeCoroutine(0f, 1f, duration, tcs));
             return tcs.Task;
         }
        
         public Task FadeIn(float duration)    //  フェードイン処理を開始する    
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-            ServiceLocator.Resolve<CoroutineRunner>().StartCoroutine(FadeCoroutine(1f, 0f, duration, tcs));
+            ServiceLocator.Get<CoroutineRunner>().StartCoroutine(FadeCoroutine(1f, 0f, duration, tcs));
             return tcs.Task;
         }
 

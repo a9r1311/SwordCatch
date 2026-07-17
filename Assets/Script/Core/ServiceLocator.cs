@@ -26,7 +26,7 @@ namespace Kamatte.Core
         }
 
         //  ‹@”\æ‚èo‚µ
-        public static T Resolve<T>()
+        public static T Get<T>()
         {
             if (!services.TryGetValue(typeof(T), out var service))
             {

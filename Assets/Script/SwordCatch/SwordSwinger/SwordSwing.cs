@@ -8,7 +8,7 @@ namespace Kamatte.SwordCatch
         AnimParamFacade _animParameter;
         public Swing()
         {
-            _animParameter = ServiceLocator.Resolve<AnimParamFacade>();
+            _animParameter = ServiceLocator.Get<AnimParamFacade>();
         }
 
         //  “U‚è‰º‚ë‚µ

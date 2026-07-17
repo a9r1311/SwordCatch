@@ -3,25 +3,25 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
-    public class FadeOutStep : IGameModeChangeStep    //  GameMode変更時のフェード処理
+    //  GameMode変更時のフェード処理
+    public sealed class FadeOutStep : IGameModeChangeStep
     {
-        public int Order => 20;    //  実行順(小さい方が先)
-        public IEnumerator Execute(GameMode prev, GameMode next)    //  Stepの処理関数のラップ関数
+        int _order;  // 実行順(小さい方が先)
+
+        public int Order => _order;
+
+        public FadeOutStep(int order)
+        {
+            _order = order;
+        }
+
+        //  フェード処理
+        public IEnumerator Execute(GameMode prev, GameMode next)
         {
             System.Threading.Tasks.Task task;
-
-            if (prev == GameMode.Title && next == GameMode.SwordCatch)
-            {
-                task = ServiceLocator.Resolve<ScreenFade>().FadeOut(1f);
-                yield return new WaitUntil(() => task.IsCompleted);
-            }
-            else if(prev == GameMode.SwordCatch && next == GameMode.SwordCatch)
-            {
-                task = ServiceLocator.Resolve<ScreenFade>().FadeOut(1f);
-                yield return new WaitUntil(() => task.IsCompleted);
-            }
-
-            yield break;
+            
+            task = ServiceLocator.Get<ScreenFade>().FadeOut(1f);
+            yield return new WaitUntil(() => task.IsCompleted);
         }
     }
 }
