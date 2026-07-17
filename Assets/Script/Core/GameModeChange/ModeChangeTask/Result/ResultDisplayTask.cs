@@ -8,7 +8,7 @@ using UAssert = UnityEngine.Assertions.Assert;
 namespace SwordCatch.Result
 {
     //  白刃取りのリザルト表示処理
-    public sealed class ResultDisplayStep : IGameModeChangeStep
+    public sealed class ResultDisplayStep : IGameModeChangeTask
     {
         int _order;  // 実行順(小さい方が先)
         
@@ -49,6 +49,7 @@ namespace SwordCatch.Result
         {
             if (prev == GameMode.SwordCatch && next == GameMode.SwordCatch)
             {
+                MyLogger.Log("リザルト表示開始");
                 _countTxt.text = _stateHolder.CatchSuccessCnt.ToString();
                 _playerLevelTxt.text = GetPlayerLevel();
                 _resultRoot.SetActive(true);

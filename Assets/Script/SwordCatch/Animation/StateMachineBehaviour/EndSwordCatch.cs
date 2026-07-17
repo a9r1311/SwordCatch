@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-
 namespace Kamatte.Core
 {
+    //  白刃取りの終了トリガー
     public sealed class EndSwordCatch : StateMachineBehaviour
     {
         public event Action OnAnimationFinished;    //  アニメーション終了通知用
@@ -20,7 +20,10 @@ namespace Kamatte.Core
             if (stateInfo.normalizedTime >= 1f && ! _isEndSwordCatch)
             {
                 _isEndSwordCatch = true;
-                ServiceLocator.Get<GameModeAPIFacade>().executeTask.Execute(GameMode.SwordCatch, GameMode.SwordCatch);
+                MyLogger.Log("白刃取り失敗!");
+                ServiceLocator.Get<CoroutineRunner>().StartCoroutine(
+                    ServiceLocator.Get<GameModeChangeTask>().Execute(GameMode.SwordCatch, GameMode.SwordCatch)
+                    );
             }
         }
     }

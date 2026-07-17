@@ -5,7 +5,7 @@ using Kamatte.Core;
 namespace SwordCatch.Audio
 {
     //  ƒŠƒUƒ‹ƒg‰æ–Ê‚Å‰¹—Ê‚ğ¬‚³‚­‚·‚é
-    public sealed class LowerAudio : IGameModeChangeStep
+    public sealed class LowerAudio : IGameModeChangeTask
     {
         int _order;  // Às‡(¬‚³‚¢•û‚ªæ)
 
@@ -25,6 +25,7 @@ namespace SwordCatch.Audio
         public IEnumerator Execute(GameMode prev, GameMode next)
         {
             _audioSource.volume = _resultVolume;
+            MyLogger.Log("‰¹—Ê‰º‚°Š®—¹");
             yield break;
         }
     }
