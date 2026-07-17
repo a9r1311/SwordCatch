@@ -33,7 +33,7 @@ namespace Kamatte.Core
         {
             buttonManager.SetInteractable(ButtonID.GoPlayButton, false);
             await ServiceLocator.Get<ScreenFade>().FadeOut(1f);
-            SceneUtility.LoadScene(SceneNameMap.GetName(SceneID.Shop));
+            SceneUtility.LoadScene(SceneNameMap.GetName(GameMode.SwordCatch));
         }
 
         void DisplayTutorial()

@@ -65,7 +65,7 @@ namespace Kamatte.SwordCatch
 
         void Retry()
         {
-            SceneUtility.LoadScene(SceneNameMap.GetName(SceneID.Shop));
+            SceneUtility.LoadScene(SceneNameMap.GetName(GameMode.SwordCatch));
         }
         void OnDestroy()
         {

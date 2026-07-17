@@ -5,13 +5,13 @@ namespace Kamatte.Core
 {
     public static class SceneNameMap
     {
-        private static readonly Dictionary<SceneID, string> map = new()
+        private static readonly Dictionary<GameMode, string> map = new()
     {
-        { SceneID.Title, "TitleScene" },
-        { SceneID.Shop, "SwordCatchScene" },
+        { GameMode.Title, "TitleScene" },
+        { GameMode.SwordCatch, "SwordCatchScene" },
     };
 
-        public static string GetName(SceneID id)
+        public static string GetName(GameMode id)
         {
             if (!map.TryGetValue(id, out string name))
                 throw new ArgumentException($"SceneID '{id}' はマッピングされていません。");
@@ -19,6 +19,6 @@ namespace Kamatte.Core
             return name;
         }
 
-        public static IEnumerable<SceneID> All => map.Keys;
+        public static IEnumerable<GameMode> All => map.Keys;
     }
 }
