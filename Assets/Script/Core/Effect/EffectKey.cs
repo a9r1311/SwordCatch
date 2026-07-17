@@ -1,25 +1,29 @@
+using System;
 using UnityEngine;
 
 namespace Kamatte.Core
 {
+    //  エフェクトの一意Key
     [System.Serializable]
-    public struct EffectKey    //  エフェクト特定の為のKey
+    public struct EffectKey : IEquatable<EffectKey>
     {
+        [SerializeField] GameMode _gameMode;     //  ゲームモード
+        [SerializeField] EffectID _effectID;   //  エフェクトの種類
 
-        //  --  外部API
-
-        [SerializeField] private GameMode _gameMode;     //  ゲームモード
-        [SerializeField] private EffectKind _effectkind;   //  エフェクトの種類
-
-        public EffectKey(GameMode gameMode, EffectKind effectKind)    //  コンストラクタ
+        public EffectKey(GameMode gameMode, EffectID effectID)
         {
             _gameMode = gameMode;
-            _effectkind = effectKind;
+            _effectID = effectID;
         }
 
-        public override bool Equals(object obj)    //  等価比較演算子
+        public override bool Equals(object obj)
+        {
+            return obj is EffectKey other && Equals(other);
+        }
+
+        public bool Equals(EffectKey obj)
         => obj is EffectKey other
         && _gameMode == other._gameMode
-        && _effectkind == other._effectkind;
+        && _effectID == other._effectID;
     }
 }

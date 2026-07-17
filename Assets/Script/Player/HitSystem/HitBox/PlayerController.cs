@@ -61,7 +61,7 @@ namespace Kamatte.Player
 
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
                 PlayrRandomEffect();
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.CatchSword));
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.CatchSword));
                 ServiceLocator.Resolve<AnimParamFacade>().SwingerParam.IsCought(true);
             }
         }
@@ -70,11 +70,11 @@ namespace Kamatte.Player
         {
             if (_stateHolder.CatchSuccessCnt == 5)
             {
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.FireWorks));
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.FireWorks));
             }
             if (_stateHolder.CatchSuccessCnt > 20)
             {
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning));
+                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.Lightning));
             }
         }
 

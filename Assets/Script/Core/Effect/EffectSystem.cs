@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
+using UAssert = UnityEngine.Assertions.Assert;
 
 namespace Kamatte.Core
 {
@@ -28,25 +29,28 @@ namespace Kamatte.Core
         public void Play(EffectKey key)
         {
             EffectDefinition definition = _catalog.Get(key);
+            UAssert.IsNotNull(definition, $"EffectDefinition not found : {key}");
 
-            if (definition == null)
-            {
-                Debug.LogWarning($"EffectDefinition not found : {key}");
-                return;
-            }
-
-            //  エフェクトを一回再生終了する
+            //  エフェクトを再生終了
             Stop(key);
 
             GameObject effect;
 
             if (definition.PotitionType == EffectPositionType.NonFixedPositon)
             {
-                effect = Instantiate(definition.EffectPrefab, GetLightningPos(definition) , definition.EffectPrefab.transform.rotation);
+                effect = EffectPool.Get(
+                    definition.EffectPrefab,
+                    GetLightningPos(definition),
+                    definition.EffectPrefab.transform.rotation
+                    );
             }
             else
             {
-                effect = Instantiate(definition.EffectPrefab, definition.Position, definition.EffectPrefab.transform.rotation);
+                effect = EffectPool.Get(
+                    definition.EffectPrefab,
+                    definition.Position,
+                    definition.EffectPrefab.transform.rotation
+                    );
             }
 
             _playingEffects[key] = effect;
@@ -65,7 +69,7 @@ namespace Kamatte.Core
         //  雷の座標(ランダム)を取得する
         Vector3 GetLightningPos(EffectDefinition definition)
         {
-            if (definition.Key.Equals(new EffectKey(GameMode.SwordCatch, EffectKind.Lightning)))
+            if (definition.Key.Equals(new EffectKey(GameMode.SwordCatch, EffectID.Lightning)))
             {
                 Vector3 LightningAddPos = Random.insideUnitSphere * definition.RandomEffectPosRadius;
                 Vector3 LightningPos = new Vector3(definition.Position.x + LightningAddPos.x, definition.Position.y, definition.Position.z + LightningAddPos.z);
