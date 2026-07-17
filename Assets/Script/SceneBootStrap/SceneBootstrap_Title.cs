@@ -1,8 +1,11 @@
 using UnityEngine;
+using Kamatte.Core;
 
-namespace Kamatte.Core
+namespace SwordCatch.Core
 {
-    public class SceneBootstrap_Title : MonoBehaviour    //  タイトルシーンの初期化役
+    //  タイトルシーンの初期化役
+    [DisallowMultipleComponent]
+    public class SceneBootstrap_Title : MonoBehaviour
     {
         void Start()
         {
