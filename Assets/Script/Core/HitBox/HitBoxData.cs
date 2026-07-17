@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace Kamatte.Core
 {
-    //  当たり判定クラス
+    //  当たり判定定義クラス
     [System.Serializable]
     public sealed class HitBox
     {
-        [Header("判定ID")]
+        [Header("ヒットボックスID")]
         public HitBoxID id;
 
         //[Header("基準地点")]
