@@ -5,9 +5,9 @@ namespace Kamatte.Core
     [DisallowMultipleComponent]
     public sealed class FPSSetter : MonoBehaviour    //  FPSをセットする
     {
-        [SerializeField, Range(30, 120)] private int _targetFPS = 60;
+        [SerializeField, Range(30, 120)] int _targetFPS = 60;
 
-        private void Awake()
+        void Awake()
         {
             Application.targetFrameRate = _targetFPS;
             QualitySettings.vSyncCount = 0;

@@ -1,5 +1,6 @@
 using Kamatte.Core;
 using SwordCatch.Audio;
+using SwordCatch.Core;
 using SwordCatch.Result;
 using TMPro;
 using UnityEngine;
@@ -65,7 +66,7 @@ namespace Kamatte.SwordCatch
 
         void Retry()
         {
-            SceneUtility.LoadScene(SceneNameMap.GetName(GameMode.SwordCatch));
+            ServiceLocator.Get<SceneMgr>().LoadScene(GameMode.SwordCatch);
         }
         void OnDestroy()
         {

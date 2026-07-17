@@ -1,44 +1,48 @@
+using SwordCatch.Core;
 using UnityEngine;
 
 namespace Kamatte.Core
 {
-    public class ButtonReactManage_Title : MonoBehaviour, IUIController    //  タイトル画面のボタンに反応を入れる
+    [DisallowMultipleComponent]
+    public sealed class ButtonReactManage_Title : MonoBehaviour, IUIController    //  タイトル画面のボタンに反応を入れる
     {
-        [SerializeField] private ButtonManager buttonManager;
-        [SerializeField] private GameObject TutorialRoot;
+        [SerializeField] ButtonManager _buttonManager;
+        [SerializeField] GameObject _tutorialRoot;
+        
+        [SerializeField] SceneMapping _sceneMapping;
 
         //  ボタン初期化
         public void Init()
         {
             // ボタン登録など
-            buttonManager.RegistReact(ButtonID.GoPlayButton, OnGoPlayPressed);
-            buttonManager.RegistReact(ButtonID.TutorialButton, DisplayTutorial);
+            _buttonManager.RegistReact(ButtonID.GoPlayButton, OnGoPlayPressed);
+            _buttonManager.RegistReact(ButtonID.TutorialButton, DisplayTutorial);
 
             // UI初期状態の設定など
-            buttonManager.EnableAllButtons();
+            _buttonManager.EnableAllButtons();
         }
 
         //    ボタン初期化解除
         public void Deinit()
         {
             // ボタンのイベント解除（※ Unregister を実装しておく）
-            buttonManager.UnregistReact(ButtonID.GoPlayButton);
+            _buttonManager.UnregistReact(ButtonID.GoPlayButton);
 
             // UIの一時非表示や状態クリアなど
-            buttonManager.DisableAllButtons();
+            _buttonManager.DisableAllButtons();
         }
 
         //  ゲーム開始を押したときの処理
         async void OnGoPlayPressed()
         {
-            buttonManager.SetInteractable(ButtonID.GoPlayButton, false);
+            _buttonManager.SetInteractable(ButtonID.GoPlayButton, false);
             await ServiceLocator.Get<ScreenFade>().FadeOut(1f);
-            SceneUtility.LoadScene(SceneNameMap.GetName(GameMode.SwordCatch));
+            ServiceLocator.Get<SceneMgr>().LoadScene(GameMode.SwordCatch);
         }
 
         void DisplayTutorial()
         {
-            TutorialRoot.SetActive(true);
+            _tutorialRoot.SetActive(true);
         }
 
         void OnExitPressed()
