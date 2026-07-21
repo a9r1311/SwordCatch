@@ -36,6 +36,8 @@ namespace SwordCatch.Player
 
             if (!_stateHolder.IsCatchSword)
             {
+                MyLogger.Log("ƒqƒbƒg");
+                Time.timeScale = 0f;
                 _playerController.EraseHitBox();
                 _stateHolder.IsHitSwing = true;
                 _characterPerformanceSystem.Play(
