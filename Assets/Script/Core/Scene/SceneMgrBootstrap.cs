@@ -3,7 +3,7 @@ using Kamatte.Core;
 
 namespace SwordCatch.Core
 {
-    //  シーンマネージャーの
+    //  シーンマネージャーの初期化役
     [DisallowMultipleComponent]
     [DefaultExecutionOrder(-10)]
     public sealed class SceneMgrBootstrap : MonoBehaviour

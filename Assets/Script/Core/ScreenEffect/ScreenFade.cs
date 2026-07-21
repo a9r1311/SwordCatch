@@ -2,68 +2,64 @@ using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using UAssert = UnityEngine.Assertions.Assert;
 
 namespace Kamatte.Core
 {
-    public sealed class ScreenFade    //  画面をフェードする
+    //  画面フェードクラス
+    public sealed class ScreenFade
     {
-        CanvasGroup canvasGroup;
-        Canvas canvas;
-        Image fadeImage;
+        CanvasGroup _canvasGroup;
+        Canvas _canvas;
+        Image _fadeImage;
 
         public ScreenFade(CanvasGroup canvasGroup, Canvas canvas, Image fadeImage)
         {
-            if (canvas == null || fadeImage == null || canvasGroup == null)
-            {
-                MyLogger.WarningLog("画面のフェードに必要な参照が不足しています。");
-            }
-            else
-            {
-                this.canvasGroup = canvasGroup;
-                this.canvas = canvas;
-                this.fadeImage = fadeImage;
-                InitializeSetting(0f);
-            }
+            UAssert.IsNotNull(canvasGroup, "キャンバスグループの参照がnullです。");
+            UAssert.IsNotNull(canvas, "キャンバスの参照がNullです。");
+            UAssert.IsNotNull(fadeImage, "フェードイメージがNullです。");
+
+            _canvasGroup = canvasGroup;
+            _canvas = canvas;
+            _fadeImage = fadeImage;
+
+            InitializeSetting(0f);
         }
 
         public void InitializeSetting(float imageAlpha)
         {
-            canvasGroup.alpha = imageAlpha;
-            fadeImage.raycastTarget = false;
+            _canvasGroup.alpha = imageAlpha;
+            _fadeImage.raycastTarget = false;
         }
 
-        public Task FadeOut(float duration, Color? fadeColor = null)    //  フェードアウト処理を開始する
+        //  フェードアウト
+        public Task FadeOut(float duration, Color? fadeColor = null)
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             SetFadeColor(fadeColor ?? Color.black);
             ServiceLocator.Get<CoroutineRunner>().StartCoroutine(FadeCoroutine(0f, 1f, duration, tcs));
             return tcs.Task;
         }
-       
-        public Task FadeIn(float duration)    //  フェードイン処理を開始する    
+
+        //  フェードイン
+        public Task FadeIn(float duration)
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
             ServiceLocator.Get<CoroutineRunner>().StartCoroutine(FadeCoroutine(1f, 0f, duration, tcs));
             return tcs.Task;
         }
 
-        private void SetModeChangeFade(GameMode prev, GameMode next)    //  ゲームモード変更時のフェードをセット
+        //  フェードの色をセット
+        void SetFadeColor(Color color)
         {
-            if(next == GameMode.SwordCatch)
-            {
-                FadeOut(1f);
-            }
+            _fadeImage.color = color;
         }
 
-        private void SetFadeColor(Color color)    //  フェードの色をセット
+        //  フェードコルーチン
+        IEnumerator FadeCoroutine(float from, float to, float duration, TaskCompletionSource<bool> tcs)
         {
-            fadeImage.color = color;
-        }
-
-        private IEnumerator FadeCoroutine(float from, float to, float duration, TaskCompletionSource<bool> tcs)    //  フェードを行う
-        {
-            canvasGroup.blocksRaycasts = true;
-            canvas.enabled = true;
+            _canvasGroup.blocksRaycasts = true;
+            _canvas.enabled = true;
 
             float elapsed = 0f;
             while (elapsed < duration)
@@ -71,16 +67,16 @@ namespace Kamatte.Core
                 elapsed += Time.deltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
                 float alpha = Mathf.Lerp(from, to, t);
-                canvasGroup.alpha = alpha;
+                _canvasGroup.alpha = alpha;
                 yield return null;
             }
 
-            canvasGroup.alpha = to;
+            _canvasGroup.alpha = to;
 
             if (Mathf.Approximately(to, 0f))
             {
-                canvas.enabled = false;
-                canvasGroup.blocksRaycasts = false;
+                _canvas.enabled = false;
+                _canvasGroup.blocksRaycasts = false;
             }
 
             tcs.SetResult(true);
