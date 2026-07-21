@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     //  U‚è‰º‚ë‚·ƒLƒƒƒ‰‚ÌID
     public enum SwingerID

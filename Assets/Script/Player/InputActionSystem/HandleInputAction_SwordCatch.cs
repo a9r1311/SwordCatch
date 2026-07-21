@@ -1,6 +1,5 @@
-using Kamatte.Player;
 
-namespace Kamatte.Core
+namespace SwordCatch.Player
 {
     public class HandleInputAction_SwordCatch    //  プレイヤーの入力を受けつけるクラス
     {

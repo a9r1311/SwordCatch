@@ -1,9 +1,8 @@
+using SwordCatch.Core;
 using System.Collections.Generic;
 using UnityEngine;
-using Kamatte.Core;
-using Kamatte.Swinger;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  アニメーターのパラメーターシステムをSLに登録するクラス
     [DisallowMultipleComponent]

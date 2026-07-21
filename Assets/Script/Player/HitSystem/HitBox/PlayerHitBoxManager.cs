@@ -1,20 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using SwordCatch.Core;
+using SwordCatch.HitBox;
+using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-using Kamatte.Core;
-using Kamatte.SwordCatch;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     //  ヒットボックス管理者
     public sealed class PlayerHitBox
     {
         PlayerController _controller;
 
-        readonly Dictionary<HitBoxID, HitBox> _hitbBoxDictionary;  // 当たり判定一覧
+        readonly Dictionary<HitBoxID, HitBoxData> _hitbBoxDictionary;  // 当たり判定一覧
         readonly Collider[] _hitResults = new Collider[8];  // 当たった相手のCollider
 
-        HitBox _activeBox = null;  // 有効になっている当たり判定
+        HitBoxData _activeBox = null;  // 有効になっている当たり判定
         HitBoxID activeID = HitBoxID.Unknown;  // アクティブにするボックスID
 
         Transform _playerHeadTF;  // プレイヤーの頭(判定位置計算用)
@@ -29,7 +29,7 @@ namespace Kamatte.Player
             Transform playerHead,
             StateHolder stateHolder)
         {
-            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBox>();
+            _hitbBoxDictionary = new Dictionary<HitBoxID, HitBoxData>();
             foreach (var box in hitBoxData.PlayerHitBoxes)
             {
                 _hitbBoxDictionary[box.id] = box;

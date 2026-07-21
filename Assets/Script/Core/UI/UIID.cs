@@ -1,4 +1,4 @@
-namespace Kamatte.UI.Buttons
+namespace SwordCatch.UI
 {
     public enum UIID    //  UIPrefab‚Æ–¼‘O‚ªˆê’v‚µ‚Ä‚¢‚é‚ÆFactorySO‚ÉŽ©“®‘}“ü‚µ‚Ä‚­‚ê‚é
     {

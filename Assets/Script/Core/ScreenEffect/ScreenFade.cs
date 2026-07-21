@@ -1,10 +1,11 @@
+using SwordCatch.Core;
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UAssert = UnityEngine.Assertions.Assert;
 
-namespace Kamatte.Core
+namespace SwordCatch.ScreenEffect
 {
     //  画面フェードクラス
     public sealed class ScreenFade

@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.HitBox
 {
     public enum HitBoxID
     {

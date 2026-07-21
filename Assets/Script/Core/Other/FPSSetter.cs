@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Setting
 {
     [DisallowMultipleComponent]
     public sealed class FPSSetter : MonoBehaviour    //  FPSをセットする

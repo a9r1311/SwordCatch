@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.HitBox
 {
     //  当たり判定定義クラス
     [System.Serializable]
-    public sealed class HitBox
+    public sealed class HitBoxData
     {
         [Header("ヒットボックスID")]
         public HitBoxID id;

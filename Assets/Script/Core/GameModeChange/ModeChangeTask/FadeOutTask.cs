@@ -1,7 +1,8 @@
+using SwordCatch.Core;
 using System.Collections;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.ScreenEffect
 {
     //  GameMode変更時のフェード処理
     public sealed class FadeOutStep : IGameModeChangeTask

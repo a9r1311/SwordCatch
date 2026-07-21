@@ -1,4 +1,6 @@
-namespace Kamatte.Core
+using SwordCatch.Core;
+
+namespace SwordCatch.UI
 {
     public class UIManageFacade : IUIManageFacade
     {

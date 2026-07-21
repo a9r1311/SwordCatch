@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     [CreateAssetMenu(fileName = "SwingerStatList", menuName = "Swinger/StatList")]
     //  スウィンガーの能力値

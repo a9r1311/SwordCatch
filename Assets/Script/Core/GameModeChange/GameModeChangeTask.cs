@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Core
 {
     //  ゲームモード変更時の処理を管理するクラス
     [DisallowMultipleComponent]

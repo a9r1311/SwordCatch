@@ -1,7 +1,7 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-namespace Kamatte.Editor
+namespace SwordCatch.Editor
 {
     //  プログレスバーUtility
     public static class ProgressBarUtility

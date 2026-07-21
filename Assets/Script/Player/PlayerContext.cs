@@ -1,7 +1,7 @@
+using SwordCatch.Core;
 using UnityEngine;
-using Kamatte.SwordCatch;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     //  コンストラクタ引数短縮用クラス
     public class PlayerContext

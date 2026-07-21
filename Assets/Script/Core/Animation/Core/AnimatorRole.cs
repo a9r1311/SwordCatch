@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.Animation
 {
     //  アニメーターが制御する対象
     enum AnimatorTarget

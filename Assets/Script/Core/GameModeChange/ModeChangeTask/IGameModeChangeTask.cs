@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace Kamatte.Core
+namespace SwordCatch.Core
 {
     //  ゲームモード変更時のタスクインターフェース
     public interface IGameModeChangeTask

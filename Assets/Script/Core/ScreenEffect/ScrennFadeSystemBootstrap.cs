@@ -1,8 +1,9 @@
+using SwordCatch.Core;
 using UnityEngine;
 using UnityEngine.UI;
 using UAssert = UnityEngine.Assertions.Assert;
 
-namespace Kamatte.Core
+namespace SwordCatch.ScreenEffect
 {
     //  画面をフェードさせるシステムの初期化役
     [DisallowMultipleComponent]

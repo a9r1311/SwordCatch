@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Kamatte.Core;
 using UnityEngine.SceneManagement;
 
 namespace SwordCatch.Core

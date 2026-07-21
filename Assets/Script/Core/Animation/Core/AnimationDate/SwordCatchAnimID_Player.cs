@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  プレイヤーの白刃取りのアニメーションID
     public enum SwordCatchAnimID_Player

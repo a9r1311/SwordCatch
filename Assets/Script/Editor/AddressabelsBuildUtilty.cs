@@ -4,7 +4,7 @@ using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 using UnityEngine;
 
-namespace Kamatte.Editor
+namespace SwordCatch.Editor
 {
     //  手動アセットビルドツール(※Editorファイル内に配置)
     public static class AddressablesBuild

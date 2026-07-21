@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     // パフォーマンス種類
     public enum PerformaceType

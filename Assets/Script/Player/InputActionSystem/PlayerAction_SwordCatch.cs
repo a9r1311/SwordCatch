@@ -1,8 +1,8 @@
-using Kamatte.Core;
-using Kamatte.SwordCatch;
+using SwordCatch.Animation;
+using SwordCatch.Core;
 using UnityEngine.InputSystem;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     public class PlayerInputAction_SwordCatch    //  ƒvƒŒƒCƒ„[‚Ì”’næ‚èó‘Ô‚Ì“ü—Í‚É”½‰‚µ‚½“®‚«
     {

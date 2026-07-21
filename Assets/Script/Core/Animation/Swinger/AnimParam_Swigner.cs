@@ -1,8 +1,7 @@
 using UnityEngine;
 using UAssert = UnityEngine.Assertions.Assert;
-using Kamatte.Core;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  Swingerのアニメーターのパラメータ保持クラス
     public sealed class AnimParam_Swinger : AnimParamCollectionBase

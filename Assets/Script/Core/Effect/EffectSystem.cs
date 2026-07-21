@@ -1,8 +1,9 @@
+using SwordCatch.Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UAssert = UnityEngine.Assertions.Assert;
 
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  エフェクト処理システム
     [DefaultExecutionOrder(-10)]
