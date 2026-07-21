@@ -71,6 +71,7 @@ namespace SwordCatch.Swinger
         //  ‹©‚Ô
         public void Shout()
         {
+            MyLogger.Log("Shout");
             IsShout = true;
             _audioSource.PlayOneShot(_roundVoiceClip, 0.4f);
         }
