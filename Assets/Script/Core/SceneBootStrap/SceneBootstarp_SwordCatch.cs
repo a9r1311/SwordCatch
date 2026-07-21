@@ -1,12 +1,12 @@
-using Kamatte.Core;
 using SwordCatch.Audio;
-using SwordCatch.Core;
 using SwordCatch.Result;
+using SwordCatch.ScreenEffect;
+using SwordCatch.Swinger;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Core
 {
     //  ‹@”\ŒQ‚Ì‰Šú‰»–ó–ğ
     [DisallowMultipleComponent]

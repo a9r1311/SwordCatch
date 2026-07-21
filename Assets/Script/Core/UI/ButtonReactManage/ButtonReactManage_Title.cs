@@ -1,7 +1,8 @@
 using SwordCatch.Core;
+using SwordCatch.ScreenEffect;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     [DisallowMultipleComponent]
     public sealed class ButtonReactManage_Title : MonoBehaviour, IUIController    //  タイトル画面のボタンに反応を入れる
@@ -43,11 +44,6 @@ namespace Kamatte.Core
         void DisplayTutorial()
         {
             _tutorialRoot.SetActive(true);
-        }
-
-        void OnExitPressed()
-        {
-            // アプリ終了処理
         }
     }
 }

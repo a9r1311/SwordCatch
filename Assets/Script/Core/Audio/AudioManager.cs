@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using SwordCatch.Core;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Audio
 {
     //  オーディオ管理クラス
     [DefaultExecutionOrder(-5)]

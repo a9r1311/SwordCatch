@@ -1,7 +1,7 @@
+using SwordCatch.Animation;
 using UnityEngine;
-using Kamatte.SwordCatch;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     //  “æ‚èƒAƒNƒVƒ‡ƒ“
     public sealed class StartCatchAnimation : IPlayerCommand

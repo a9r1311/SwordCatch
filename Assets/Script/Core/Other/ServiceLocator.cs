@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Core
 {
     //  システム系を使うためのServiceLocator
     public static class ServiceLocator

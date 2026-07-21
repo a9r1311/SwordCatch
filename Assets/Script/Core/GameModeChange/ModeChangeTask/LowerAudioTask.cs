@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using Kamatte.Core;
+using SwordCatch.Core;
 
 namespace SwordCatch.Audio
 {

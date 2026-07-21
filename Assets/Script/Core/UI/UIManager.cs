@@ -1,6 +1,7 @@
+using SwordCatch.Core;
 using System.Collections.Generic;
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     public class UIManager    //  •ïŠ‡“I‚ÈUIŠÇ—‚ğ‚·‚éƒNƒ‰ƒX
     {

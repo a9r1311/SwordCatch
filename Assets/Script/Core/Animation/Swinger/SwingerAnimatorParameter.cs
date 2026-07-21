@@ -1,4 +1,4 @@
-namespace Kamatte.Swinger
+namespace SwordCatch.Animation
 {
     //  刀振りのアニメーターのパラメーター列挙
     public enum SwingerAnimatorParameter

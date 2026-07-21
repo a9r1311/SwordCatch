@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     // エフェクトの座標タイプ
     public enum EffectPositionType

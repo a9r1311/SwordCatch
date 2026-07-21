@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Animation
 {
     //  パラメータ集約クラスBase
     public abstract class AnimParamCollectionBase

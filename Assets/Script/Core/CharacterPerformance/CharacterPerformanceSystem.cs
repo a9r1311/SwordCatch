@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  演出用の動きをさせるシステム
     public sealed class CharacterPerformanceSystem

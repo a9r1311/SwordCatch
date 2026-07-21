@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using Kamatte.Core;
-using Kamatte.SwordCatch;
 using UAssert = UnityEngine.Assertions.Assert;
+using SwordCatch.Core;
 
 namespace SwordCatch.Result
 {

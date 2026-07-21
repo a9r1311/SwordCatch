@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
-using Kamatte.UI.Buttons;
+using SwordCatch.Core;
+
 
 #if UNITY_EDITOR
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
 #endif
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     [CreateAssetMenu(fileName ="UIFactory", menuName = "UI/UIFactory")]
     public class UIFactory : ScriptableObject    //  UIコントローラーを生成する

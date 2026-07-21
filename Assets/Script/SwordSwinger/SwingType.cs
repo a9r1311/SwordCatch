@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.SwordCatch
 {
     public enum SwingType    //  U‚è‰º‚ë‚µ‚Ìí—Ş
     {

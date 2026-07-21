@@ -1,6 +1,7 @@
-using Kamatte.SwordCatch;
+using SwordCatch.Core;
+using SwordCatch.SwordCatch;
 
-namespace Kamatte.Swinger
+namespace SwordCatch.Swinger
 {
     //  性格 : スピードスターの振り方
     public sealed class SpeedStarStrategy : ISwingStrategy

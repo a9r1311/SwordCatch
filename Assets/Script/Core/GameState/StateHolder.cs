@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Core
 {
     //  ƒQ[ƒ€ó‘Ô‚ğ•Û‚µ‚Ä‚¢‚éƒNƒ‰ƒX
     [DisallowMultipleComponent]

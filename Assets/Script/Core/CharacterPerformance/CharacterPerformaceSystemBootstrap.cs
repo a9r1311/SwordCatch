@@ -1,8 +1,9 @@
+using SwordCatch.Core;
 using System.Collections.Generic;
 using UnityEngine;
 using UAssert = UnityEngine.Assertions.Assert;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  演出用の動きをさせるシステムの初期化役
     [DisallowMultipleComponent]

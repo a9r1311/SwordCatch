@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     public class ButtonManager : MonoBehaviour    //  ボタンの管理関数保持クラス
     {

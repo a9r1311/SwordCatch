@@ -1,5 +1,5 @@
+using SwordCatch.UI;
 using UnityEngine;
-using Kamatte.Core;
 
 namespace SwordCatch.Core
 {

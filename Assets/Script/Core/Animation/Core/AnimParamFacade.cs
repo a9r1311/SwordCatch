@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  アニメーションを操作するための窓口
     public sealed class AnimParamFacade

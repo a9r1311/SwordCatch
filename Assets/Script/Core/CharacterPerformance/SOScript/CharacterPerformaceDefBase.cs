@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  エフェクト定義クラス継承元
     public abstract class CharacterPerformanceDefBase : ScriptableObject

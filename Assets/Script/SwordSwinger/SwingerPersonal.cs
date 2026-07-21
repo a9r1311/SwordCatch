@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     public enum SwingerPersonal    //  “‚ğU‚él‚Ì«Ši
     {

@@ -1,9 +1,10 @@
+using SwordCatch.Animation;
+using SwordCatch.CharacterPerformance;
+using SwordCatch.Core;
 using UnityEngine;
 using UAssert = UnityEngine.Assertions.Assert;
-using Kamatte.Core;
-using Kamatte.Player;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Player
 {
     //  “‚ª“–‚½‚Á‚½‚Ìˆ—‚ğ‚·‚éƒNƒ‰ƒX
     [DisallowMultipleComponent]

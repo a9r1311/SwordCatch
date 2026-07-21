@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Player
 {
     //  頭にアタッチして衝突を検知してもらう
     [DisallowMultipleComponent]

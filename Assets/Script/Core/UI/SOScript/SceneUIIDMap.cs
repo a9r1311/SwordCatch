@@ -1,8 +1,8 @@
 ﻿using System;
 using UnityEngine;
-using Kamatte.UI.Buttons;
+using SwordCatch.Core;
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     [CreateAssetMenu(fileName = "SceneIDCovert" ,menuName = "UI/SceneIDConvert")]
     public class SceneIDConvert : ScriptableObject    //  SceneIDとUIIDを変換するためのMap

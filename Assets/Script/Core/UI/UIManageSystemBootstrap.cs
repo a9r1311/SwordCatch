@@ -1,6 +1,7 @@
+using SwordCatch.Core;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     public class UIManageSystemBootstrap : MonoBehaviour   //  UI変更システムの初期化役
     {

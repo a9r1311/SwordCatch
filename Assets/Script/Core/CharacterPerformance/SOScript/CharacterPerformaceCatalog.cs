@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  演出用の動きの定義データ集約クラス
     [CreateAssetMenu(fileName = "CharacterPerformanceCatalog", menuName = "Character/PerformaceCatalog")]

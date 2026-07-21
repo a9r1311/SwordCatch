@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.HitBox
 {
     // ヒットボックス位置基準
     public enum HitBoxAnchorType

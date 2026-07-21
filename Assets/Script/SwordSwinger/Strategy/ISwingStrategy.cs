@@ -1,4 +1,4 @@
-namespace Kamatte.Swinger
+namespace SwordCatch.Swinger
 {
     public interface ISwingStrategy
     {

@@ -1,6 +1,7 @@
-using Kamatte.SwordCatch;
+using SwordCatch.Core;
+using SwordCatch.SwordCatch;
 
-namespace Kamatte.Swinger
+namespace SwordCatch.Swinger
 {
     //  «Ši : •’Ê‚ÌU‚è•û
     public sealed class NormalStrategy : ISwingStrategy

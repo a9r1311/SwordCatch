@@ -1,7 +1,9 @@
+using SwordCatch.Animation;
+using SwordCatch.Core;
+using SwordCatch.SwordCatch;
 using UnityEngine;
-using Kamatte.Core;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     public sealed class Swing
     {

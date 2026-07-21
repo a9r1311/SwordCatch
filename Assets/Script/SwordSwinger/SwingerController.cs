@@ -1,8 +1,9 @@
-using Kamatte.Core;
-using Kamatte.Swinger;
+using SwordCatch.Animation;
+using SwordCatch.Core;
+using SwordCatch.SwordCatch;
 using UnityEngine;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     //  刀を振るタイミングを決定するスクリプト
     [DisallowMultipleComponent]

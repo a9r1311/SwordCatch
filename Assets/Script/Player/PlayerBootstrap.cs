@@ -1,8 +1,7 @@
+using SwordCatch.Core;
 using UnityEngine;
-using Kamatte.Core;
-using Kamatte.SwordCatch;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     //  プレイヤー初期化クラス
     [DisallowMultipleComponent]

@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.UI
 {
     public class UIManageJudge : IUIManageJudge
     {

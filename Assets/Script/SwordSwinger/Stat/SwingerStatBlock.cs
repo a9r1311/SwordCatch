@@ -1,6 +1,7 @@
+using SwordCatch.SwordCatch;
 using UnityEngine;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Swinger
 {
     //  スウィンガーの能力値クラス
     [System.Serializable]

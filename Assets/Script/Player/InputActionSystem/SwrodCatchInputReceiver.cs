@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Player
 {
     public class SwordCatchInputReceiver : MonoBehaviour    //  “ü—ÍŽó•t
     {

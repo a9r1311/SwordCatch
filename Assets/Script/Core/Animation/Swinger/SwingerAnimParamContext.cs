@@ -1,4 +1,4 @@
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  “U‚è‚ÌAnimatorParametorStringƒNƒ‰ƒX(ˆø”È—ª—p)
     public sealed class SwingerAnimParameters

@@ -1,7 +1,6 @@
 using UnityEngine;
-using Kamatte.Core;
 
-namespace Kamatte.SwordCatch
+namespace SwordCatch.Animation
 {
     //  Playerのアニメーションパラーメータを保持しているクラス
     public sealed class AnimParam_Player : AnimParamCollectionBase

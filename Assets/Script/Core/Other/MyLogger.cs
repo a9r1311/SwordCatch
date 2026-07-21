@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Kamatte.Core
+namespace SwordCatch.Core
 {
     public static class MyLogger
     {

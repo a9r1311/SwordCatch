@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  キャラクターパフォーマンスの一意Key
     [System.Serializable]

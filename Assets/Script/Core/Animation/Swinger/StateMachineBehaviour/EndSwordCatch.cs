@@ -1,7 +1,8 @@
+using SwordCatch.Core;
 using System;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Animation
 {
     //  ”’næ‚è‚ÌI—¹ƒgƒŠƒK[
     public sealed class EndSwordCatch : StateMachineBehaviour

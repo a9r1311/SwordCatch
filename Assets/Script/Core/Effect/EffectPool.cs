@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Pool;
 using System.Collections.Generic;
 
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  EffectSystemから呼び出すためのプール管理クラス
     //  (汎用性が欲しいクラスではないのでServiceLocatorには登録しません)

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     //  ‚«”ò‚Ñ‰‰o’è‹`
     [CreateAssetMenu(fileName ="PlayerBlowPerformaneceDef",menuName = "Character/Performace/PlayerBlow")]

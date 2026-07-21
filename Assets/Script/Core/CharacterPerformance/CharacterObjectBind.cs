@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.CharacterPerformance
 {
     // キャラクター定義と実際のオブジェクトの紐づけ用クラス
     [System.Serializable]

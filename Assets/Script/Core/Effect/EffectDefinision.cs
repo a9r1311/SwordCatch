@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  Effect’è‹`
     [CreateAssetMenu(fileName = "EffectDefinition", menuName = "Effect/Definition")]

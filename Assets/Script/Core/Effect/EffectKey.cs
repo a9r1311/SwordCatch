@@ -1,7 +1,8 @@
+using SwordCatch.Core;
 using System;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  エフェクトの一意Key
     [System.Serializable]

@@ -1,4 +1,4 @@
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  エフェクトID
     public enum EffectID

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kamatte.Core
+namespace SwordCatch.Effect
 {
     //  エフェクト定義データを集約しているクラス
     [CreateAssetMenu(fileName = "EffectDefinitionCatalog", menuName = "Effect/Catalog")]

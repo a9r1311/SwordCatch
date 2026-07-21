@@ -1,8 +1,11 @@
+using SwordCatch.Animation;
+using SwordCatch.Audio;
+using SwordCatch.Core;
+using SwordCatch.Effect;
+using SwordCatch.HitBox;
 using UnityEngine;
-using Kamatte.Core;
-using Kamatte.SwordCatch;
 
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     //  プレイヤーコントローラー
     [DisallowMultipleComponent]

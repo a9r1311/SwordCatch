@@ -1,4 +1,4 @@
-namespace Kamatte.Player
+namespace SwordCatch.Player
 {
     public interface IPlayerCommand    //  コマンドパターンインターフェース
     {
