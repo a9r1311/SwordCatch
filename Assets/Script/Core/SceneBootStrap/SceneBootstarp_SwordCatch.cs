@@ -1,80 +1,98 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UAsset = UnityEngine.Assertions.Assert;
+using TMPro;
 using SwordCatch.Audio;
 using SwordCatch.Result;
 using SwordCatch.ScreenEffect;
 using SwordCatch.Swinger;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
 
 namespace SwordCatch.Core
 {
-    //  機能群の初期化訳役
+    //  シーンの初期化役
     [DisallowMultipleComponent]
     public sealed class SceneBootstrap_SwordCatch : MonoBehaviour
     {
-        [SerializeField] StateHolder stateHolder;  // 白刃取りの状況を保持しているクラス
+        // 白刃取りの状況を保持しているクラス
+        [SerializeField] StateHolder _stateHolder;
 
-        FadeOutStep fadeOutStep;
+        // ゲームモード変更時のフェードTask
+        FadeOutStep _fadeOutTask;
 
-        ResultDisplayTask resultDisplay;
-        [SerializeField] GameObject resultRoot;
-        [SerializeField] TextMeshProUGUI playerPowerTxt;
-        [SerializeField] TextMeshProUGUI CatchCountTxt;
-        [SerializeField] Button RetryButton;
+        // ゲームモード変更時のリザルト表示Task
+        ResultDisplayTask _resultDisplayTask;
+        [SerializeField] GameObject _resultRoot;
+        [SerializeField] TextMeshProUGUI _playerPowerTxt;
+        [SerializeField] TextMeshProUGUI _catchCountTxt;
+        [SerializeField] Button _retryButton;
 
-        [SerializeField] SwingerController swingTimeController;
+        //  Swingerの振り下ろしタイミングコントローラー
+        [SerializeField] SwingerController _swingTimeController;
         Swing _swing;
 
-        LowerAudio _lowerAudio;
-        [SerializeField] AudioSource BgmSource;
-
+        //  白刃取り成功回数と称号のペアデータ
         [SerializeField] PlayerLevelCatalog _levelCatalog;
-       
-        readonly int _fadeOutOrder = 20;
-        readonly int _stopAuidoOrder = 25;
-        readonly float _loweredVolume = 0.02f;
-        readonly int _resultDisplayOrder = 50;
 
+        SceneMgr _sceneMgr;
+
+        //  ゲームモード変更時の処理システム
         GameModeChangeTask _gameModeTask;
+        
+        readonly int _fadeOutOrder = 20;
+        
+        readonly int _lowerAuidoOrder = 25;
+        LowerAudio _lowerAudio;
+        [SerializeField] AudioSource _bgmSource;
+        readonly float _loweredVolume = 0.02f;
+        
+        readonly int _resultDisplayOrder = 50;
 
         void Awake()
         {
-            if (stateHolder == null)
-            {
-                Debug.LogError("stateHolder isn't assigned in the Inspector");
-            }
-
-            fadeOutStep = new FadeOutStep(_fadeOutOrder);
-            _lowerAudio = new LowerAudio(_stopAuidoOrder, BgmSource, _loweredVolume);
-            resultDisplay = new ResultDisplayTask(_resultDisplayOrder, resultRoot, CatchCountTxt, playerPowerTxt, stateHolder, _levelCatalog);
+            UAsset.IsNotNull(_stateHolder, "stateHolderがインスペクターに設定されていません");
+            UAsset.IsNotNull(_resultRoot, "resultRootがインスペクターに設定されていません");
+            UAsset.IsNotNull(_playerPowerTxt, "playerPowerTextがインスペクターに設定されていません");
+            UAsset.IsNotNull(_catchCountTxt, "catchCountTextがインスペクターに設定されていません");
+            UAsset.IsNotNull(_retryButton, "retryButtonがインスペクターに設定されていません");
+            UAsset.IsNotNull(_swingTimeController, "swingTimeControllerがインスペクターに設定されていません");
+            UAsset.IsNotNull(_bgmSource, "bgmSourceがインスペクターに設定されていません");
+            UAsset.IsNotNull(_levelCatalog, "levelCatalogがインスペクターに設定されていません");
+            
             _swing = new Swing();
+
+            _fadeOutTask = new FadeOutStep(_fadeOutOrder);
+            _lowerAudio = new LowerAudio(_lowerAuidoOrder, _bgmSource, _loweredVolume);
+            _resultDisplayTask = new ResultDisplayTask(_resultDisplayOrder, _resultRoot, _catchCountTxt, _playerPowerTxt, _stateHolder, _levelCatalog);
         }
 
         void Start()
         {
+            //  インゲーム開始時フェードイン
             ServiceLocator.Get<ScreenFade>().FadeIn(1f);
+            _sceneMgr = ServiceLocator.Get<SceneMgr>();
 
-            swingTimeController.Initialize(_swing);
+            _swingTimeController.Initialize(_swing);
             
-            RetryButton.onClick.AddListener(Retry);
+            _retryButton.onClick.AddListener(Retry);
 
             _gameModeTask = ServiceLocator.Get<GameModeChangeTask>();
-            _gameModeTask.PushStep(resultDisplay);
+            _gameModeTask.PushStep(_resultDisplayTask);
             _gameModeTask.PushStep(_lowerAudio);
-            _gameModeTask.PushStep(fadeOutStep);
+            _gameModeTask.PushStep(_fadeOutTask);
         }
 
         void Retry()
         {
-            ServiceLocator.Get<SceneMgr>().LoadScene(GameMode.SwordCatch);
+            _sceneMgr.LoadScene(GameMode.SwordCatch);
         }
+
         void OnDestroy()
         {
-            RetryButton.onClick.RemoveAllListeners();
+            _retryButton.onClick.RemoveAllListeners();
 
-            _gameModeTask.RemoveStep(resultDisplay);
+            _gameModeTask.RemoveStep(_resultDisplayTask);
             _gameModeTask.RemoveStep(_lowerAudio);
-            _gameModeTask.RemoveStep(fadeOutStep);
+            _gameModeTask.RemoveStep(_fadeOutTask);
         }
     }
 }
