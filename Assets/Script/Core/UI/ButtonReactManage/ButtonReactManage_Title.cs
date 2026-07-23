@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace SwordCatch.UI
 {
+    //  タイトル画面のボタンに反応を入れる
     [DisallowMultipleComponent]
-    public sealed class ButtonReactManage_Title : MonoBehaviour, IUIController    //  タイトル画面のボタンに反応を入れる
+    public sealed class ButtonReactManage_Title : MonoBehaviour, IUIController
     {
         [SerializeField] ButtonManager _buttonManager;
         [SerializeField] GameObject _tutorialRoot;
-        
+
         [SerializeField] SceneMapping _sceneMapping;
 
         //  ボタン初期化

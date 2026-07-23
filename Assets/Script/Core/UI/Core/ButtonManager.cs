@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using SwordCatch.Core;
 
 namespace SwordCatch.UI
 {
-    public class ButtonManager : MonoBehaviour    //  ボタンの管理関数保持クラス
+    //  ボタンの管理関数保持クラス
+    public sealed class ButtonManager : MonoBehaviour
     {
         [System.Serializable]
         public class ButtonMapping
@@ -24,29 +26,28 @@ namespace SwordCatch.UI
                     .FirstOrDefault(b => string.Equals(b.name, id.ToString(), StringComparison.Ordinal));
                 if (button != null)
                 {
-                    Debug.Log("$\" {id} に {button.name} を自動割当しました。\"");
+                    MyLogger.Log("$\" {id} に {button.name} を自動割当しました。\"");
                 }
                 else
                 {
-                    Debug.Log($" {id.ToString()} に対応するボタンが見つかりませんでした。");
+                    MyLogger.Log($" {id.ToString()} に対応するボタンが見つかりませんでした。");
                 }
             }
 #endif
         }
 
-        [SerializeField] private ButtonMapping[] buttonMapping;
-
-        private Dictionary<ButtonID, Button> buttonMap = new();
+        [SerializeField] ButtonMapping[] _buttonMapping;
+        Dictionary<ButtonID, Button> _buttonMap = new();
 
 #if UNITY_EDITOR
-        private void OnValidate()
+        void OnValidate()
         {
-            if (buttonMapping == null || buttonMapping.Length == 0)
+            if (_buttonMapping == null || _buttonMapping.Length == 0)
             {
                 return;
             }
 
-            foreach (var mapping in buttonMapping)
+            foreach (var mapping in _buttonMapping)
             {
                 if (mapping == null)
                 {
@@ -59,64 +60,71 @@ namespace SwordCatch.UI
             }
         }
 #endif
+        //  ボタン初期化
         void Awake()
         {
-            InitializeButtons();    //  ボタン初期化
+            InitializeButtons();
         }
 
-        private void InitializeButtons()    //  ボタンを初期化する
+        //  ボタンを初期化する
+        void InitializeButtons()
         {
-            buttonMap.Clear();
+            _buttonMap.Clear();
 
-            foreach (ButtonMapping mapping in buttonMapping)
+            foreach (ButtonMapping mapping in _buttonMapping)
             {
                 if (mapping.button != null)
                 {
-                    buttonMap[mapping.id] = mapping.button;
+                    _buttonMap[mapping.id] = mapping.button;
                 }
             }
         }
 
-        public void RegistReact(ButtonID ButtonID, Action callback)    //    ボタン反応入れ
+        //    ボタン反応入れ
+        public void RegistReact(ButtonID ButtonID, Action callback)
         {
-            if (buttonMap.TryGetValue(ButtonID, out Button button))
+            if (_buttonMap.TryGetValue(ButtonID, out Button button))
             {
                 button.onClick.RemoveAllListeners();
                 button.onClick.AddListener(() => callback?.Invoke());
             }
             else
             {
-                Debug.LogWarning($"ボタンが見つかりません: {ButtonID}");
+                MyLogger.WarningLog($"ボタンが見つかりません: {ButtonID}");
             }
         }
 
-        public void UnregistReact(ButtonID ButtonID)    //  ボタン反応解除
+        //  ボタン反応解除
+        public void UnregistReact(ButtonID ButtonID)
         {
-            if (buttonMap.TryGetValue(ButtonID, out Button button))
+            if (_buttonMap.TryGetValue(ButtonID, out Button button))
             {
                 button.onClick.RemoveAllListeners(); // コールバック解除
             }
         }
 
-        public void SetInteractable(ButtonID titleButtonID, bool interactable)    //  ボタン反応するかどうかを設定
+        //  ボタン反応するかどうかを設定
+        public void SetInteractable(ButtonID titleButtonID, bool interactable)
         {
-            if (buttonMap.TryGetValue(titleButtonID, out var button))
+            if (_buttonMap.TryGetValue(titleButtonID, out var button))
             {
                 button.interactable = interactable;
             }
         }
 
-        public void DisableAllButtons()    //  ボタン全部反応不可能にする
+        //  ボタン全部反応不可能にする
+        public void DisableAllButtons()
         {
-            foreach (var btn in buttonMap.Values)
+            foreach (var btn in _buttonMap.Values)
             {
                 btn.interactable = false;
             }
         }
 
-        public void EnableAllButtons()    //  ボタン全部反応可能にする
+        //  ボタン全部反応可能にする
+        public void EnableAllButtons()
         {
-            foreach (var btn in buttonMap.Values)
+            foreach (var btn in _buttonMap.Values)
             {
                 btn.interactable = true;
             }
