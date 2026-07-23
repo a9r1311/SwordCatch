@@ -1,5 +1,5 @@
-using SwordCatch.SwordCatch;
 using UnityEngine;
+using SwordCatch.SwordCatch;
 
 namespace SwordCatch.Swinger
 {
@@ -13,9 +13,9 @@ namespace SwordCatch.Swinger
         [Header("Å‰‚ÌU‚è‰º‚ë‚µ•û–@")]
         public SwingType FirstSwingType = SwingType.Normal;
         [Header("Å‰‚É~‚è‰º‚ë‚·‚Ü‚Å‚ÌŠÔ")]
-        public float FirstSwingTime = 10f;
+        public float FirstSwingTime = 8f;
 
         [Header("‹©‚ñ‚Å‚©‚ç‚‘¬~‚è‰º‚ë‚µ‚Ü‚Å‚ÌŠÔ")]
-        public float ScreemToSwing = 0.74f;
+        public float ScreemToSwing = 0.49f;
     }
 }

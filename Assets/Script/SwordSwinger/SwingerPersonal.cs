@@ -1,6 +1,7 @@
 namespace SwordCatch.Swinger
 {
-    public enum SwingerPersonal    //  “‚ğU‚él‚Ì«Ši
+    //  “‚ğU‚él‚Ì«Ši
+    public enum SwingerPersonal
     {
         Normal,     // •’Ê‚ÌU‚è•û
         Chiken,     // Td‚ÉU‚è‰º‚ë‚·

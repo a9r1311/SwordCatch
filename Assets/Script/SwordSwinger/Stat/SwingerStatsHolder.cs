@@ -16,8 +16,8 @@ namespace SwordCatch.Swinger
         }
 
         [Header("刀振りの能力値リスト")]
-        [SerializeField] List<SwingerIDStat> _swingerIDStatList = new();    //  IDと能力値のリスト(インスペクター用)
-        Dictionary<SwingerID, SwingerStatBlock> _statMap = new();    //  IDと能力値の辞書(処理用)
+        [SerializeField] List<SwingerIDStat> _swingerIDStatList = new();  // IDと能力値のリスト(インスペクター用)
+        Dictionary<SwingerID, SwingerStatBlock> _statMap = new();  // IDと能力値の辞書(処理用)
 
         public void OnAfterDeserialize()
         {

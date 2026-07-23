@@ -1,8 +1,9 @@
 namespace SwordCatch.SwordCatch
 {
-    public enum SwingType    //  振り下ろしの種類
+    //  振り下ろしの種類
+    public enum SwingType
     {
-        Normal,    //  普通の振り下ろし
-        Fast,      //  叫んだ後、高速で振り下ろし
+        Normal,    //  デフォルトの振り下ろし
+        Fast,      //  高速振り下ろし
     }
 }

@@ -1,6 +1,6 @@
 namespace SwordCatch.Swinger
 {
-    //  U‚è‰º‚ë‚·ƒLƒƒƒ‰‚ÌID
+    //  “‚ğU‚è‰º‚ë‚·ƒLƒƒƒ‰‚ÌID
     public enum SwingerID
     {
         Samurai,    //  ˜
