@@ -1,5 +1,6 @@
 using SwordCatch.Core;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SwordCatch.UI
 {
@@ -19,13 +20,13 @@ namespace SwordCatch.UI
         }
 
         //  ゲームステート単位でUIを変更する
-        public void ChangeUI(GameStateID gameStateID)
+        public async Task ChangeUI(GameStateID gameStateID)
         {
             currentUIController?.Deinit();    //  現在のUIを無効果
 
             if (!uiCache.TryGetValue(gameStateID, out var ui))
             {
-                ui = uiFactory.CreateUI(gameStateID);
+                ui = await uiFactory.CreateUI(gameStateID);
                 uiCache[gameStateID] = ui;
             }
 

@@ -4,24 +4,25 @@ using SwordCatch.Core;
 
 namespace SwordCatch.UI
 {
+    //  SceneIDとUIIDを変換するためのMap
     [CreateAssetMenu(fileName = "SceneIDCovert" ,menuName = "UI/SceneIDConvert")]
-    public class SceneIDConvert : ScriptableObject    //  SceneIDとUIIDを変換するためのMap
+    public sealed class SceneIDConvert : ScriptableObject
     {
+        //  GameStateIDとuiID変換用Map
         [Serializable]
-        public struct Mapping    //  GameStateIDとuiID変換用Map
+        public struct Mapping
         {
             public GameStateID sceneID;
             public UIID uiID;
         }
 
-        [SerializeField] private Mapping[] mappings;
+        [SerializeField] Mapping[] _mappings;
 
-        //  --  Public method
 
         //  SceneIDに対応するUIIDを抽出する
         public bool TryGetUIID(GameStateID sceneID, out UIID controllerID)
         {
-            foreach (var map in mappings)
+            foreach (var map in _mappings)
             {
                 if (map.sceneID == sceneID)
                 {
