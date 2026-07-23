@@ -16,7 +16,7 @@ namespace SwordCatch.Core
 
         FadeOutStep fadeOutStep;
 
-        ResultDisplayStep resultDisplay;
+        ResultDisplayTask resultDisplay;
         [SerializeField] GameObject resultRoot;
         [SerializeField] TextMeshProUGUI playerPowerTxt;
         [SerializeField] TextMeshProUGUI CatchCountTxt;
@@ -46,7 +46,7 @@ namespace SwordCatch.Core
 
             fadeOutStep = new FadeOutStep(_fadeOutOrder);
             _lowerAudio = new LowerAudio(_stopAuidoOrder, BgmSource, _loweredVolume);
-            resultDisplay = new ResultDisplayStep(_resultDisplayOrder, resultRoot, CatchCountTxt, playerPowerTxt, stateHolder, _levelCatalog);
+            resultDisplay = new ResultDisplayTask(_resultDisplayOrder, resultRoot, CatchCountTxt, playerPowerTxt, stateHolder, _levelCatalog);
             _swing = new Swing();
         }
 
