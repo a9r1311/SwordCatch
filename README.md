@@ -1,0 +1,24 @@
+# SwordCatch👏(README作成中)
+
+## ゲーム説明
+このゲームは白刃取りのミニゲームです。🗡
+白刃取りの練習をして、白刃取りマスターになりましょう！
+
+## 実行方法
+#### 1. VisualStudioでサーバーを起動
+#### 2. UnityのBuildDataを実行しクライアントを起動
+```bash
+[UnityBuildPath]
+Move/Build/Move.exe
+```
+### ⚠️ 実行時の注意点
+
+> [!IMPORTANT]
+> Unity側のClientMatchMakerのURLのIP部分を、サーバーを起動するPCのプライベートIPアドレスに変更してください
+> Move/Assets/Script/C#/NetWork/Client/ClientMatchMaker.cs
+
+> [!IMPORTANT]
+> MatchMakerとInGameServerは同じPCで実行してください。
+
+> [!TIP]
+> この作品のマッチング人数は2人です。
