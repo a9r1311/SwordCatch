@@ -1,13 +1,14 @@
-
 namespace SwordCatch.Player
 {
-    public class HandleInputAction_SwordCatch    //  プレイヤーの入力を受けつけるクラス
+    //  プレイヤーの入力を受けつけるクラス
+    public sealed class HandleInputAction
     {
         InputSystem_Actions inputSystem_Action;
 
-        PlayerInputAction_SwordCatch playerAction_SwordCatch;    //  プレイヤーの白刃取り状態のアクション
+        //  プレイヤーの白刃取り状態のアクション
+        PlayerInputAction playerAction_SwordCatch;
 
-        public HandleInputAction_SwordCatch(InputSystem_Actions inputSystem, PlayerInputAction_SwordCatch action)
+        public HandleInputAction(InputSystem_Actions inputSystem, PlayerInputAction action)
         {
             inputSystem_Action = inputSystem;
             playerAction_SwordCatch = action;

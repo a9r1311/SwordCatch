@@ -25,11 +25,12 @@ namespace SwordCatch.Player
 
         void Awake()
         {
-            UAssert.IsNotNull(_playerController,     "PlayerContorllerがインスペクターに設定されていません");
-            UAssert.IsNotNull(_playerHitBoxData,     "PlayerHitBoxDataがインスペクターに設定されていません");
-            UAssert.IsNotNull(_playerHeadTF,         "PlayerHeadTransFormがインスペクターに設定されていません");
-            UAssert.IsNotNull(_stageEffectGenerater, "StateHolderがインスペクターに設定されていません");
-            UAssert.IsNotNull(_catchSE,              "CatchSEがインスペクターに設定されていません");
+            UAssert.IsNotNull(_playerController, "PlayerContorllerがインスペクターに設定されていません");
+            UAssert.IsNotNull(_stateHolder, "StateHolderがインスペクターに設定されていません");
+            UAssert.IsNotNull(_playerHitBoxData, "PlayerHitBoxDataがインスペクターに設定されていません");
+            UAssert.IsNotNull(_playerHeadTF, "PlayerHeadTransFormがインスペクターに設定されていません");
+            UAssert.IsNotNull(_stageEffectGenerater, "StageEffectGeneraterがインスペクターに設定されていません");
+            UAssert.IsNotNull(_catchSE, "CatchSEがインスペクターに設定されていません");
 
             _playerHitBox = new PlayerHitBox(
                 _playerHitBoxData,
