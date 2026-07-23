@@ -1,7 +1,8 @@
-using SwordCatch.Animation;
+using UnityEngine;
 using SwordCatch.Core;
 using SwordCatch.SwordCatch;
-using UnityEngine;
+using SwordCatch.Animation;
+using SwordCatch.Audio;
 
 namespace SwordCatch.Swinger
 {
@@ -9,19 +10,19 @@ namespace SwordCatch.Swinger
     [DisallowMultipleComponent]
     public sealed class SwingerController : MonoBehaviour
     {
-        [SerializeField] StateHolder _stateHolder;  // ゲーム状態クラス
+        [SerializeField] StateHolder _stateHolder;  // ゲーム状態保持クラス
 
-        [SerializeField] SwingerStatsHolder _statsHolder;  // スウィンガーの能力値SO
-        SwingerStatBlock _stat;  // 刀役の能力値(キャッシュ用)
-        Swing _swing;  // 刀振りのコントローラー
+        [SerializeField] SwingerStatsHolder _statsHolder;  // Swingerの能力値
+        SwingerStatBlock _stat;  // Swignerの能力値(キャッシュ用)
+        Swing _swing;  // Swingerのコントローラー
 
-        SwingerPersonal _personal;  // 刀振りの性格
+        SwingerPersonal _personal;  // Swingerの性格
         ISwingStrategy _strategy;  // 性格ごとの振り方
 
         AnimParamFacade _animatorParametor;  // アニメーターのパラメーターを保持してるクラス
         
-        [SerializeField] AudioSource _audioSource;
-        [SerializeField] AudioClip _roundVoiceClip;
+        AudioManager _audioManager;
+        [SerializeField] AudioClip _shoutClip;  // 高速振り下ろし前の合図Voice
 
         public float SwingTimer { get; set; }  // 刀を振り下ろすまでのタイマー
         public float ScreemToFastSwing { get; set; }  // 叫んでから高速振り下ろしするまでの時間
@@ -31,17 +32,17 @@ namespace SwordCatch.Swinger
         void Awake()
         {
             _stat = _statsHolder.GetStat(SwingerID.Samurai);
+           
             _personal = _stat.SwingerPersonal;
-
             SwingTimer = _stat.FirstSwingTime;  // 最初の振り下ろしまでの時間を取得
             ScreemToFastSwing = _stat.ScreemToSwing;
             SwingTyep = _stat.FirstSwingType;  // 最初の振り下ろし方法を取得
-
         }
 
         void Start()
         {
             _animatorParametor = ServiceLocator.Get<AnimParamFacade>();
+            _audioManager = ServiceLocator.Get<AudioManager>();
 
             switch (_personal)
             {
@@ -73,7 +74,7 @@ namespace SwordCatch.Swinger
         {
             MyLogger.Log("Shout");
             IsShout = true;
-            _audioSource.PlayOneShot(_roundVoiceClip, 0.4f);
+            _audioManager.PlaySE(_shoutClip, 0.4f);
         }
 
         //  振り下ろす
