@@ -9,7 +9,7 @@ namespace SwordCatch.Core
         int _catchSuccessCnt = 0;  // ”’næ‚è¬Œ÷‰ñ”
         bool _isCatchSword = false;  // ”’næ‚è¬Œ÷‚µ‚½‚©‚Ç‚¤‚©
         bool _isHitSwing = false;  // U‚è‰º‚ë‚µ‚É“–‚½‚Á‚½‚©‚Ç‚¤‚©
-        
+
         public int CatchSuccessCnt
         { get { return _catchSuccessCnt; } }
         

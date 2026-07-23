@@ -7,7 +7,7 @@ using SwordCatch.Core;
 namespace SwordCatch.Result
 {
     //  白刃取りのリザルト表示処理
-    public sealed class ResultDisplayStep : IGameModeChangeTask
+    public sealed class ResultDisplayTask : IGameModeChangeTask
     {
         int _order;  // 実行順(小さい方が先)
         
@@ -20,7 +20,7 @@ namespace SwordCatch.Result
 
         public int Order => _order;
         
-        public ResultDisplayStep(
+        public ResultDisplayTask(
             int order,
             GameObject resultRoot,
             TextMeshProUGUI countText,

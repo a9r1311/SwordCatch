@@ -12,14 +12,17 @@ namespace SwordCatch.Player
     [RequireComponent(typeof(PlayerBootstrap))]
     public sealed class PlayerController : MonoBehaviour
     {
-        PlayerHitBox _playerHitBoxMgr;  // プレイヤーヒットボックス管理クラス
         StateHolder _stateHolder;  // ゲーム状態を保持するクラス
+        PlayerHitBox _playerHitBoxMgr;  // プレイヤーヒットボックス管理クラス
+
+        [SerializeField]StageEffectGenerater _stageEffectGenerater;  // ステージエフェクト生成クラス
 
         AudioManager _audioManager;  // audio管理クラス
-        AudioClip catchClip;  // 白刃取り成功時の音
-        bool _isActivateOnCatch = false;  // SEが何回もなるのを防ぐためのフラグ
+        EffectSystem _effectSystem;  // エフェクト管理クラス
+        AnimParamFacade _animParamFacade;  // アニメーションパラメータ管理クラス
 
-        EffectSystem _effectSystem;
+        AudioClip catchClip;  // 白刃取り成功時の音
+        bool _isActivateOnCatch = false;  // キャッチ成功処理が複数回発生するのを防ぐためのフラグ
 
         //  初期化
         public void Initialize(PlayerContext ctx)
@@ -27,10 +30,11 @@ namespace SwordCatch.Player
             _playerHitBoxMgr = ctx.HitBoxMgr;
             _stateHolder = ctx.StateHolder;
 
-            catchClip = ctx.CatchSE;
             _audioManager = ServiceLocator.Get<AudioManager>();
-
             _effectSystem = ServiceLocator.Get<EffectSystem>();
+            _animParamFacade = ServiceLocator.Get<AnimParamFacade>();
+
+            catchClip = ctx.CatchSE;
         }
 
         void Update()
@@ -62,22 +66,10 @@ namespace SwordCatch.Player
 
                 _isActivateOnCatch = true;
 
+                _stageEffectGenerater.OnCountChanged();
                 _audioManager.PlaySE(catchClip, 0.8f, 1f, 0f);
-                PlayrRandomEffect();
                 _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.CatchSword));
-                ServiceLocator.Get<AnimParamFacade>().SwingerParam.IsCought(true);
-            }
-        }
-
-        void PlayrRandomEffect()
-        {
-            if (_stateHolder.CatchSuccessCnt == 5)
-            {
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.FireWorks));
-            }
-            if (_stateHolder.CatchSuccessCnt > 20)
-            {
-                _effectSystem.Play(new EffectKey(GameMode.SwordCatch, EffectID.Lightning));
+                _animParamFacade.SwingerParam.IsCought(true);
             }
         }
 
