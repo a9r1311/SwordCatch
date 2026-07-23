@@ -1,9 +1,10 @@
-using SwordCatch.Core;
+//using SwordCatch.Core;
+//using System.Threading.Tasks;
 
-namespace SwordCatch.UI
-{
-    public interface IUIManageFacade    //  íäè€âªÇÃÇΩÇﬂÇÃInterface
-    {
-        void ChangeUI(GameStateID stateID);
-    }
-}
+//namespace SwordCatch.UI
+//{
+//    public interface IUIManageFacade    //  íäè€âªÇÃÇΩÇﬂÇÃInterface
+//    {
+//        Task ChangeUI(GameStateID stateID);
+//    }
+//}

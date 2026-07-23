@@ -1,19 +1,22 @@
-using SwordCatch.Core;
+//using SwordCatch.Core;
+//using System.Threading.Tasks;
 
-namespace SwordCatch.UI
-{
-    public class UIManageFacade : IUIManageFacade
-    {
-        UIManager uiManager;    //  UIをモード単位で変更するクラス
+//namespace SwordCatch.UI
+//{
+//    public class UIManageFacade : IUIManageFacade
+//    {
+//        //  UIをモード単位で変更するクラス
+//        UIManager _uiManager;
 
-        public UIManageFacade(UIManager uiManager)
-        {
-            this.uiManager = uiManager;
-        }
+//        public UIManageFacade(UIManager uiManager)
+//        {
+//            _uiManager = uiManager;
+//        }
 
-        public void ChangeUI(GameStateID stateID)    //  UI変更窓口関数
-        {
-            uiManager.ChangeUI(stateID);
-        }
-    }
-}
+//        //  UI変更窓口関数
+//        public async Task ChangeUI(GameStateID stateID)
+//        {
+//            await _uiManager.ChangeUI(stateID);
+//        }
+//    }
+//}
