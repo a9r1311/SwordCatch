@@ -4,30 +4,33 @@ using UnityEngine;
 
 namespace SwordCatch.Player
 {
-    //  コンストラクタ引数短縮用クラス
-    public class PlayerContext
+    //  引数短縮用
+    public sealed class PlayerContext
     {
-        public PlayerHitBox HitBoxMgr { get; private set; }
-        public Transform HeadTF { get; private set; }
+        //  ゲーム状態保持クラス
         public StateHolder StateHolder { get; private set; }
-
+        //  プレイヤー当たり判定管理クラス
+        public PlayerHitBox HitBoxMgr { get; private set; }
+        //  当たり判定生成の際に使用するTF
+        public Transform HeadTF { get; private set; }
+        //  ステージエフェクト生成クラス
+        public StageEffectGenerater StageEffectGenerater { get; private set; }
+        //  キャッチ時のサウンドエフェクト
         public AudioClip CatchSE{ get; private set; }
 
-        public StageEffectGenerater StageEffectGenerater{ get; private set; }
-
         public PlayerContext(
+            StateHolder stateHolder,
             PlayerHitBox hitBoxMgr,
             Transform headTF,
-            StateHolder stateHolder,
-            AudioClip catchSE,
-            StageEffectGenerater stageEffect
+            StageEffectGenerater stageEffect,
+            AudioClip catchSE
             )
         {
+            StateHolder = stateHolder;
             HitBoxMgr = hitBoxMgr;
             HeadTF = headTF;
-            StateHolder = stateHolder;
-            CatchSE = catchSE;
             StageEffectGenerater = stageEffect;
+            CatchSE = catchSE;
         }
     }
 }
