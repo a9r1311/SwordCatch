@@ -5,7 +5,7 @@ namespace SwordCatch.Core
 {
     //  タイトルシーンの初期化役
     [DisallowMultipleComponent]
-    public class SceneBootstrap_Title : MonoBehaviour
+    public sealed class SceneBootstrap_Title : MonoBehaviour
     {
         void Start()
         {
