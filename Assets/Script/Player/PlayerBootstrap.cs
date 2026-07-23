@@ -1,6 +1,7 @@
 using SwordCatch.Core;
 using SwordCatch.Effect;
 using UnityEngine;
+using UAssert = UnityEngine.Assertions.Assert;
 
 namespace SwordCatch.Player
 {
@@ -10,47 +11,42 @@ namespace SwordCatch.Player
     public sealed class PlayerBootstrap : MonoBehaviour
     {
         [SerializeField] PlayerController _playerController;  // プレイヤーコントローラー 
-        PlayerContext _context;  // コンストラクタ引数短縮用クラス
-        
-        [SerializeField] StageEffectGenerater _stageEffectGenerater;  // ステージエフェクト生成クラス
-
-        PlayerHitBox _playerHitBox;  // プレイヤー当たり判定クラス
-        [SerializeField] PlayerHitBoxData _playerHitBoxData;  // 当たり判定データSO
-        [SerializeField] Transform _playerHeadTF;  // 当たり判定用の頭Transform
+        PlayerContext _context;  // 初期化引数短縮用クラス
 
         [SerializeField] StateHolder _stateHolder;  // ゲーム状況保持クラス
-        
-        [SerializeField] AudioClip _catchClip;  // キャッチSE
+
+        PlayerHitBox _playerHitBox;  // プレイヤー当たり判定管理クラス
+        [SerializeField] PlayerHitBoxData _playerHitBoxData;  // プレイヤー当たり判定データ
+        [SerializeField] Transform _playerHeadTF;  // 当たり判定用のTransform
+
+        [SerializeField] StageEffectGenerater _stageEffectGenerater;  // ステージエフェクト生成クラス
+
+        [SerializeField] AudioClip _catchSE;  // キャッチSE
 
         void Awake()
         {
-            if (_playerController == null)
-            {
-                _playerController = GetComponent<PlayerController>();
-                Debug.LogWarning("playerController isn't assigned in the Inspector");
-            }
-            if(_playerHitBoxData == null)
-            {
-                Debug.LogError("playerHitBoxData isn't assigned in the Inspector");
-            }
-            if (_playerHeadTF == null)
-            {
-                Debug.LogError("playerHeadTF isn't assigned in the Inspector");
-            }
-            if(_stateHolder == null)
-            {
-                Debug.LogError("stateHolder isn't assigned in the Inspector");
-            }
-            if (_catchClip == null)
-            {
-                Debug.LogError("catchClip isn't assigned in the Inspector");
-            }
+            UAssert.IsNotNull(_playerController,     "PlayerContorllerがインスペクターに設定されていません");
+            UAssert.IsNotNull(_playerHitBoxData,     "PlayerHitBoxDataがインスペクターに設定されていません");
+            UAssert.IsNotNull(_playerHeadTF,         "PlayerHeadTransFormがインスペクターに設定されていません");
+            UAssert.IsNotNull(_stageEffectGenerater, "StateHolderがインスペクターに設定されていません");
+            UAssert.IsNotNull(_catchSE,              "CatchSEがインスペクターに設定されていません");
 
-            _playerHitBox = new PlayerHitBox(_playerHitBoxData, _playerController, _playerHeadTF, _stateHolder);
+            _playerHitBox = new PlayerHitBox(
+                _playerHitBoxData,
+                _playerController,
+                _playerHeadTF,
+                _stateHolder
+                );
 
-            _context = new PlayerContext(_playerHitBox, _playerHeadTF, _stateHolder, _catchClip, _stageEffectGenerater);
+            _context = new PlayerContext(
+                _stateHolder,
+                _playerHitBox,
+                _playerHeadTF,
+                _stageEffectGenerater,
+                _catchSE
+                );
           
-            _playerController.Initialize(_context);    //  Controllerの性質上Awakeで初期化
+            _playerController.Initialize(_context);
         }
     }
 }
