@@ -1,4 +1,5 @@
 using SwordCatch.Core;
+using SwordCatch.Effect;
 using UnityEngine;
 
 namespace SwordCatch.Player
@@ -10,6 +11,8 @@ namespace SwordCatch.Player
     {
         [SerializeField] PlayerController _playerController;  // プレイヤーコントローラー 
         PlayerContext _context;  // コンストラクタ引数短縮用クラス
+        
+        [SerializeField] StageEffectGenerater _stageEffectGenerater;  // ステージエフェクト生成クラス
 
         PlayerHitBox _playerHitBox;  // プレイヤー当たり判定クラス
         [SerializeField] PlayerHitBoxData _playerHitBoxData;  // 当たり判定データSO
@@ -45,7 +48,7 @@ namespace SwordCatch.Player
 
             _playerHitBox = new PlayerHitBox(_playerHitBoxData, _playerController, _playerHeadTF, _stateHolder);
 
-            _context = new PlayerContext(_playerHitBox, _playerHeadTF, _stateHolder, _catchClip);
+            _context = new PlayerContext(_playerHitBox, _playerHeadTF, _stateHolder, _catchClip, _stageEffectGenerater);
           
             _playerController.Initialize(_context);    //  Controllerの性質上Awakeで初期化
         }
