@@ -8,7 +8,6 @@ namespace SwordCatch.Core
     [DefaultExecutionOrder(-10)]
     public sealed class CoroutineRunner : MonoBehaviour
     {
-
         void Awake()
         {
             ServiceLocator.Register<CoroutineRunner>(this);
