@@ -118,7 +118,7 @@ namespace SwordCatch.UI
         }
 
         //  Enum対応Prefab自動登録
-        private void AutoAssignPrefabs()
+        void AutoAssignPrefabs()
         {
             foreach (var id in Enum.GetValues(typeof(UIID)))
             {
@@ -138,7 +138,7 @@ namespace SwordCatch.UI
 
                 if (foundEntry == null)
                 {
-                    MyLogger.ErrorLog($"\"{address} に対応するAddressablesアセットが見つかりません。\"");
+                    MyLogger.WarningLog($"\"{address} に対応するAddressablesアセットが見つかりません。\"");
                     continue;
                 }
 

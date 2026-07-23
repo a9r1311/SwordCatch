@@ -1,5 +1,6 @@
-using SwordCatch.UI;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using SwordCatch.UI;
 
 namespace SwordCatch.Core
 {
@@ -7,9 +8,9 @@ namespace SwordCatch.Core
     [DisallowMultipleComponent]
     public sealed class SceneBootstrap_Title : MonoBehaviour
     {
-        void Start()
+        async UniTaskVoid Start()
         {
-            ServiceLocator.Get<IUIManageFacade>().ChangeUI(GameStateID.Title);
+            await ServiceLocator.Get<UIManager>().ChangeUI(GameStateID.Title);
         }
     }
 }

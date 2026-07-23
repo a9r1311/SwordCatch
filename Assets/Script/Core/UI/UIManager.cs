@@ -1,37 +1,43 @@
-using SwordCatch.Core;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using SwordCatch.Core;
 
 namespace SwordCatch.UI
 {
-    public class UIManager    //  包括的なUI管理をするクラス
+    //  UI管理をするクラス
+    public sealed class UIManager
     {
-        private UIFactory uiFactory;    //  UIObjcetのRootが詰まってるSO
+        UIFactory _uiFactory;  // UIが詰まってるScriptableObject
 
-        private Dictionary<GameStateID, IUIController> uiCache = new();
-
-        private IUIController currentUIController;
-
-        //  --  Public method
+        Dictionary<GameStateID, IUIController> _uiCache = new();
+        IUIController _currentUIController;
 
         public UIManager(UIFactory uiFactory)
         {
-            this.uiFactory = uiFactory;
+            _uiFactory = uiFactory;
         }
 
-        //  ゲームステート単位でUIを変更する
-        public async Task ChangeUI(GameStateID gameStateID)
+        //  UI変更
+        public async UniTask ChangeUI(GameStateID gameStateID)
         {
-            currentUIController?.Deinit();    //  現在のUIを無効果
+            //  現在のUIを無効果
+            _currentUIController?.Deinit();
 
-            if (!uiCache.TryGetValue(gameStateID, out var ui))
+            if (!_uiCache.TryGetValue(gameStateID, out var ui))
             {
-                ui = await uiFactory.CreateUI(gameStateID);
-                uiCache[gameStateID] = ui;
+                ui = await _uiFactory.CreateUI(gameStateID);
+
+                if (ui == null)
+                {
+                    MyLogger.ErrorLog($"UI生成に失敗しました: {gameStateID}");
+                    return;
+                }
+
+                _uiCache[gameStateID] = ui;
             }
 
-            currentUIController = ui;
-            currentUIController.Init();    //  新しいUIを初期化
+            _currentUIController = ui;
+            _currentUIController.Init();
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace SwordCatch.UI
 {
-    public enum UIID    //  UIPrefab‚Æ–¼‘O‚ªˆê’v‚µ‚Ä‚¢‚é‚ÆFactorySO‚ÉŽ©“®‘}“ü‚µ‚Ä‚­‚ê‚é
+    //  UIPrefab‚Æ–¼‘O‚ªˆê’v‚µ‚Ä‚¢‚é‚ÆFactory‚ÉŽ©“®ƒAƒTƒCƒ“‚µ‚Ä‚­‚ê‚é
+    public enum UIID
     {
         TitleUIRoot,
         SwordCatchUIRoot,
