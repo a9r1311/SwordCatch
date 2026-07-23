@@ -1,8 +1,9 @@
 namespace SwordCatch.UI
 {
-    public interface IUIController    //  UIコントローラーインターフェース
+    //  UIコントローラーインターフェース
+    public interface IUIController
     {
-        void Init();    //  初期化関数
-        void Deinit();    //  初期化解除変数
+        void Init();  // 初期化関数
+        void Deinit();  // 初期化解除関数
     }
 }

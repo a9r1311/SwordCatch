@@ -7,19 +7,14 @@ namespace SwordCatch.UI
     {
         [SerializeField] UIFactory uiFactory;    //  UIObjectのRootが詰まったSO
 
-        IUIManageJudge uiManageJudge;    //  UI変更をしていいかを判断するクラス
         IUIManageFacade manageFacade;    //  ServiceLocatorに登録する窓口クラス
         UIManager uiManager;    //  UIを変更するクラス
 
         void Awake()
         {
-            uiManageJudge = new UIManageJudge();
             uiManager = new UIManager(uiFactory);
-            manageFacade = new UIManageFacade(uiManager, uiManageJudge);
-        }
+            manageFacade = new UIManageFacade(uiManager);
 
-        void Start()
-        {
             ServiceLocator.Register<IUIManageFacade>(manageFacade);
         }
     }

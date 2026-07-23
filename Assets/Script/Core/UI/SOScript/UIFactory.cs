@@ -4,8 +4,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using SwordCatch.Core;
-
-
+using UnityEngine.AddressableAssets;
+using Cysharp.Threading.Tasks;
 #if UNITY_EDITOR
 using UnityEditor.AddressableAssets;
 using UnityEditor.AddressableAssets.Settings;
@@ -13,20 +13,24 @@ using UnityEditor.AddressableAssets.Settings;
 
 namespace SwordCatch.UI
 {
+    //  UIコントローラーを生成する
     [CreateAssetMenu(fileName ="UIFactory", menuName = "UI/UIFactory")]
-    public class UIFactory : ScriptableObject    //  UIコントローラーを生成する
+    public sealed class UIFactory : ScriptableObject
     {
+        //  UIIDの対応したUIのRootのkvp
         [Serializable]
-        public struct UIMap    //  UIIDの対応したUIのRootのkvp
+        public struct UIMap
         {
             public UIID uiID;
-            public GameObject uiPrefab;
+            public AssetReference uiPrefab;
+            //public GameObject uiPrefab;
         }
-        
-        [SerializeField] private UIMap[] uiMappings;    //  インスペクターでのアサイン用
 
-        [SerializeField] private SceneIDConvert sceneIDConvert;    //  SceneIDからUIIDに変換してくれるSO
-        private Dictionary<UIID, GameObject> prefabDict;
+        //  インスペクターでのアサイン用
+        [SerializeField] UIMap[] _uiMappings;
+
+        [SerializeField] SceneIDConvert _sceneIDConvert;  // SceneIDからUIIDに変換してくれるSO
+        Dictionary<UIID, AssetReference> _prefabDictionary;
 
         void OnEnable()
         {
@@ -36,44 +40,46 @@ namespace SwordCatch.UI
         //    SceneIDとUIIDの辞書を初期化
         void BuildUIMapping()
         {
-            prefabDict = new();
+            _prefabDictionary = new();
 
-            foreach (var map in uiMappings)
+            foreach (var map in _uiMappings)
             {
                 if (map.uiPrefab != null)
                 {
-                    prefabDict[map.uiID] = map.uiPrefab;
+                    _prefabDictionary[map.uiID] = map.uiPrefab;
                 }
             }
         }
 
         //  GameStateIDに対応したUIコントローラーを生成
-        public IUIController CreateUI(GameStateID gameStateID)
+        public async UniTask<IUIController> CreateUI(GameStateID gameStateID)
         {
-            if (!sceneIDConvert.TryGetUIID(gameStateID, out var buttonControllerID))
+            if (!_sceneIDConvert.TryGetUIID(gameStateID, out var buttonControllerID))
             {
-                Debug.LogWarning($"SceneID {gameStateID} に対応する ButtonControllerID が見つかりません");
+                MyLogger.WarningLog($"SceneID {gameStateID} に対応する ButtonControllerID が見つかりません");
                 return null;
             }
 
-            if (!prefabDict.TryGetValue(buttonControllerID, out var prefab))
+            if (!_prefabDictionary.TryGetValue(buttonControllerID, out var prefabRef))
             {
-                Debug.LogWarning($"シーンIDに対応したUIコントローラーのプレハブがありません SceneID : {gameStateID}");
+                MyLogger.WarningLog($"シーンIDに対応したUIコントローラーのプレハブが未登録です SceneID : {gameStateID}");
                 return null;
             }
 
-            var instance = Instantiate(prefab);
+            var handle = Addressables.InstantiateAsync(prefabRef);
+            var instance = await handle.Task;
+
             var controller = instance.GetComponent<IUIController>();
-
             if (controller == null)
             {
-                Debug.LogWarning($"UIController doesn't have Controller Conponet UIController : {instance}");
+                Debug.LogWarning($"IUIControllerがありません: {instance.name}");
+                Addressables.ReleaseInstance(instance);
+                return null;
             }
 
             return controller;
         }
 
-        //  --  Editor process
 
 #if UNITY_EDITOR
         void OnValidate()
@@ -88,7 +94,7 @@ namespace SwordCatch.UI
             var enumValues = Enum.GetValues(typeof(UIID)).Cast<UIID>().ToArray();
             Dictionary<UIID, UIMap> uniqueMap = new Dictionary<UIID, UIMap>();
 
-            foreach (var map in uiMappings)
+            foreach (var map in _uiMappings)
             {
                 if (!uniqueMap.ContainsKey(map.uiID))
                 {
@@ -108,7 +114,7 @@ namespace SwordCatch.UI
                 }
             }
 
-            uiMappings = uniqueMap.Values.ToArray();
+            _uiMappings = uniqueMap.Values.ToArray();
         }
 
         //  Enum対応Prefab自動登録
@@ -132,7 +138,7 @@ namespace SwordCatch.UI
 
                 if (foundEntry == null)
                 {
-                    Debug.LogWarning($"{address} に対応するAddressablesアセットが見つかりません。");
+                    MyLogger.ErrorLog($"\"{address} に対応するAddressablesアセットが見つかりません。\"");
                     continue;
                 }
 
@@ -141,40 +147,19 @@ namespace SwordCatch.UI
 
                 if (prefab == null)
                 {
-                    Debug.LogWarning($"アドレス {address} に対応するPrefabが見つかりませんでした。");
+                    MyLogger.WarningLog($"アドレス {address} に対応するPrefabが見つかりませんでした。");
                     continue;
                 }
 
-                int index = Array.FindIndex(uiMappings, m => m.uiID.Equals(uiID));
-                if (index >= 0 && uiMappings[index].uiPrefab != prefab)
+                int index = Array.FindIndex(_uiMappings, m => m.uiID.Equals(uiID));
+                
+                if (index >= 0)
                 {
-                    uiMappings[index].uiPrefab = prefab;
-                    Debug.Log($"{uiID} に {prefab.name} をAddressablesから自動割当しました。");
-                }
-
-                GameObject uiPrefab = uiMappings[index].uiPrefab;
-                if (uiPrefab != null && uiPrefab.name != uiID.ToString())
-                {
-                    uiMappings[index].uiPrefab = null;
+                    var guid = foundEntry.guid;
+                    _uiMappings[index].uiPrefab = new AssetReference(guid);
                 }
             }
         }
-
-        ////  stringでprefabを取得する
-        //private GameObject FindPrefabByName(string name)
-        //{
-        //    string[] guids = AssetDatabase.FindAssets($"t:GameObject {name}");
-        //    foreach (var guid in guids)
-        //    {
-        //        var path = AssetDatabase.GUIDToAssetPath(guid);
-        //        var go = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-        //        if (go != null && go.name == name)
-        //        {
-        //            return go;
-        //        }
-        //    }
-        //    return null;
-        //}
 #endif
     }
 }
