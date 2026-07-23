@@ -1,4 +1,5 @@
 using SwordCatch.Core;
+using SwordCatch.Effect;
 using UnityEngine;
 
 namespace SwordCatch.Player
@@ -12,17 +13,21 @@ namespace SwordCatch.Player
 
         public AudioClip CatchSE{ get; private set; }
 
+        public StageEffectGenerater StageEffectGenerater{ get; private set; }
+
         public PlayerContext(
             PlayerHitBox hitBoxMgr,
             Transform headTF,
             StateHolder stateHolder,
-            AudioClip catchSE
+            AudioClip catchSE,
+            StageEffectGenerater stageEffect
             )
         {
             HitBoxMgr = hitBoxMgr;
             HeadTF = headTF;
             StateHolder = stateHolder;
             CatchSE = catchSE;
+            StageEffectGenerater = stageEffect;
         }
     }
 }
